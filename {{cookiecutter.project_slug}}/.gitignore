@@ -46,6 +46,9 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+*.log
+*.lock
+testdata.json
 
 # Translations
 *.mo
@@ -63,6 +66,10 @@ instance/
 .scrapy
 
 # Sphinx documentation
+docs/make.bat
+docs/doctrees/
+docs/html/
+docs/build/
 docs/_build/
 
 # PyBuilder
@@ -103,3 +110,33 @@ ENV/
 
 # IDE settings
 .vscode/
+.idea/
+*.sublime*
+
+# custom configs
+custom.cfg
+Makefile.config
+
+# R
+*.Rhistory
+
+# Eclipse / PyDev
+.project
+.pydevproject
+.settings
+
+# Kate
+*.kate-swp
+
+# buildout
+bin
+.installed.cfg
+.mr.developer.cfg
+bootstrap-buildout.py
+bootstrap.py
+
+# gcc/fortran
+*.o
+*.a
+*.mod
+*.out
