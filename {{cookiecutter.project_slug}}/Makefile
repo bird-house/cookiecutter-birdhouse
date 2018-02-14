@@ -1,3 +1,55 @@
+VERSION := {{ cookiecutter.version }}
+RELEASE := master
+
+# Include custom config if it is available
+-include Makefile.config
+
+# Application
+APP_ROOT := $(CURDIR)
+APP_NAME := $(shell basename $(APP_ROOT))
+
+# guess OS (Linux, Darwin, ...)
+OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
+CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknown")
+
+# Python
+SETUPTOOLS_VERSION := 36.5.0
+CONDA_VERSION := 4.4
+BUILDOUT_VERSION := 2.10.0
+
+# Anaconda
+ANACONDA_HOME ?= $(HOME)/anaconda
+CONDA_ENV ?= $(APP_NAME)
+CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
+CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
+CONDA_PINNED := $(APP_ROOT)/requirements/conda_pinned
+
+# Configuration used by update-config
+HOSTNAME ?= localhost
+HTTP_PORT ?= 8094
+OUTPUT_PORT ?= 8090
+
+# choose anaconda installer depending on your OS
+ANACONDA_URL = https://repo.continuum.io/miniconda
+ifeq "$(OS_NAME)" "Linux"
+FN := Miniconda2-latest-Linux-x86_64.sh
+else ifeq "$(OS_NAME)" "Darwin"
+FN := Miniconda2-latest-MacOSX-x86_64.sh
+else
+FN := unknown
+endif
+
+# Buildout files and folders
+DOWNLOAD_CACHE := $(APP_ROOT)/downloads
+BUILDOUT_FILES := parts eggs develop-eggs bin .installed.cfg .mr.developer.cfg *.egg-info bootstrap-buildout.py *.bak.* $(DOWNLOAD_CACHE)
+
+# Docker
+DOCKER_IMAGE := birdhouse/$(APP_NAME)
+DOCKER_CONTAINER := $(APP_NAME)
+
+# end of configuration
+
+
 .PHONY: clean clean-test clean-pyc clean-build docs help
 .DEFAULT_GOAL := help
 
@@ -92,98 +144,6 @@ dist: clean ## builds source and wheel package
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
 
-## EMU ##
-
-VERSION := 0.3.14
-RELEASE := master
-
-# Include custom config if it is available
--include Makefile.config
-
-# Application
-APP_ROOT := $(CURDIR)
-APP_NAME := $(shell basename $(APP_ROOT))
-
-# guess OS (Linux, Darwin, ...)
-OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
-CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknown")
-
-# Python
-SETUPTOOLS_VERSION := 36.5.0
-CONDA_VERSION := 4.4
-BUILDOUT_VERSION := 2.10.0
-
-# Anaconda
-ANACONDA_HOME ?= $(HOME)/anaconda
-CONDA_ENV ?= $(APP_NAME)
-CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
-CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
-CONDA_PINNED := $(APP_ROOT)/requirements/conda_pinned
-
-# Configuration used by update-config
-HOSTNAME ?= localhost
-HTTP_PORT ?= 8094
-OUTPUT_PORT ?= 8090
-
-# choose anaconda installer depending on your OS
-ANACONDA_URL = https://repo.continuum.io/miniconda
-ifeq "$(OS_NAME)" "Linux"
-FN := Miniconda2-latest-Linux-x86_64.sh
-else ifeq "$(OS_NAME)" "Darwin"
-FN := Miniconda2-latest-MacOSX-x86_64.sh
-else
-FN := unknown
-endif
-
-# Buildout files and folders
-DOWNLOAD_CACHE := $(APP_ROOT)/downloads
-BUILDOUT_FILES := parts eggs develop-eggs bin .installed.cfg .mr.developer.cfg *.egg-info bootstrap-buildout.py *.bak.* $(DOWNLOAD_CACHE)
-
-# Docker
-DOCKER_IMAGE := birdhouse/$(APP_NAME)
-DOCKER_CONTAINER := $(APP_NAME)
-
-# end of configuration
-
-.DEFAULT_GOAL := help
-
-.PHONY: all
-all: help
-
-.PHONY: help
-help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  help        to print this help message. (Default)"
-	@echo "  version     to print version number of this Makefile."
-	@echo "  info        to print information about $(APP_NAME)."
-	@echo "  install     to install $(APP_NAME) by running 'bin/buildout -c custom.cfg'."
-	@echo "  sysinstall  to install system packages from requirements.sh. You can also call 'bash requirements.sh' directly."
-	@echo "  update      to update your application by running 'bin/buildout -o -c custom.cfg' (buildout offline mode)."
-	@echo "  clean       to delete all files that are created by running buildout."
-	@echo "\nTesting targets:"
-	@echo "  test        to run tests (but skip long running tests)."
-	@echo "  testall     to run all tests (including long running tests)."
-	@echo "  pep8        to run pep8 code style checks."
-	@echo "\nSphinx targets:"
-	@echo "  docs        to generate HTML documentation with Sphinx."
-	@echo "  linkcheck   to check all external links in documentation for integrity."
-	@echo "  doc8        to run doc8 documentation style checks."
-	@echo "\nSupporting targets:"
-	@echo "  envclean    to remove the conda enviroment $(CONDA_ENV)."
-	@echo "  srcclean    to remove all *.pyc files."
-	@echo "  distclean   to remove *all* files that are not controlled by 'git'. WARNING: use it *only* if you know what you do!"
-	@echo "  passwd      to generate password for 'phoenix-password' in custom.cfg."
-	@echo "  export      to export the conda environment. Caution! You always need to check it the enviroment.yml is working."
-	@echo "  selfupdate  to update this Makefile."
-	@echo "\nSupervisor targets:"
-	@echo "  start       to start supervisor service."
-	@echo "  stop        to stop supervisor service."
-	@echo "  restart     to restart supervisor service."
-	@echo "  status      to show supervisor status"
-	@echo "\nDocker targets:"
-	@echo "  Dockerfile  to generate a Dockerfile for $(APP_NAME)."
-	@echo "  dockerbuild to build a docker image for $(APP_NAME)."
-
 .PHONY: version
 version:
 	@echo "Version: $(VERSION)"
@@ -200,6 +160,8 @@ info:
 	@echo "  APP_ROOT            $(APP_ROOT)"
 	@echo "  DOWNLOAD_CACHE      $(DOWNLOAD_CACHE)"
 	@echo "  DOCKER_IMAGE        $(DOCKER_IMAGE)"
+
+## EMU ##
 
 ## Helper targets ... ensure that Makefile etc are in place
 
@@ -231,7 +193,7 @@ downloads:
 .PHONY: init
 init: custom.cfg downloads
 
-bootstrap-buildout.py:
+bootstrap-buildout.py: ## Checkout the bootstrap-buildout.py file
 	@echo "Update buildout bootstrap-buildout.py ..."
 	@test -f boostrap-buildout.py || curl https://bootstrap.pypa.io/bootstrap-buildout.py --insecure --silent --output bootstrap-buildout.py
 
