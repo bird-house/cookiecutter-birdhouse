@@ -31,6 +31,10 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: POSIX',
+        'Programming Language :: Python'
 {%- if cookiecutter.open_source_license in license_classifiers %}
         '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
@@ -40,7 +44,8 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-    ],
+        'Topic :: Scientific/Engineering :: Atmospheric Science',
+],
     description="{{ cookiecutter.project_short_description }}",
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
@@ -55,7 +60,7 @@ setup(
 {%- endif %}
     long_description=readme + '\n\n' + history,
     include_package_data=True,
-    keywords='{{ cookiecutter.project_slug }}',
+    keywords='wps pywps birdhouse {{ cookiecutter.project_slug }}',
     name='{{ cookiecutter.project_slug }}',
     packages=find_packages(include=['{{ cookiecutter.project_slug }}', '{{ cookiecutter.project_slug }}.*']),
     setup_requires=setup_requirements,

@@ -93,6 +93,7 @@ docs/_build/
 target/
 
 # Cookiecutter
+cookies/
 output/
 python_boilerplate/
 cookiecutter-pypackage-env/

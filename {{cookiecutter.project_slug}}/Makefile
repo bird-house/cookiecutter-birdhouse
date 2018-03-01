@@ -75,6 +75,10 @@ export PRINT_HELP_PYSCRIPT
 
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
+.PHONY: all
+all: help
+
+.PHONY: help
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
@@ -193,7 +197,7 @@ downloads:
 .PHONY: init
 init: custom.cfg downloads
 
-bootstrap-buildout.py: ## Checkout the bootstrap-buildout.py file
+bootstrap-buildout.py:
 	@echo "Update buildout bootstrap-buildout.py ..."
 	@test -f boostrap-buildout.py || curl https://bootstrap.pypa.io/bootstrap-buildout.py --insecure --silent --output bootstrap-buildout.py
 

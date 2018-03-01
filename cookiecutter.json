@@ -1,8 +1,8 @@
 {
-  "full_name": "David Huard",
-  "email": "huard.david@ouranos.ca",
-  "github_username": "huard",
-  "project_name": "Birdname",
+  "full_name": "Full Name",
+  "email": "your@email",
+  "github_username": "bird-house",
+  "project_name": "Babybird",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "WPS climate data analysis",
   "pypi_username": "{{ cookiecutter.github_username }}",
