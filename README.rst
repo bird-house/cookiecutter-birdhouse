@@ -143,6 +143,18 @@ environment as follows::
   # finally you may clean it all up
   $ make clean
 
+Bump a new version
+------------------
+
+Make a new version of this Cookiecutter in the following steps::
+
+  * Make sure everything is commit to GitHub.
+  * Update `CHANGES.rst` with the next version.
+  * Dry Run: `bumpversion --dry-run --verbose --new-version 0.2.1 patch`
+  * Do it: `bumpversion --new-version 0.2.1 patch`
+
+See the bumpversion_ documentation for details.
+
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
