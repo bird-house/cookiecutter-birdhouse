@@ -14,8 +14,8 @@ CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknow
 
 # Python
 SETUPTOOLS_VERSION := 36.5.0
-CONDA_VERSION := 4.4
-BUILDOUT_VERSION := 2.10.0
+CONDA_VERSION := 4.5
+BUILDOUT_VERSION := 2.11
 
 # Anaconda
 ANACONDA_HOME ?= $(HOME)/anaconda
@@ -48,7 +48,6 @@ DOCKER_IMAGE := birdhouse/$(APP_NAME)
 DOCKER_CONTAINER := $(APP_NAME)
 
 # end of configuration
-
 
 .PHONY: clean clean-test clean-pyc clean-build docs help
 .DEFAULT_GOAL := help
