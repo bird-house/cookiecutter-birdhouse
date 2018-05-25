@@ -20,9 +20,6 @@ BUILDOUT_VERSION := 2.11
 # Anaconda
 ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= $(APP_NAME)
-CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
-CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
-CONDA_PINNED := $(APP_ROOT)/requirements/conda_pinned
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
@@ -32,16 +29,14 @@ OUTPUT_PORT ?= 8090
 # choose anaconda installer depending on your OS
 ANACONDA_URL = https://repo.continuum.io/miniconda
 ifeq "$(OS_NAME)" "Linux"
-FN := Miniconda2-latest-Linux-x86_64.sh
+FN := Miniconda3-latest-Linux-x86_64.sh
 else ifeq "$(OS_NAME)" "Darwin"
-FN := Miniconda2-latest-MacOSX-x86_64.sh
+FN := Miniconda3-latest-MacOSX-x86_64.sh
 else
 FN := unknown
 endif
 
-# Buildout files and folders
-DOWNLOAD_CACHE := $(APP_ROOT)/downloads
-BUILDOUT_FILES := parts eggs develop-eggs bin .installed.cfg .mr.developer.cfg *.egg-info bootstrap-buildout.py *.bak.* $(DOWNLOAD_CACHE)
+TEMP_FILES := *.egg-info *.log *.sqlite
 
 # Docker
 DOCKER_IMAGE := birdhouse/$(APP_NAME)
@@ -49,8 +44,7 @@ DOCKER_CONTAINER := $(APP_NAME)
 
 # end of configuration
 
-.PHONY: clean clean-test clean-pyc clean-build docs help
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := all
 
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -207,73 +201,42 @@ anaconda:
 	@echo "Installing Anaconda ..."
 	@test -d $(ANACONDA_HOME) || curl $(ANACONDA_URL)/$(FN) --silent --insecure --output "$(DOWNLOAD_CACHE)/$(FN)"
 	@test -d $(ANACONDA_HOME) || bash "$(DOWNLOAD_CACHE)/$(FN)" -b -p $(ANACONDA_HOME)
-	@echo "Add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
-
-.PHONY: conda_config
-conda_config: anaconda
-	@echo "Update ~/.condarc"
-	@-"$(ANACONDA_HOME)/bin/conda" install -y conda=$(CONDA_VERSION) requests
-	@"$(ANACONDA_HOME)/bin/conda" config --add envs_dirs $(CONDA_ENVS_DIR)
-	@"$(ANACONDA_HOME)/bin/conda" config --set ssl_verify true
-	@"$(ANACONDA_HOME)/bin/conda" config --set use_pip true
-	@"$(ANACONDA_HOME)/bin/conda" config --set channel_priority true
-	@"$(ANACONDA_HOME)/bin/conda" config --set auto_update_conda false
-	@"$(ANACONDA_HOME)/bin/conda" config --add channels defaults
-	@"$(ANACONDA_HOME)/bin/conda" config --append channels birdhouse
-	@"$(ANACONDA_HOME)/bin/conda" config --append channels conda-forge
+	@echo "Please add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
 
 .PHONY: conda_env
-conda_env: anaconda conda_config
-	@echo "Update conda environment $(CONDA_ENV) ..."
-	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" env create -n $(CONDA_ENV) -f environment.yml
-	"$(ANACONDA_HOME)/bin/conda" install -y -n $(CONDA_ENV) setuptools=$(SETUPTOOLS_VERSION)
-
-.PHONY: conda_pinned
-conda_pinned: conda_env
-	@echo "Update pinned conda packages ..."
-	@-test -d $(CONDA_ENV_PATH) && test -f $(CONDA_PINNED) && cp -f "$(CONDA_PINNED)" "$(CONDA_ENV_PATH)/conda-meta/pinned"
-
-.PHONY: export
-export:
-	@echo "Exporting conda enviroment ..."
-	@test -d $(CONDA_ENV_PATH) && "$(ANACONDA_HOME)/bin/conda" env export -n $(CONDA_ENV) -f environment.yml
+conda_env: anaconda
+	@echo "Updating conda environment $(CONDA_ENV) ..."
+	"$(ANACONDA_HOME)/bin/conda" env update -n $(CONDA_ENV) -f environment.yml
 
 ## Build targets
 
 .PHONY: bootstrap
-bootstrap: init conda_env conda_pinned bootstrap-buildout.py
-	@echo "Bootstrap buildout ..."
-	@test -f bin/buildout || bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);python bootstrap-buildout.py -c custom.cfg --allow-site-packages --setuptools-version=$(SETUPTOOLS_VERSION) --buildout-version=$(BUILDOUT_VERSION)"
+bootstrap: conda_env bootstrap_dev
+	@echo "Bootstrap ..."
 
-.PHONY: sysinstall
-sysinstall:
-	@echo "\nInstalling system packages for bootstrap ..."
-	@bash bootstrap.sh -i
-	@echo "\nInstalling system packages for your application ..."
-	@-test -f requirements.sh && bash requirements.sh
+.PHONY: bootstrap_dev
+bootstrap_dev:
+	@echo "Installing development requirements for tests and docs ..."
+	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8 sphinx"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
 install: bootstrap
-	@echo "Installing application with buildout ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) -c custom.cfg"
+	@echo "Installing application..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && python setup.py develop"
 	@echo "\nStart service with \`make start'"
 
-.PHONY: update
-update:
-	@echo "Update application config with buildout (offline mode) ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) -o -c custom.cfg"
-
-.PHONY: update-config
-update-config:
-	@echo "Update application config with buildout (offline mode) and environment variables..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:http-port=$(HTTP_PORT) -o -c custom.cfg"
+.PHONY: start
+start:
+	@echo "Starting application ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) -a -d"
 
 .PHONY: clean
 clean: srcclean envclean
-	@echo "Cleaning buildout files ..."
-	@-for i in $(BUILDOUT_FILES); do \
-            test -e $$i && rm -v -rf $$i; \
-        done
+	@echo "Cleaning generated files ..."
+	@-for i in $(TEMP_FILES); do \
+  	test -e $$i && rm -v -rf $$i; \
+  done
 
 .PHONY: envclean
 envclean: stop
@@ -286,10 +249,10 @@ srcclean:
 	@-find $(APP_ROOT) -type f -name "*.pyc" -print | xargs rm
 
 .PHONY: distclean
-distclean: backup clean
-	@echo "Cleaning distribution ..."
+distclean: clean
+	@echo "Cleaning ..."
 	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
-	@-git clean -dfx -e *.bak -e custom.cfg -e Makefile.config
+	@-git clean -dfx -e *.bak -e custom.cfg
 
 .PHONY: passwd
 passwd: custom.cfg
@@ -302,22 +265,24 @@ passwd: custom.cfg
 .PHONY: test
 test:
 	@echo "Running tests (skip slow and online tests) ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); bin/py.test -v -m 'not slow and not online'"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);pytest -v -m 'not slow and not online'"
 
 .PHONY: testall
 testall:
 	@echo "Running all tests (including slow and online tests) ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); bin/py.test -v"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pytest -v"
 
 .PHONY: pep8
 pep8:
 	@echo "Running pep8 code style checks ..."
-	$(CONDA_ENV_PATH)/bin/flake8
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && flake8"
+
+##  Sphinx targets
 
 .PHONY: docs
 docs:
 	@echo "Generating docs with Sphinx ..."
-	$(MAKE) -C $@ clean html
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);$(MAKE) -C $@ clean html"
 	@echo "open your browser: firefox docs/build/html/index.html"
 
 .PHONY: linkcheck
