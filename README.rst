@@ -22,16 +22,19 @@ Cookiecutter for Birdhouse
     :target: https://pyup.io/repos/github/audreyr/cookiecutter-pypackage/
     :alt: Updates
 
+   This is the cookiecutter template for PyWPS *without* the Buildout deployment.
+   The template for the Buildout deployment is on branch `0.2.x`_.
 
-Cookiecutter_ template for a Birdhouse bird package (pyWPS server).
+A Cookiecutter_ template for a Birdhouse bird package (PyWPS server).
 
-* GitHub repo: https://github.com/birdhouse/cookiecutter-birdhouse/
-* Documentation: https://birdhouse.readthedocs.io/
+* GitHub repo: https://github.com/bird-house/cookiecutter-birdhouse/
+* Documentation: https://cookiecutter-birdhouse.readthedocs.io/en/latest/
 * Free software: BSD license
 
 Features
 --------
 
+* Ready-made PyWPS service (a bird).
 * Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
 * Travis-CI_: Ready for Travis Continuous Integration testing
 * Tox_ testing: Setup to easily test for Python 3.5, 3.6, 3.7, 3.8
@@ -167,4 +170,5 @@ See the bumpversion_ documentation for details.
 .. _Punch: https://github.com/lgiordani/punch
 .. _Poetry: https://python-poetry.org/
 .. _PyPi: https://pypi.python.org/pypi
+.. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
 
