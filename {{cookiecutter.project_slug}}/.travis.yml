@@ -2,6 +2,9 @@
 # This file will be regenerated if you run travis_pypi_setup.py
 
 language: python
+#branches:
+#  only:
+#    - master
 python:
   - 3.8
   - 3.7
@@ -20,7 +23,9 @@ install:
   - make install
   - make start
 before_script:
-  - sleep 10
+  # Start WPS service on port 5000 on 0.0.0.0
+  - {{ cookiecutter.project_slug }} --daemon --bind-host 0.0.0.0 --port 5000
+  - sleep 5
 script:
   - make testall
   - make pep8
