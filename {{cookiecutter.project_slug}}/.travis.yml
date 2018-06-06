@@ -24,8 +24,8 @@ install:
   - make start
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
-  - {{ cookiecutter.project_slug }} --daemon --bind-host 0.0.0.0 --port 5000
-  - sleep 5
+  - {{ cookiecutter.project_slug }} start --daemon --bind-host 0.0.0.0 --port 5000
+  - sleep 2
 script:
   - make testall
   - make pep8

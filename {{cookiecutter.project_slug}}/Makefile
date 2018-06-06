@@ -12,11 +12,6 @@ APP_NAME := $(shell basename $(APP_ROOT))
 OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
 CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknown")
 
-# Python
-SETUPTOOLS_VERSION := 36.5.0
-CONDA_VERSION := 4.5
-BUILDOUT_VERSION := 2.11
-
 # Anaconda
 ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= $(APP_NAME)
@@ -217,7 +212,7 @@ bootstrap: conda_env bootstrap_dev
 .PHONY: bootstrap_dev
 bootstrap_dev:
 	@echo "Installing development requirements for tests and docs ..."
-	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8 sphinx"
+	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8 sphinx bumpversion"
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
@@ -229,7 +224,17 @@ install: bootstrap
 .PHONY: start
 start:
 	@echo "Starting application ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) -d"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) start -d"
+
+.PHONY: stop
+stop:
+	@echo "Stopping application ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) stop"
+
+.PHONY: status
+status:
+	@echo "Show status ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) status"
 
 .PHONY: clean
 clean: srcclean envclean
@@ -261,6 +266,8 @@ passwd: custom.cfg
 	@bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); python -c 'from IPython.lib import passwd; pw = passwd(algorithm=\"sha256\"); lines = [\"phoenix-password = \" + pw + \"\\n\" if line.startswith(\"phoenix-password\") else line for line in open(\"custom.cfg\", \"r\")]; file = open(\"custom.cfg\", \"w\"); file.writelines(lines); file.close()'"
 	@echo ""
 	@echo "Run \`make install restart' to activate this password."
+
+## Test targets
 
 .PHONY: test
 test:

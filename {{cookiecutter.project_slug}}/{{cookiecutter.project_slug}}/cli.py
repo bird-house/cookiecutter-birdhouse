@@ -9,6 +9,7 @@
 
 import os
 import sys
+import psutil
 {%- if cookiecutter.command_line_interface|lower == 'argparse' %}
 import argparse
 {%- endif %}
@@ -20,6 +21,8 @@ from pywps import configuration
 
 from . import wsgi
 from six.moves.urllib.parse import urlparse
+
+PID_FILE = os.path.abspath(os.path.join(os.path.curdir, "pywps.pid"))
 
 import logging
 logging.basicConfig(format='%(message)s', level=logging.INFO)
@@ -35,7 +38,7 @@ template_env = Environment(
 def write_user_config(**kwargs):
     config_templ = template_env.get_template('pywps.cfg')
     rendered_config = config_templ.render(**kwargs)
-    config_file = os.path.abspath(os.path.join(os.path.curdir, "custom.cfg"))
+    config_file = os.path.abspath(os.path.join(os.path.curdir, ".custom.cfg"))
     with open(config_file, 'w') as fp:
         fp.write(rendered_config)
     return config_file
@@ -55,6 +58,30 @@ def get_host():
         port = 80
     return host, port
 
+{% if cookiecutter.command_line_interface|lower == 'click' %}
+def run_process_action(action=None):
+    """Run an action with psutil on current process
+    and return a status message."""
+    action = action or 'status'
+    try:
+        with open(PID_FILE, 'r') as fp:
+            pid = int(fp.read())
+            p = psutil.Process(pid)
+            if action == 'stop':
+                p.terminate()
+                msg = "pid={}, status=terminated".format(p.pid)
+            else:
+                from psutil import _pprint_secs
+                msg = "pid={}, status={}, created={}".format(
+                    p.pid, p.status(), _pprint_secs(p.create_time()))
+        if action == 'stop':
+            os.remove(PID_FILE)
+    except IOError:
+        msg = "No PID file found. Service not running?"
+    except psutil.NoSuchProcess as e:
+        msg = e.msg
+    click.echo(msg)
+{%- endif %}
 
 def _run(application, bind_host=None, daemon=False):
     from werkzeug.serving import run_simple
@@ -77,10 +104,33 @@ def _run(application, bind_host=None, daemon=False):
         static_files=static_files)
 
 {% if cookiecutter.command_line_interface|lower == 'click' %}
-@click.command(context_settings=CONTEXT_SETTINGS)
+@click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option()
+def cli():
+    """Command line to start/stop a PyWPS service.
+
+    Do not use this service in a production environment.
+    It's intended to be running in a test environment only!
+    For more documentation, visit http://pywps.org/doc
+    """
+    pass
+
+
+@cli.command()
+def status():
+    """Show status of PyWPS service"""
+    run_process_action(action='status')
+
+
+@cli.command()
+def stop():
+    """Stop PyWPS service"""
+    run_process_action(action='stop')
+
+
+@cli.command()
 @click.option('--config', '-c', metavar='PATH', help='path to pywps configuration file.')
-@click.option('--bind-host', '-b', metavar='IP-ADDRESS', default='0.0.0.0',
+@click.option('--bind-host', '-b', metavar='IP-ADDRESS', default='127.0.0.1',
               help='IP address used to bind service.')
 @click.option('--daemon', '-d', is_flag=True, help='run in daemon mode.')
 @click.option('--hostname', metavar='HOSTNAME', default='localhost', help='hostname in PyWPS configuration.')
@@ -91,15 +141,11 @@ def _run(application, bind_host=None, daemon=False):
 @click.option('--log-level', metavar='LEVEL', default='INFO', help='log level in PyWPS configuration.')
 @click.option('--log-file', metavar='PATH', default='pywps.log', help='log file in PyWPS configuration.')
 @click.option('--database', default='sqlite:///pywps-logs.sqlite', help='database in PyWPS configuration')
-def cli(config, bind_host, daemon, hostname, port,
-        maxsingleinputsize, maxprocesses, parallelprocesses,
-        log_level, log_file, database):
-    """Command line for starting a PyWPS service.
+def start(config, bind_host, daemon, hostname, port,
+          maxsingleinputsize, maxprocesses, parallelprocesses,
+          log_level, log_file, database):
+    """Start PyWPS service.
     This service is by default available at http://localhost:{{ cookiecutter.http_port }}/wps
-
-    Do not use this service in a production environment.
-    It's intended to be running in a test environment only!
-    For more documentation, visit http://pywps.org/doc
     """
     cfgfiles = []
     cfgfiles.append(write_user_config(
@@ -125,7 +171,9 @@ def cli(config, bind_host, daemon, hostname, port,
         try:
             pid = os.fork()
             if pid:
-                LOGGER.warn('forked process id: {}'.format(pid))
+                LOGGER.warn('forked process id: %s' % pid)
+                with open(PID_FILE, 'w') as fp:
+                    fp.write("{}".format(pid))
         except OSError as e:
             raise Exception("%s [%d]" % (e.strerror, e.errno))
 

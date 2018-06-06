@@ -3,8 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# custom configs
+# PyWPS 
 custom.cfg
+.custom.cfg
+*.pid
 
 # Python / Extensions etc.
 *~
