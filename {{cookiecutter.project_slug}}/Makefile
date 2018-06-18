@@ -6,7 +6,7 @@ RELEASE := master
 
 # Application
 APP_ROOT := $(CURDIR)
-APP_NAME := $(shell basename $(APP_ROOT))
+APP_NAME := {{ cookiecutter.project_slug }}
 
 # guess OS (Linux, Darwin, ...)
 OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
