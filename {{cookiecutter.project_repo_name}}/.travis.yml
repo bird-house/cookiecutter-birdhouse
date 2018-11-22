@@ -2,9 +2,6 @@
 # This file will be regenerated if you run travis_pypi_setup.py
 
 language: python
-#branches:
-#  only:
-#    - master
 python:
   - 3.8
   - 3.7
