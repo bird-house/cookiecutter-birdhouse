@@ -190,7 +190,7 @@ bootstrap-buildout.py:
 	@echo "Update buildout bootstrap-buildout.py ..."
 	@test -f boostrap-buildout.py || curl https://bootstrap.pypa.io/bootstrap-buildout.py --insecure --silent --output bootstrap-buildout.py
 
-## Anaconda targets
+## Conda targets
 
 .PHONY: check_conda
 check_conda:
@@ -208,6 +208,11 @@ envclean: check_conda
 	@echo "Removing conda env $(CONDA_ENV)"
 	@-"$(CONDA)" remove -n $(CONDA_ENV) --yes --all
 
+.PHONY: spec
+spec: check_conda
+	@echo "Updating conda environment specification file ..."
+	@-"$(CONDA)" list -n $(CONDA_ENV) --explicit > spec-file.txt
+
 ## Build targets
 
 .PHONY: bootstrap
@@ -217,7 +222,7 @@ bootstrap: check_conda conda_env bootstrap_dev
 .PHONY: bootstrap_dev
 bootstrap_dev:
 	@echo "Installing development requirements for tests and docs ..."
-	@-bash -c "$(CONDA) install -y -n $(CONDA_ENV) -c conda-forge pytest flake8 sphinx bumpversion"
+	@-bash -c "$(CONDA) install -y -n $(CONDA_ENV) -c conda-forge pytest flake8 sphinx bumpversion gunicorn psycopg2"
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
