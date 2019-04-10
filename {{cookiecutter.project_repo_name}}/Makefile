@@ -67,7 +67,7 @@ bootstrap: check_conda conda_env bootstrap_dev
 .PHONY: bootstrap_dev
 bootstrap_dev:
 	@echo "Installing development requirements for tests and docs ..."
-	@-bash -c "$(CONDA) install -y -n $(CONDA_ENV) -c conda-forge pytest flake8 sphinx bumpversion gunicorn psycopg2"
+	@-bash -c "$(CONDA) install -y -n $(CONDA_ENV) pytest flake8 sphinx gunicorn psycopg2"
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
