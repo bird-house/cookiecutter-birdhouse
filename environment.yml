@@ -1,13 +1,18 @@
 name: cookiecutter-birdhouse
 channels:
-- conda-forge
+#- conda-forge
 - defaults
 dependencies:
-- cookiecutter
+#- cookiecutter
 - cryptography
 - pyyaml
-- bumpversion
-- watchdog
+#- bumpversion
+#- watchdog
 # tests
 - pytest
-- pytest-cookies
+#- pytest-cookies
+- pip:
+  - cookiecutter
+  - bumpversion
+  - watchdog
+  - pytest-cookies
