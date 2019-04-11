@@ -47,6 +47,7 @@ Features
 * Pre-configured :file:`.travis.yml` for Travis-CI_ automated deployment and testing
 * Pre-configured :file:`.codacy.yml` for automated Codacy_ code review
 * A :file:`Dockerfile` and :file:`docker-compose.yml` for containerization
+* Preconfigured Sphinx_ documentation that can be hosted on ReadTheDocs_
 * A :file:`Makefile` to install the code, start, stop and poll the server and more
 * Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
 * Travis-CI_: Ready for Travis Continuous Integration testing
@@ -69,16 +70,21 @@ Installation
 ------------
 
 Prior to installing cookiecutter-birdhouse, the cookiecutter package must be installed in your environment.
-This is achieved via the following command::
+This is achieved via the following command:
+
+.. code-block:: console
 
     $ conda install -c conda-forge cookiecutter
 
-With cookiecutter installed, the cookiecutter-birdhouse template can be installed with::
+With cookiecutter installed, the cookiecutter-birdhouse template can be installed with:
+
+.. code-block:: console
 
     $ cookiecutter https://github.com/bird-house/cookiecutter-birdhouse.git
 
-Once cookiecutter clones the template, you will be asked a series of questions related to your project::
-.. _Cookiecutter: https://github.com/cookiecutter/cookiecutter
+Once cookiecutter clones the template, you will be asked a series of questions related to your project:
+
+.. code-block:: console
 
     $ full_name [Full Name]: Enter your full name.
 
@@ -132,7 +138,9 @@ Development
 -----------
 
 If you want to extend the cookiecutter template then prepare your development
-environment as follows::
+environment as follows:
+
+.. code-block:: console
 
   # clone repo
   $ git clone git@github.com:bird-house/cookiecutter-birdhouse.git
