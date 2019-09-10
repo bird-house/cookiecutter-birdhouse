@@ -1,3 +1,5 @@
+# Configuration
+APP_ROOT := $(abspath $(lastword $(MAKEFILE_LIST))/..)
 VERSION := {{ cookiecutter.version }}
 RELEASE := master
 
@@ -40,7 +42,7 @@ DOCKER_CONTAINER := $(APP_NAME)
 
 # end of configuration
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -226,47 +228,67 @@ bootstrap_dev:
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
-install: bootstrap
+install:
 	@echo "Installing application ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && python setup.py develop"
+	@-bash -c 'pip install -e .'
 	@echo "\nStart service with \`make start'"
 
+.PHONY: develop
+develop:
+	@echo "Installing development requirements for tests and docs ..."
+	@-bash -c 'pip install -e ".[dev]"'
+
 .PHONY: start
-start: check_conda
+start:
 	@echo "Starting application ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) start -d"
+	@-bash -c "$(APP_NAME) start -d"
 
 .PHONY: stop
-stop: check_conda
+stop:
 	@echo "Stopping application ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) stop"
+	@-bash -c "$(APP_NAME) stop"
 
 .PHONY: restart
 restart: stop start
 	@echo "Restarting application ..."
 
 .PHONY: status
-status: check_conda
+status:
 	@echo "Show status ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) status"
+	@-bash -c "$(APP_NAME) status"
 
 .PHONY: clean
-clean: srcclean envclean
-	@echo "Cleaning generated files ..."
-	@-for i in $(TEMP_FILES); do \
-  	test -e $$i && rm -v -rf $$i; \
-  done
+clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
-.PHONY: srcclean
-srcclean:
-	@echo "Removing *.pyc files ..."
-	@-find $(APP_ROOT) -type f -name "*.pyc" -print | xargs rm
+.PHONY: clean-build
+clean-build:
+	@echo "Remove build artifacts ..."
+	@-rm -fr build/
+	@-rm -fr dist/
+	@-rm -fr .eggs/
+	@-find . -name '*.egg-info' -exec rm -fr {} +
+	@-find . -name '*.egg' -exec rm -f {} +
+	@-find . -name '*.log' -exec rm -fr {} +
+	@-find . -name '*.sqlite' -exec rm -fr {} +
 
-.PHONY: distclean
-distclean: clean
-	@echo "Cleaning ..."
+.PHONY: clean-pyc
+clean-pyc:
+	@echo "Remove Python file artifacts ..."
+	@-find . -name '*.pyc' -exec rm -f {} +
+	@-find . -name '*.pyo' -exec rm -f {} +
+	@-find . -name '*~' -exec rm -f {} +
+	@-find . -name '__pycache__' -exec rm -fr {} +
+
+.PHONY: clean-test
+clean-test:
+	@echo "Remove test artifacts ..."
+	@-rm -fr .pytest_cache
+
+.PHONY: clean-dist
+clean-dist: clean
+	@echo "Run 'git clean' ..."
 	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
-	@-git clean -dfx -e *.bak -e custom.cfg
+	@-git clean -dfx
 
 .PHONY: passwd
 passwd: custom.cfg
@@ -279,27 +301,36 @@ passwd: custom.cfg
 ## Test targets
 
 .PHONY: test
-test: check_conda
+test:
 	@echo "Running tests (skip slow and online tests) ..."
-	@bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);pytest -v -m 'not slow and not online'"
+	@bash -c 'pytest -v -m "not slow and not online" tests/'
 
-.PHONY: testall
-testall: check_conda
+.PHONY: test-all
+test-all:
 	@echo "Running all tests (including slow and online tests) ..."
-	@bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pytest -v"
+	@bash -c 'pytest -v tests/'
 
-.PHONY: pep8
-pep8: check_conda
-	@echo "Running pep8 code style checks ..."
-	@bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && flake8"
+.PHONY: lint
+lint:
+	@echo "Running flake8 code style checks ..."
+	@bash -c 'flake8'
 
-##  Sphinx targets
+## Sphinx targets
 
 .PHONY: docs
-docs: check_conda
+docs:
 	@echo "Generating docs with Sphinx ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);$(MAKE) -C $@ clean html"
-	@echo "open your browser: firefox docs/build/html/index.html"
+	@-bash -c '$(MAKE) -C $@ clean html'
+	@echo "open your browser: open file://$(APP_ROOT)/docs/build/html/index.html"
+
+## Deployment targets
+
+.PHONY: dist
+dist: clean
+	@echo "Builds source and wheel package ..."
+	@-python setup.py sdist
+	@-python setup.py bdist_wheel
+	ls -l dist
 
 .PHONY: linkcheck
 linkcheck:
