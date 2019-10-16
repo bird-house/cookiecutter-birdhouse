@@ -9,6 +9,7 @@ python:
   - 3.5
 os:
   - linux
+dist: xenial   # required for Python >= 3.7
 branches:
   only:
     - master
