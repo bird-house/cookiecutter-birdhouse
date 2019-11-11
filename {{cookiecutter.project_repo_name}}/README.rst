@@ -47,6 +47,24 @@ Features
 
 * TODO
 
+Documentation
+-------------
+
+Learn more about {{ cookiecutter.project_name }} in its official documentation at
+https://{{ cookiecutter.project_repo_name | replace("_", "-") }}.readthedocs.io.
+
+Contributing
+------------
+
+You can find information about contributing in our `Developer Guide`_.
+
+Please use bumpversion_ to release a new version.
+
+License
+-------
+
+Free software: {{ cookiecutter.open_source_license }}
+
 Credits
 -------
 
@@ -54,3 +72,5 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`bird-house/cookiecutter-birdhouse`: https://github.com/bird-house/cookiecutter-birdhouse
+.. _`Developer Guide`: https://{{ cookiecutter.project_repo_name | replace("_", "-") }}.readthedocs.io/en/latest/dev_guide.html
+.. _bumpversion: https://{{ cookiecutter.project_repo_name | replace("_", "-") }}.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version
