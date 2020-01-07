@@ -1,6 +1,7 @@
 name: cookiecutter-birdhouse
 channels:
 - defaults
+- conda-forge
 dependencies:
 - pip
 - cryptography
