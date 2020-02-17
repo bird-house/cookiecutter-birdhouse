@@ -23,6 +23,8 @@ install:
   - conda info -a
   # Prepare env with Python version
   - conda create -n {{ cookiecutter.project_slug }} python=$TRAVIS_PYTHON_VERSION
+  # Note: if using conda-forge, specify the channel with this command instead
+  # - conda create -n {{ cookiecutter.project_slug }} -c conda-forge python=$TRAVIS_PYTHON_VERSION
   # Update now the env with our environment
   - conda env update -f environment.yml
   - source activate {{ cookiecutter.project_slug }}
