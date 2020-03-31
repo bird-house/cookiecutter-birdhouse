@@ -13,7 +13,9 @@ with open('HISTORY.rst') as history_file:
 requirements = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=7.0',{%- endif %} ]
 
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
+
 setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
+
 test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest>=3',{%- endif %} ]
 
 {%- set license_classifiers = {
@@ -34,7 +36,7 @@ setup(
         'Intended Audience :: Science/Research',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX',
-        'Programming Language :: Python'
+        'Programming Language :: Python',
 {%- if cookiecutter.open_source_license in license_classifiers %}
         '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
