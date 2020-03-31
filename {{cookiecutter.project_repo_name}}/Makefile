@@ -10,35 +10,13 @@ RELEASE := master
 APP_ROOT := $(CURDIR)
 APP_NAME := {{ cookiecutter.project_slug }}
 
-# guess OS (Linux, Darwin, ...)
-OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
-CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknown")
+WPS_URL = https://localhost:{{ cookiecutter.http_port }}/
+OUTPUT_URL = $(WPS_URL)/wpsoutputs
 
-# Anaconda
-CONDA := $(shell command -v conda 2> /dev/null)
-ANACONDA_HOME := $(shell conda info --base 2> /dev/null)
-CONDA_ENV := $(APP_NAME)
+WPS_PERMALINK =  https://pavics.ouranos.ca/
+OUTPUT_PERMALINK = $(WPS_PERMALINK)/wpsoutputs
 
-# Configuration used by update-config
-HOSTNAME ?= localhost
-HTTP_PORT ?= 8094
-OUTPUT_PORT ?= 8090
-
-# choose anaconda installer depending on your OS
-ANACONDA_URL = https://repo.continuum.io/miniconda
-ifeq "$(OS_NAME)" "Linux"
-FN := Miniconda3-latest-Linux-x86_64.sh
-else ifeq "$(OS_NAME)" "Darwin"
-FN := Miniconda3-latest-MacOSX-x86_64.sh
-else
-FN := unknown
-endif
-
-TEMP_FILES := *.egg-info *.log *.sqlite
-
-# Docker
-DOCKER_IMAGE := birdhouse/$(APP_NAME)
-DOCKER_CONTAINER := $(APP_NAME)
+SANITIZE_FILE := https://github.com/Ouranosinc/PAVICS-e2e-workflow-tests/raw/master/notebooks/output-sanitize.cfg
 
 # end of configuration
 
@@ -71,149 +49,25 @@ all: help
 
 .PHONY: help
 help:
-	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
-
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
-
-clean-build: ## remove build artifacts
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +
-
-clean-pyc: ## remove Python file artifacts
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
-	find . -name '__pycache__' -exec rm -fr {} +
-
-clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
-	rm -f .coverage
-	rm -fr htmlcov/
-	rm -fr .pytest_cache
-
-lint: ## check style with flake8
-	flake8 {{ cookiecutter.project_slug }} tests
-
-test: ## run tests quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	pytest
-{%- else %}
-	python setup.py test
-{%- endif %}
-
-test-all: ## run tests on every Python version with tox
-	tox
-
-coverage: ## check code coverage quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	coverage run --source {{ cookiecutter.project_slug }} -m pytest
-{%- else %}
-	coverage run --source {{ cookiecutter.project_slug }} setup.py test
-{%- endif %}
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
-
-docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/{{ cookiecutter.project_slug }}.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/build/html/index.html
-
-servedocs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
-
-release: dist ## package and upload a release
-	twine upload dist/*
-
-dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
-
-install: clean ## install the package to the active Python's site-packages
-	python setup.py install
-
-.PHONY: version
-version:
-	@echo "Version: $(VERSION)"
-
-.PHONY: info
-info:
-	@echo "Informations about your Bird:"
-	@echo "  OS_NAME             $(OS_NAME)"
-	@echo "  CPU_ARCH            $(CPU_ARCH)"
-	@echo "  Anaconda Home       $(ANACONDA_HOME)"
-	@echo "  Conda Environment   $(CONDA_ENV). Use \`source activate $(CONDA_ENV)' to activate it."
-	@echo "  Conda Prefix        $(CONDA_ENV_PATH)"
-	@echo "  APP_NAME            $(APP_NAME)"
-	@echo "  APP_ROOT            $(APP_ROOT)"
-	@echo "  DOWNLOAD_CACHE      $(DOWNLOAD_CACHE)"
-	@echo "  DOCKER_IMAGE        $(DOCKER_IMAGE)"
-
-## EMU ##
-
-## Helper targets ... ensure that Makefile etc are in place
-
-.PHONY: backup
-backup:
-	@echo "Backup custom config ..."
-	@-test -f custom.cfg && cp -v --update --backup=numbered --suffix=.bak custom.cfg custom.cfg.bak
-
-.PHONY: .gitignore
-.gitignore:
-	@echo "Setup default .gitignore ..."
-	@curl "https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/$(RELEASE)/dot_gitignore" --silent --insecure --output .gitignore
-
-.PHONY: bootstrap.sh
-bootstrap.sh:
-	@echo "Update bootstrap.sh ..."
-	@curl "https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/$(RELEASE)/bootstrap.sh" --silent --insecure --output bootstrap.sh "https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/$(RELEASE)/bootstrap.sh"
-	@chmod 755 bootstrap.sh
-
-custom.cfg:
-	@echo "Using custom.cfg for buildout ..."
-	@test -f custom.cfg || cp -v custom.cfg.example custom.cfg
-
-.PHONY: downloads
-downloads:
-	@echo "Using DOWNLOAD_CACHE $(DOWNLOAD_CACHE)"
-	@test -d $(DOWNLOAD_CACHE) || mkdir -v -p $(DOWNLOAD_CACHE)
-
-.PHONY: init
-init: custom.cfg downloads
-
-bootstrap-buildout.py:
-	@echo "Update buildout bootstrap-buildout.py ..."
-	@test -f boostrap-buildout.py || curl https://bootstrap.pypa.io/bootstrap-buildout.py --insecure --silent --output bootstrap-buildout.py
-
-## Conda targets
-
-.PHONY: check_conda
-check_conda:
-ifndef CONDA
-		$(error "Conda is not available. Please install miniconda: https://conda.io/miniconda.html")
-endif
-
-.PHONY: conda_env
-conda_env: check_conda
-	@echo "Updating conda environment $(CONDA_ENV) ..."
-	"$(CONDA)" env update -n $(CONDA_ENV) -f environment.yml
-
-.PHONY: envclean
-envclean: check_conda
-	@echo "Removing conda env $(CONDA_ENV)"
-	@-"$(CONDA)" remove -n $(CONDA_ENV) --yes --all
-
-.PHONY: spec
-spec: check_conda
-	@echo "Updating conda environment specification file ..."
-	@-"$(CONDA)" list -n $(CONDA_ENV) --explicit > spec-file.txt
+	@echo "Please use 'make <target>' where <target> is one of:"
+	@echo "  help              to print this help message. (Default)"
+	@echo "  install           to install app by running 'pip install -e .'"
+	@echo "  develop           to install with additional development requirements."
+	@echo "  start             to start $(APP_NAME) service as daemon (background process)."
+	@echo "  stop              to stop $(APP_NAME) service."
+	@echo "  restart           to restart $(APP_NAME) service."
+	@echo "  status            to show status of $(APP_NAME) service."
+	@echo "  clean             to remove all files generated by build and tests."
+	@echo "\nTesting targets:"
+	@echo "  test              to run tests (but skip long running tests)."
+	@echo "  test-all          to run all tests (including long running tests)."
+	@echo "  test-notebooks    to verify Jupyter Notebook test outputs are valid."
+	@echo "  lint              to run code style checks with flake8."
+	@echo "  refresh-notebooks to verify Jupyter Notebook test outputs are valid."
+	@echo "\nSphinx targets:"
+	@echo "  docs              to generate HTML documentation with Sphinx."
+	@echo "\nDeployment targets:"
+	@echo "  dist              to build source and wheel package."
 
 ## Build targets
 
@@ -254,7 +108,7 @@ restart: stop start
 
 .PHONY: status
 status:
-	@echo "Show status ..."
+	@echo "Showing status ..."
 	@-bash -c "$(APP_NAME) status"
 
 .PHONY: clean
@@ -262,7 +116,7 @@ clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and 
 
 .PHONY: clean-build
 clean-build:
-	@echo "Remove build artifacts ..."
+	@echo "Removing build artifacts ..."
 	@-rm -fr build/
 	@-rm -fr dist/
 	@-rm -fr .eggs/
@@ -273,7 +127,7 @@ clean-build:
 
 .PHONY: clean-pyc
 clean-pyc:
-	@echo "Remove Python file artifacts ..."
+	@echo "Removing Python file artifacts ..."
 	@-find . -name '*.pyc' -exec rm -f {} +
 	@-find . -name '*.pyo' -exec rm -f {} +
 	@-find . -name '*~' -exec rm -f {} +
@@ -281,13 +135,13 @@ clean-pyc:
 
 .PHONY: clean-test
 clean-test:
-	@echo "Remove test artifacts ..."
+	@echo "Removing test artifacts ..."
 	@-rm -fr .pytest_cache
 
 .PHONY: clean-dist
 clean-dist: clean
-	@echo "Run 'git clean' ..."
-	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
+	@echo "Running 'git clean' ..."
+	@git diff --quiet HEAD || echo "There are uncommitted changes! Aborting 'git clean' ..."
 	@-git clean -dfx
 
 .PHONY: passwd
@@ -310,10 +164,24 @@ test-all:
 	@echo "Running all tests (including slow and online tests) ..."
 	@bash -c 'pytest -v tests/'
 
+.PHONY: notebook-sanitizer
+notebook-sanitizer:
+	@bash -c "curl -L $(SANITIZE_FILE) -o $(CURDIR)/docs/source/output-sanitize.cfg --silent"
+
+.PHONY: test-notebooks
+test-notebooks: notebook-sanitizer
+	@echo "Running notebook-based tests"
+	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval --verbose $(CURDIR)/docs/source/notebooks/ --sanitize-with $(CURDIR)/docs/source/output-sanitize.cfg --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
+
 .PHONY: lint
 lint:
 	@echo "Running flake8 code style checks ..."
 	@bash -c 'flake8'
+
+.PHONY: refresh-notebooks
+refresh-notebooks:
+	@echo "Refresh all notebook outputs under docs/source/notebooks"
+	@bash -c 'for nb in $(CURDIR)/docs/source/notebooks/*.ipynb; do WPS_URL="$(WPS_URL)" jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output "$$nb" "$$nb"; sed -i "s@$(WPS_URL)/outputs/@$(OUTPUT_URL)/@g" "$$nb"; done; cd $(APP_ROOT)'
 
 ## Sphinx targets
 
@@ -321,16 +189,17 @@ lint:
 docs:
 	@echo "Generating docs with Sphinx ..."
 	@-bash -c '$(MAKE) -C $@ clean html'
-	@echo "open your browser: open file://$(APP_ROOT)/docs/build/html/index.html"
+	@echo "Opening browser to: file:/$(APP_ROOT)/docs/build/html/index.html"
+	@-bash -c 'xdg-open $(APP_ROOT)/docs/build/html/index.html'
 
 ## Deployment targets
 
 .PHONY: dist
 dist: clean
-	@echo "Builds source and wheel package ..."
+	@echo "Building source and wheel package ..."
 	@-python setup.py sdist
 	@-python setup.py bdist_wheel
-	ls -l dist
+	@-bash -c 'ls -l dist/'
 
 .PHONY: linkcheck
 linkcheck:
