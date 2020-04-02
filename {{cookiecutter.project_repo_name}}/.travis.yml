@@ -7,15 +7,18 @@ python:
   - 3.7
   - 3.6
   - 3.5
-os:
-  - linux
+os: linux
 dist: xenial   # required for Python >= 3.7
 branches:
   only:
     - master
-    - develop
-
-# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+jobs:
+  include:
+    - os: osx
+      language: shell
+before_install:
+  # Useful for debugging Travis CI environment
+  - printenv
 install:
   - make install
   - make start
