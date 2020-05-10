@@ -163,3 +163,6 @@ testdata.json
 *.a
 *.mod
 *.out
+
+# Merge conflict
+*.orig
