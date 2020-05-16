@@ -7,6 +7,8 @@
   "project_short_description": "WPS climate data analysis",
   "pypi_username": "{{ cookiecutter.github_username }}",
   "project_repo_name": "{{ cookiecutter.project_slug }}",
+  "project_readthedocs_name": "{{ cookiecutter.project_repo_name.replace('_', '-') }}",
+  "project_short_description": "A Web Processing Service for Climate Data Analysis.",
   "version": "0.1.0",
   "open_source_license": ["Apache Software License 2.0", "MIT license", "BSD license", "ISC license", "GNU General Public License v3"],
   "permanent_address": "https://pavics.ouranos.ca",
