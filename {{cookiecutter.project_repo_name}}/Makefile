@@ -10,7 +10,7 @@ RELEASE := master
 APP_ROOT := $(CURDIR)
 APP_NAME := {{ cookiecutter.project_slug }}
 
-WPS_URL = https://localhost:{{ cookiecutter.http_port }}/
+WPS_URL = http://localhost:{{ cookiecutter.http_port }}/
 OUTPUT_URL = $(WPS_URL)/wpsoutputs
 
 SANITIZE_FILE := https://github.com/Ouranosinc/PAVICS-e2e-workflow-tests/raw/master/notebooks/output-sanitize.cfg
