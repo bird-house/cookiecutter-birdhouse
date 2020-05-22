@@ -26,4 +26,4 @@ nbsphinx
 nbval
 nbconvert
 cruft
-# add extra not in cookiecutter below to prevent merge conflict when refreshing cookiecutter
+# Changing dependencies above this comment will create merge conflicts when updating the cookiecutter template with cruft. Add extra requirements below this line. 
