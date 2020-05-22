@@ -26,3 +26,4 @@ nbsphinx
 nbval
 nbconvert
 cruft
+# add extra not in cookiecutter below to prevent merge conflict when refreshing cookiecutter
