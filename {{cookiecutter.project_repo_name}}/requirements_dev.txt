@@ -25,3 +25,4 @@ pytest-notebook
 nbsphinx
 nbval
 nbconvert
+cruft
