@@ -33,6 +33,7 @@ before_script:
   - sleep 2
 script:
   - make testall
+  - make test-notebooks
   - make pep8
 #install: pip install -U tox-travis
 
