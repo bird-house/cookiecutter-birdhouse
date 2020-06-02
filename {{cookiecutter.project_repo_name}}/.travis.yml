@@ -35,6 +35,7 @@ script:
   - make testall
   - make test-notebooks
   - make pep8
+  - make docs
 #install: pip install -U tox-travis
 
 # Command to run tests, e.g. python setup.py test
