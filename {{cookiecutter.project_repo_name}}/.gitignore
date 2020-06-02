@@ -33,6 +33,8 @@ htmlcov/
 .coverage.*
 .cache
 nosetests.xml
+unit_tests/testdata.json
+coverage/
 coverage.xml
 *.cover
 .hypothesis/
