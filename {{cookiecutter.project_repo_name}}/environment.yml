@@ -5,7 +5,7 @@ channels:
 dependencies:
 - pip
 - python>=3.6,<3.8
-- pywps=4.2
+- pywps>=4.2.4,<4.3
 - jinja2
 - click
 - psutil
