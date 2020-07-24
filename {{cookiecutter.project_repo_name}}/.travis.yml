@@ -36,6 +36,8 @@ script:
   - make test-notebooks
   - make pep8
   - make docs
+  - make SPHINXOPTS='-b epub' docs  # to match RtD
+  - make SPHINXOPTS='-b latex' docs  # to match RtD
 #install: pip install -U tox-travis
 
 # Command to run tests, e.g. python setup.py test
