@@ -17,7 +17,7 @@ PyYAML==3.11{% endif %}
 {% if cookiecutter.command_line_interface|lower == 'click' -%}
 Click==7.0{% endif %}
 {% if cookiecutter.use_pytest == 'y' -%}
-pytest==4.6.5
+pytest==5.4.3
 pytest-flake8
 pytest-runner==5.1{% endif %}
 ipython
