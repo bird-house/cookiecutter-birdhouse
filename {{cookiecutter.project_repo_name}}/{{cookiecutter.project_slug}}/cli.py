@@ -16,7 +16,7 @@ import argparse
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
 import click
 {%- endif %}
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, PackageLoader
 from pywps import configuration
 
 from . import wsgi
@@ -32,8 +32,9 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 template_env = Environment(
     loader=PackageLoader('{{ cookiecutter.project_slug }}', 'templates'),
-    autoescape=select_autoescape(['yml', 'xml'])
+    autoescape=True
 )
+
 
 def write_user_config(**kwargs):
     config_templ = template_env.get_template('pywps.cfg')

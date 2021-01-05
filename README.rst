@@ -89,23 +89,23 @@ Once cookiecutter clones the template, you will be asked a series of questions r
 
 .. code-block:: console
 
-    full_name [Full Name]: 
-    email [your@email]: 
-    github_username [bird-house]: 
-    project_name [Babybird]: 
-    project_slug [babybird]: 
-    project_repo_name [babybird]: 
-    project_readthedocs_name [babybird]: 
-    project_short_description [A Web Processing Service for Climate Data Analysis.]: 
-    version [0.1.0]: 
+    full_name [Full Name]:
+    email [your@email]:
+    github_username [bird-house]:
+    project_name [Babybird]:
+    project_slug [babybird]:
+    project_repo_name [babybird]:
+    project_readthedocs_name [babybird]:
+    project_short_description [A Web Processing Service for Climate Data Analysis.]:
+    version [0.1.0]:
     Select open_source_license:
     1 - Apache Software License 2.0
     2 - MIT license
     3 - BSD license
     4 - ISC license
     5 - GNU General Public License v3
-    Choose from 1, 2, 3, 4, 5 [1]: 
-    http_port [5000]: 
+    Choose from 1, 2, 3, 4, 5 [1]:
+    http_port [5000]:
 
 The answer to all those questions are recorded in the ``.cruft.json`` file in
 your generated bird.
@@ -230,7 +230,7 @@ See the bumpversion_ documentation for details.
 .. _Tox: http://testrun.org/tox/
 .. _Codacy: http://codacy.com
 .. _Sphinx: http://sphinx-doc.org/
-.. _Read the Docs: https://readthedocs.io/
+.. _ReadtheDocs: https://readthedocs.io/
 .. _`pyup.io`: https://pyup.io/
 .. _bump2version: https://github.com/c4urself/bump2version
 .. _Punch: https://github.com/lgiordani/punch
