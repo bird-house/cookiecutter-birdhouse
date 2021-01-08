@@ -19,5 +19,6 @@
   "http_port": "5000",
   "https_port": "28094",
   "_copy_without_render": [
-        "{{cookiecutter.project_slug}}/templates/*.cfg",
+        "{{cookiecutter.project_slug}}/templates/*.cfg"
+  ]
 }

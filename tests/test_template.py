@@ -9,13 +9,20 @@ def context():
         "email": "test@email.com",
         "github_username": "test_username",
         "project_name": "Test Bird",
+        "pypi_username": "test_name",
         "project_slug": "testbird",
+        "project_repo_name": "testbird",
+        "project_readthedocs_name": "testbird",
         "project_short_description": "Test description.",
         "version": "0.1.0",
         "open_source_license": "MIT license",
-        "http_port": "5000",
-        "https_port": "25000",
-        "output_port": "8090"
+        "permanent_address": "https://pavics.ouranos.ca",
+        "use_pytest": "y",
+        "use_pypi_deployment_with_travis": "y",
+        "add_pyup_badge": "n",
+        "command_line_interface": ["Click", "Argparse", "No command-line interface"],
+        "create_author_file": "y",
+        "_copy_without_render": "testbird/templates/*.cfg"
     }
 
 
