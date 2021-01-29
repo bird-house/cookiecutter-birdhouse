@@ -1,6 +1,14 @@
 CHANGES
 ********
 
+0.6.0
+=====
+
+Changes:
+
+* `make test-notebooks` now uses `--nbval-lax`. Notebooks will only fail if an error is raised, instead of failing if the cell output is not identical to what is expected.
+
+
 0.5.0 (2020-10-07)
 ==================
 
