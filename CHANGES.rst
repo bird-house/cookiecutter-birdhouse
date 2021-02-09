@@ -6,8 +6,8 @@ CHANGES
 
 Changes:
 
+* Replace `search` by `parse` in the bumpversion config for `docs/conf.py` to support the `version|release` expression.
 * `make test-notebooks` now uses `--nbval-lax`. Notebooks will only fail if an error is raised, instead of failing if the cell output is not identical to what is expected.
-
 
 0.5.0 (2020-10-07)
 ==================
