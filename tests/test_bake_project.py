@@ -79,7 +79,7 @@ def test_bake_with_defaults(cookies):
 
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert 'setup.py' in found_toplevel_files
-        assert 'python_boilerplate' in found_toplevel_files
+        assert 'setup.cfg' in found_toplevel_files
         assert 'tox.ini' in found_toplevel_files
         assert 'tests' in found_toplevel_files
 
@@ -142,7 +142,7 @@ def test_bake_without_author_file(cookies):
         assert 'authors.rst' not in doc_files
 
         # Assert there are no spaces in the toc tree
-        docs_index_path = result.project.join('docs/index.rst')
+        docs_index_path = result.project.join('docs/source/index.rst')
         with open(str(docs_index_path)) as index_file:
             assert 'contributing\n   history' in index_file.read()
 
@@ -167,11 +167,9 @@ def test_make_help(cookies):
 def test_bake_selecting_license(cookies):
     license_strings = {
         'MIT license': 'MIT ',
-        'BSD license': 'Redistributions of source code must retain the ' +
-                       'above copyright notice, this',
+        'BSD license': 'Redistributions of source code must retain the above copyright notice, this',
         'ISC license': 'ISC License',
-        'Apache Software License 2.0':
-            'Licensed under the Apache License, Version 2.0',
+        'Apache Software License 2.0': 'Licensed under the Apache License, Version 2.0',
         'GNU General Public License v3': 'GNU GENERAL PUBLIC LICENSE',
     }
     for license, target_string in license_strings.items():

@@ -10,6 +10,7 @@
    dev_guide
    processes
    changes
+   authors
 
 Indices and tables
 ==================

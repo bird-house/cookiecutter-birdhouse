@@ -19,7 +19,7 @@ setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%
 
 test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest>=3',{%- endif %} ]
 
-requirements.extend([line.strip() for line in open('requirements.txt')])
+requirements = [line.strip() for line in open('requirements.txt')]
 
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
 
