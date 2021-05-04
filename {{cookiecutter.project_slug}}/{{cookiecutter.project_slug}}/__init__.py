@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+
 """Top-level package for {{ cookiecutter.project_name }}."""
 
-__author__ = """{{ cookiecutter.full_name }}"""
-__email__ = '{{ cookiecutter.email }}'
-__version__ = '{{ cookiecutter.version }}'
+from .__version__ import __author__, __email__, __version__  # noqa: F401
+
+from .wsgi import application  # noqa: F401

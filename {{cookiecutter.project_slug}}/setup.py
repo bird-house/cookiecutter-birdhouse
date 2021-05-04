@@ -2,65 +2,77 @@
 
 """The setup script."""
 
+import os
+
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
+here = os.path.abspath(os.path.dirname(__file__))
+README = open(os.path.join(here, 'README.rst')).read()
+CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
+REQUIRES_PYTHON = ">=3.6.0"
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
-requirements = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=7.0',{%- endif %} ]
+about = {}
+with open(os.path.join(here, '{{ cookiecutter.project_slug }}', '__version__.py'), 'r') as f:
+    exec(f.read(), about)
 
 setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
 
 test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest>=3',{%- endif %} ]
 
+requirements.extend([line.strip() for line in open('requirements.txt')])
+
+dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
+
 {%- set license_classifiers = {
+    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'MIT license': 'License :: OSI Approved :: MIT License',
     'BSD license': 'License :: OSI Approved :: BSD License',
     'ISC license': 'License :: OSI Approved :: ISC License (ISCL)',
-    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
 } %}
 
-setup(
-    author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
-    author_email='{{ cookiecutter.email }}',
-    python_requires='>=3.6',
-    classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Science/Research',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: POSIX',
+    'Programming Language :: Python',
+    'Natural Language :: English',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Topic :: Scientific/Engineering :: Atmospheric Science',
 {%- if cookiecutter.open_source_license in license_classifiers %}
-        '{{ license_classifiers[cookiecutter.open_source_license] }}',
+    '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-    ],
-    description="{{ cookiecutter.project_short_description }}",
-    {%- if 'no' not in cookiecutter.command_line_interface|lower %}
-    entry_points={
-        'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
-        ],
-    },
-    {%- endif %}
-    install_requires=requirements,
+]
+
+setup(name='{{ cookiecutter.project_slug }}',
+      version=about['__version__'],
+      description="{{ cookiecutter.project_short_description }}",
+      long_description=README + '\n\n' + CHANGES,
+      long_description_content_type="text/x-rst",
+      author=about['__author__'],
+      author_email=about['__email__'],
+      url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}',
+      python_requires=REQUIRES_PYTHON,
+      classifiers=classifiers,
 {%- if cookiecutter.open_source_license in license_classifiers %}
-    license="{{ cookiecutter.open_source_license }}",
+      license="{{ cookiecutter.open_source_license }}",
 {%- endif %}
-    long_description=readme + '\n\n' + history,
-    include_package_data=True,
-    keywords='{{ cookiecutter.project_slug }}',
-    name='{{ cookiecutter.project_slug }}',
-    packages=find_packages(include=['{{ cookiecutter.project_slug }}', '{{ cookiecutter.project_slug }}.*']),
-    setup_requires=setup_requirements,
-    test_suite='tests',
-    tests_require=test_requirements,
-    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
-    version='{{ cookiecutter.version }}',
-    zip_safe=False,
-)
+      keywords='wps pywps birdhouse {{ cookiecutter.project_slug }}',
+      packages=find_packages(),
+      include_package_data=True,
+      install_requires=requirements,
+      setup_requires=setup_requirements,
+      test_suite = 'tests',
+      tests_require = test_requirements,
+      extras_require={
+          "dev": dev_reqs,  # pip install ".[dev]"
+      },
+      entry_points={
+          'console_scripts': [
+              '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:cli',
+          ]},)

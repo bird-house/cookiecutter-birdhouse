@@ -4,6 +4,6 @@
 # without importing the main package when its dependencies are not installed.
 # See: https://packaging.python.org/guides/single-sourcing-package-version
 
-__author__ = """{{ cookiecutter.full_name }}"""
-__email__ = '{{ cookiecutter.email }}'
-__version__ = '{{ cookiecutter.version }}'
+__author__ = "{{ cookiecutter.full_name }}"
+__email__ = "{{ cookiecutter.email }}"
+__version__ = "{{ cookiecutter.version }}"
