@@ -87,7 +87,8 @@ def test_bake_with_defaults(cookies):
 def test_bake_and_run_tests(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project.isdir()
-        run_inside_dir('python setup.py test', str(result.project)) == 0
+        run_inside_dir('pip install -e .', str(result.project))
+        run_inside_dir('pytest tests', str(result.project)) == 0
         print("test_bake_and_run_tests path", str(result.project))
 
 
