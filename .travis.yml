@@ -1,16 +1,25 @@
-dist: xenial   # required for Python >= 3.7
+# Config file for automatic testing at travis-ci.org
+
 language: python
-  - 3.6
+python:
+  - 3.8
   - 3.7
-install:
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda env update -n root -f environment.yml
-script:
-  - pytest -v
+  - 3.6
+
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install: pip install -U tox-travis
+
+# command to run tests, e.g. python setup.py test
+script: tox
+
+# deploy new versions to PyPI
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: audreyr
+  password:
+    secure: PLEASE_REPLACE_ME
+  on:
+    tags: true
+    repo: audreyr/python_boilerplate
+    python: 3.8
