@@ -40,9 +40,6 @@ The following package configuration options set up different features for your p
 use_pytest
     Whether to use `pytest <https://docs.pytest.org/en/latest/>`_
 
-command_line_interface
-    Whether to create a console script using Click. Console script entry point will match the project_slug. Options: ['Click', 'Argparse', 'No command-line interface']
-
 create_author_file
     Whether to create an authors file
 

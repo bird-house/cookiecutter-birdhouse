@@ -131,20 +131,6 @@ def test_bake_with_apostrophe_and_run_tests(cookies):
 #         ) > min_size_of_encrypted_password
 
 
-def test_bake_without_travis_pypi_setup(cookies):
-    with bake_in_temp_dir(
-        cookies,
-        extra_context={'use_pypi_deployment_with_travis': 'n'}
-    ) as result:
-        result_travis_config = yaml.load(
-            result.project.join(".travis.yml").open(),
-            Loader=yaml.FullLoader
-        )
-        assert "deploy" not in result_travis_config
-        assert "python" == result_travis_config["language"]
-        # found_toplevel_files = [f.basename for f in result.project.listdir()]
-
-
 def test_bake_without_author_file(cookies):
     with bake_in_temp_dir(
         cookies,
@@ -224,18 +210,6 @@ def test_using_pytest(cookies):
         # Test the test alias (which invokes pytest)
         run_inside_dir('python setup.py test', str(result.project)) == 0
 
-
-def test_not_using_pytest(cookies):
-    with bake_in_temp_dir(cookies) as result:
-        assert result.project.isdir()
-        test_file_path = result.project.join(
-            'tests/test_python_boilerplate.py'
-        )
-        lines = test_file_path.readlines()
-        assert "import unittest" in ''.join(lines)
-        assert "import pytest" not in ''.join(lines)
-
-
 # def test_project_with_hyphen_in_module_name(cookies):
 #     result = cookies.bake(
 #         extra_context={'project_name': 'something-with-a-dash'}
@@ -256,19 +230,7 @@ def test_not_using_pytest(cookies):
 #     assert "secure" in result_travis_config["deploy"]["password"],\
 #         "missing password config in .travis.yml"
 
-def test_bake_with_console_script_files(cookies):
-    context = {'command_line_interface': 'click'}
-    result = cookies.bake(extra_context=context)
-    project_path, project_slug, project_dir = project_info(result)
-    found_project_files = os.listdir(project_dir)
-    assert "cli.py" in found_project_files
-
-    setup_path = os.path.join(project_path, 'setup.py')
-    with open(setup_path, 'r') as setup_file:
-        assert 'entry_points' in setup_file.read()
-
-
-def test_bake_with_console_script_cli(cookies):
+def test_bake_with_cli(cookies):
     result = cookies.bake()
     project_path, project_slug, project_dir = project_info(result)
     module_path = os.path.join(project_dir, 'cli.py')
