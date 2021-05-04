@@ -160,8 +160,7 @@ def test_make_help(cookies):
                 'make help',
                 str(result.project)
             )
-            assert b"check code coverage quickly with the default Python" in \
-                output
+            assert b"Please use 'make <target>' where <target> is one of:" in output
 
 
 def test_bake_selecting_license(cookies):
