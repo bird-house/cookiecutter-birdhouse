@@ -18,11 +18,11 @@ Cookiecutter for Birdhouse
    :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
    :alt: GitHub license
 
-Cookiecutter_ template for a Python package.
-
 .. image:: https://badges.gitter.im/bird-house/birdhouse.svg
-    :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-    :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+   :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+   :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+
+Cookiecutter_ template for a Python package.
 
 *A Cookiecutter template for a Birdhouse bird package*
 
@@ -51,12 +51,10 @@ Features
 * Travis-CI_: Ready for Travis Continuous Integration testing
 * Tox_ testing: Setup to easily test for Python 3.6, 3.7, 3.8
 * Sphinx_ docs: Documentation ready for generation with, for example, ReadtheDocs_
-* bump2version_: Pre-configured version bumping with a single command
+* bumpversion_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * A :file:`Makefile` to install the code, start, stop and poll the server and more
 * Command line interface using Click (optional)
-
-.. _Cookiecutter: https://github.com/cookiecutter/cookiecutter
 
 Installation
 ------------
@@ -199,7 +197,6 @@ Make a new version of this Cookiecutter in the following steps:
 
 See the bumpversion_ documentation for details.
 
-
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Cruft: https://timothycrosley.github.io/cruft/
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
@@ -211,8 +208,6 @@ See the bumpversion_ documentation for details.
 .. _ReadTheDocs: https://readthedocs.io/
 .. _bumpversion: https://pypi.org/project/bumpversion/
 .. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
-.. _bump2version: https://github.com/c4urself/bump2version
-.. _Punch: https://github.com/lgiordani/punch
 .. _Poetry: https://python-poetry.org/
 .. _PyPi: https://pypi.python.org/pypi
 .. _Mkdocs: https://pypi.org/project/mkdocs/
