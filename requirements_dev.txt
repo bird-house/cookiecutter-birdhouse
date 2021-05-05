@@ -6,6 +6,4 @@ alabaster==0.7.12
 watchdog==0.9.0
 PyYAML
 cryptography
-pytest
-pytest-cookies
 sphinx>=1.7
