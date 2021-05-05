@@ -145,9 +145,9 @@ def test_bake_without_author_file(cookies):
         # Assert there are no spaces in the toc tree
         docs_index_path = result.project.join('docs/source/index.rst')
         with open(str(docs_index_path)) as index_file:
-            assert 'contributing\n   history' in index_file.read()
+            assert 'installation\n   configuration\n   notebooks/index\n   dev_guide' \
+                   '\n   processes\n   changes\n   authors' in index_file.read()
 
-        # Check that
         manifest_path = result.project.join('MANIFEST.in')
         with open(str(manifest_path)) as manifest_file:
             assert 'AUTHORS.rst' not in manifest_file.read()
@@ -195,7 +195,6 @@ def test_bake_not_open_source(cookies):
 def test_using_pytest(cookies):
     with bake_in_temp_dir(
         cookies,
-        extra_context={'use_pytest': 'y'}
     ) as result:
         assert result.project.isdir()
         test_file_path = result.project.join(
@@ -207,42 +206,3 @@ def test_using_pytest(cookies):
         run_inside_dir('python setup.py pytest', str(result.project)) == 0
         # Test the test alias (which invokes pytest)
         run_inside_dir('python setup.py test', str(result.project)) == 0
-
-# def test_project_with_hyphen_in_module_name(cookies):
-#     result = cookies.bake(
-#         extra_context={'project_name': 'something-with-a-dash'}
-#     )
-#     assert result.project is not None
-#     project_path = str(result.project)
-#
-#     # when:
-#     travis_setup_cmd = ('python travis_pypi_setup.py'
-#                         ' --repo audreyr/cookiecutter-pypackage'
-#                         ' --password invalidpass')
-#     run_inside_dir(travis_setup_cmd, project_path)
-#
-#     # then:
-#     result_travis_config = yaml.load(
-#         open(os.path.join(project_path, ".travis.yml"))
-#     )
-#     assert "secure" in result_travis_config["deploy"]["password"],\
-#         "missing password config in .travis.yml"
-
-def test_bake_with_cli(cookies):
-    result = cookies.bake()
-    project_path, project_slug, project_dir = project_info(result)
-    module_path = os.path.join(project_dir, 'cli.py')
-    module_name = '.'.join([project_slug, 'cli'])
-    spec = importlib.util.spec_from_file_location(module_name, module_path)
-    cli = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(cli)
-    runner = CliRunner()
-    noarg_result = runner.invoke(cli.main)
-    assert noarg_result.exit_code == 0
-    noarg_output = ' '.join([
-        'Replace this message by putting your code into',
-        project_slug])
-    assert noarg_output in noarg_result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert 'Show this message' in help_result.output

@@ -24,10 +24,10 @@ requirements = [line.strip() for line in open('requirements.txt')]
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
 
 {%- set license_classifiers = {
-    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'MIT license': 'License :: OSI Approved :: MIT License',
     'BSD license': 'License :: OSI Approved :: BSD License',
     'ISC license': 'License :: OSI Approved :: ISC License (ISCL)',
+    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
 } %}
 
