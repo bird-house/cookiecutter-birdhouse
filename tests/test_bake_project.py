@@ -146,7 +146,7 @@ def test_bake_without_author_file(cookies):
         docs_index_path = result.project.join('docs/source/index.rst')
         with open(str(docs_index_path)) as index_file:
             assert 'installation\n   configuration\n   notebooks/index\n   dev_guide' \
-                   '\n   processes\n   changes\n   authors' in index_file.read()
+                   '\n   processes\n   changes\n' in index_file.read()
 
         manifest_path = result.project.join('MANIFEST.in')
         with open(str(manifest_path)) as manifest_file:

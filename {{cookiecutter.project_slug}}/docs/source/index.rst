@@ -10,7 +10,7 @@
    dev_guide
    processes
    {% if cookiecutter.create_author_file == 'y' -%}authors
-   {% endif -%}   changes
+   {% endif -%}changes
 
 Indices and tables
 ==================
