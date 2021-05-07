@@ -54,7 +54,6 @@ Features
 * bumpversion_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * A :file:`Makefile` to install the code, start, stop and poll the server and more
-* Command line interface using Click (optional)
 
 Installation
 ------------
