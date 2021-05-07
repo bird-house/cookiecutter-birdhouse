@@ -10,13 +10,19 @@ Cookiecutter for Birdhouse
    :target: https://travis-ci.org/bird-house/cookiecutter-birdhouse
    :alt: Travis Build
 
+.. image:: https://readthedocs.org/projects/cookiecutter-pypackage/badge/?version=latest
+   :target: https://cookiecutter-pypackage.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. image:: https://img.shields.io/github/license/bird-house/cookiecutter-birdhouse.svg
-    :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
-    :alt: GitHub license
+   :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
+   :alt: GitHub license
 
 .. image:: https://badges.gitter.im/bird-house/birdhouse.svg
-    :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-    :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+   :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+   :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+
+Cookiecutter_ template for a Python package.
 
 *A Cookiecutter template for a Birdhouse bird package*
 
@@ -41,12 +47,14 @@ You may at any time update your project using the latest cookiecutter template u
 Features
 --------
 
-* Ready-made PyWPS server (a bird)
-* Pre-configured :file:`.travis.yml` for Travis-CI_ automated deployment and testing
-* Pre-configured :file:`.codacy.yml` for automated Codacy_ code review
-* A :file:`Dockerfile` and :file:`docker-compose.yml` for containerization
-* Preconfigured Sphinx_ documentation that can be hosted on ReadTheDocs_
+* Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
+* Travis-CI_: Ready for Travis Continuous Integration testing
+* Tox_ testing: Setup to easily test for Python 3.6, 3.7, 3.8
+* Sphinx_ docs: Documentation ready for generation with, for example, ReadtheDocs_
+* bumpversion_: Pre-configured version bumping with a single command
+* Auto-release to PyPI_ when you push a new tag to master (optional)
 * A :file:`Makefile` to install the code, start, stop and poll the server and more
+* Command line interface using Click (optional)
 
 Installation
 ------------
@@ -69,23 +77,25 @@ Once cookiecutter clones the template, you will be asked a series of questions r
 
 .. code-block:: console
 
-    full_name [Full Name]: 
-    email [your@email]: 
-    github_username [bird-house]: 
-    project_name [Babybird]: 
-    project_slug [babybird]: 
-    project_repo_name [babybird]: 
-    project_readthedocs_name [babybird]: 
-    project_short_description [A Web Processing Service for Climate Data Analysis.]: 
-    version [0.1.0]: 
+    full_name [Full Name]:
+    email [your@email]:
+    github_username [bird-house]:
+    project_name [Babybird]:
+    project_slug [babybird]:
+    project_repo_name [babybird]:
+    project_readthedocs_name [babybird]:
+    project_short_description [A Web Processing Service for Climate Data Analysis.]:
+    version [0.1.0]:
     Select open_source_license:
     1 - Apache Software License 2.0
     2 - MIT license
     3 - BSD license
     4 - ISC license
     5 - GNU General Public License v3
-    Choose from 1, 2, 3, 4, 5 [1]: 
-    http_port [5000]: 
+    Choose from 1, 2, 3, 4, 5 [1]:
+    http_port [5000]:
+    use_pytest [y]:
+    create_author_file [y]:
 
 The answer to all those questions are recorded in the ``.cruft.json`` file in
 your generated bird.
@@ -189,15 +199,17 @@ Make a new version of this Cookiecutter in the following steps:
 
 See the bumpversion_ documentation for details.
 
-
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Cruft: https://timothycrosley.github.io/cruft/
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 .. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
 .. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
 .. _Travis-CI: http://travis-ci.org/
-.. _Codacy: http://codacy.com
+.. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.io/
 .. _bumpversion: https://pypi.org/project/bumpversion/
 .. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
+.. _Poetry: https://python-poetry.org/
+.. _PyPi: https://pypi.python.org/pypi
+.. _Mkdocs: https://pypi.org/project/mkdocs/

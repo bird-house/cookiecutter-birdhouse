@@ -14,8 +14,11 @@ def context():
         "version": "0.1.0",
         "open_source_license": "MIT license",
         "http_port": "5000",
-        "https_port": "25000",
-        "output_port": "8090"
+        "use_pytest": "y",
+        "create_author_file": "y",
+        "_copy_without_render": [
+            "testbird/templates/*.cfg"
+        ]
     }
 
 

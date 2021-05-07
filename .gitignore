@@ -96,3 +96,7 @@ target/
 cookies/
 output/
 python_boilerplate/
+cookiecutter-pypackage-env/
+
+# IDE settings
+.vscode/

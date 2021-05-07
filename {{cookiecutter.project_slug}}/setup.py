@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """The setup script."""
 
@@ -10,20 +9,25 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
-REQUIRES_PYTHON = ">=3.5.0"
+REQUIRES_PYTHON = ">=3.6.0"
 
 about = {}
 with open(os.path.join(here, '{{ cookiecutter.project_slug }}', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
-reqs = [line.strip() for line in open('requirements.txt')]
+setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
+
+test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest>=3',{%- endif %} ]
+
+requirements = [line.strip() for line in open('requirements.txt')]
+
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
 
 {%- set license_classifiers = {
-    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'MIT license': 'License :: OSI Approved :: MIT License',
     'BSD license': 'License :: OSI Approved :: BSD License',
     'ISC license': 'License :: OSI Approved :: ISC License (ISCL)',
+    'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
     'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
 } %}
 
@@ -61,9 +65,12 @@ setup(name='{{ cookiecutter.project_slug }}',
       keywords='wps pywps birdhouse {{ cookiecutter.project_slug }}',
       packages=find_packages(),
       include_package_data=True,
-      install_requires=reqs,
+      install_requires=requirements,
+      setup_requires=setup_requirements,
+      test_suite = 'tests',
+      tests_require = test_requirements,
       extras_require={
-          "dev": dev_reqs,              # pip install ".[dev]"
+          "dev": dev_reqs,  # pip install ".[dev]"
       },
       entry_points={
           'console_scripts': [

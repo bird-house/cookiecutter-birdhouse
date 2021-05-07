@@ -9,4 +9,10 @@ def remove_file(filepath):
 
 
 if __name__ == '__main__':
-    pass
+
+    if '{{ cookiecutter.create_author_file }}' != 'y':
+        remove_file('AUTHORS.rst')
+        remove_file('docs/source/authors.rst')
+
+    if 'Not open source' == '{{ cookiecutter.open_source_license }}':
+        remove_file('LICENSE')

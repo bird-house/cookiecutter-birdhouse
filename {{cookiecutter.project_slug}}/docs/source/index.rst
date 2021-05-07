@@ -9,7 +9,8 @@
    notebooks/index
    dev_guide
    processes
-   changes
+   {% if cookiecutter.create_author_file == 'y' -%}authors
+   {% endif -%}changes
 
 Indices and tables
 ==================
