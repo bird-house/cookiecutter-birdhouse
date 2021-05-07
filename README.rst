@@ -94,6 +94,8 @@ Once cookiecutter clones the template, you will be asked a series of questions r
     5 - GNU General Public License v3
     Choose from 1, 2, 3, 4, 5 [1]:
     http_port [5000]:
+    use_pytest [y]:
+    create_author_file [y]:
 
 The answer to all those questions are recorded in the ``.cruft.json`` file in
 your generated bird.
