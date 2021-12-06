@@ -1,3 +1,4 @@
+{% raw %}
 name: build ⚙️
 
 on: [ push, pull_request ]
@@ -43,3 +44,4 @@ jobs:
     #     export PYWPS_CFG=$PWD/etc/smoke-pywps.cfg
     #     make smoke
     #   if: matrix.python-version == 3.6
+{% endraw %}
