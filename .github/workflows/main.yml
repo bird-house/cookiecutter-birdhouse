@@ -11,7 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, pypy-3.7]
+        include:
+          - tox-env: py37
+            python-version: "3.7"
+          - tox-env: py38
+            python-version: "3.8"
+          - tox-env: py39
+            python-version: "3.9"
+          - tox-env: pypy37
+            python-version: "pypy-3.7"
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.9.1
