@@ -7,9 +7,7 @@ import yaml  # noqa
 import datetime
 from cookiecutter.utils import rmtree
 
-from click.testing import CliRunner
-
-import importlib
+import pytest
 
 
 @contextmanager
@@ -84,6 +82,7 @@ def test_bake_with_defaults(cookies):
         assert 'tests' in found_toplevel_files
 
 
+@pytest.mark.requires_gdal
 def test_bake_and_run_tests(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project.isdir()
@@ -92,6 +91,7 @@ def test_bake_and_run_tests(cookies):
         print("test_bake_and_run_tests path", str(result.project))
 
 
+@pytest.mark.requires_gdal
 def test_bake_withspecialchars_and_run_tests(cookies):
     """Ensure that a `full_name` with double quotes does not break setup.py"""
     with bake_in_temp_dir(
@@ -102,6 +102,7 @@ def test_bake_withspecialchars_and_run_tests(cookies):
         run_inside_dir('python setup.py test', str(result.project)) == 0
 
 
+@pytest.mark.requires_gdal
 def test_bake_with_apostrophe_and_run_tests(cookies):
     """Ensure that a `full_name` with apostrophes does not break setup.py"""
     with bake_in_temp_dir(
@@ -192,6 +193,7 @@ def test_bake_not_open_source(cookies):
         assert 'License' not in result.project.join('README.rst').read()
 
 
+@pytest.mark.requires_gdal
 def test_using_pytest(cookies):
     with bake_in_temp_dir(
         cookies,
