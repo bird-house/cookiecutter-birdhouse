@@ -1,6 +1,5 @@
 name: cookiecutter-birdhouse
 channels:
-- defaults
 - conda-forge
 dependencies:
 - pip
@@ -11,6 +10,4 @@ dependencies:
 - pytest-cookies
 - bump2version
 - watchdog
-- pip:
-  # https://timothycrosley.github.io/cruft/
-  - cruft
+- cruft
