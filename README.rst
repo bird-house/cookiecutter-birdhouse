@@ -63,8 +63,7 @@ This is achieved via the following commands:
 
 .. code-block:: console
 
-    $ conda install -c conda-forge cookiecutter
-    $ pip install cruft
+    $ conda install -c conda-forge cookiecutter cruft
 
 With cookiecutter and cruft installed, the cookiecutter-birdhouse template can be installed with:
 
