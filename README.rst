@@ -216,6 +216,7 @@ Install the new babybird WPS:
 
     $ cd babybird
     $ mamba env create
+    $ conda activate babybird
     $ pip install -e .
 
 Start the baybird WPS:
@@ -228,6 +229,19 @@ Start the baybird WPS:
 The service is running on port 5000. Check this URL:
 
 http://localhost:5000/wps?service=WPS&version=1.0.0&request=GetCapabilities 
+
+Use birdy as a WPS client to execute a job on the babybird WPS:
+
+.. code-block:: console
+
+    $ mamba install -c conda-forge birdy jupyterlab
+
+    # start jupyterlab to run birdy in a notebook
+    $ jupyterlab
+
+Use this notebook as an example:
+
+https://github.com/bird-house/birdy/blob/master/notebooks/examples/emu-example.ipynb
 
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
