@@ -197,6 +197,39 @@ Make a new version of this Cookiecutter in the following steps:
 
 See the bumpversion_ documentation for details.
 
+Tutorial
+--------
+
+Run cookiecutter to create a WPS bird: babybird
+
+.. code-block:: console
+
+    $ mamba create -n cookies -c conda-forge cookiecutter cruft
+    $ conda activate cookies
+
+    # create the babybird
+    $ cruft create https://github.com/bird-house/cookiecutter-birdhouse.git
+
+Install the new babybird WPS:
+
+.. code-block:: console
+
+    $ cd babybird
+    $ mamba env create
+    $ pip install -e .
+
+Start the baybird WPS:
+
+.. code-block:: console
+
+    $ babybird -h
+    $ babybird start
+
+The service is running on port 5000. Check this URL:
+
+http://localhost:5000/wps?service=WPS&version=1.0.0&request=GetCapabilities 
+
+
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Cruft: https://timothycrosley.github.io/cruft/
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
