@@ -13,13 +13,28 @@ SANITIZE_FILE := https://github.com/Ouranosinc/PAVICS-e2e-workflow-tests/raw/mas
 
 # end of configuration
 
+define PRINT_HELP_PYSCRIPT
+import re, sys
+
+for line in sys.stdin:
+	match = re.match(r'^([a-zA-Z_-]+):.*?## (.*)$$', line)
+	if match:
+		target, help = match.groups()
+		print("%-20s %s" % (target, help))
+	else:
+		match = re.match(r'^## (.*)$$', line)
+		if match:
+			help = match.groups()[0]
+			print("\n%s" % (help))
+endef
+export PRINT_HELP_PYSCRIPT
+
+BROWSER := python -c "$$BROWSER_PYSCRIPT"
+
 .DEFAULT_GOAL := help
 
-.PHONY: all
-all: help
-
-.PHONY: help
 help: ## print this help message. (Default)
+	@echo "Please use 'make <target>' where <target> is one of:"
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 #help:
@@ -43,33 +58,32 @@ help: ## print this help message. (Default)
 #	@echo "\nDeployment targets:"
 #	@echo "  dist              to build source and wheel package."
 
-## Build targets
+## Build targets:
 
-.PHONY: install
-install: ## install application
+install: ## install {{ cookiecutter.project_slug }} application
 	@echo "Installing application ..."
 	@-bash -c 'pip install -e .'
-	@echo "\nStart service with \`make start'"
+	@echo "\nStart service with \`make start\` and stop with \`make stop\`."
 
 .PHONY: develop
-develop: ## install application with development libraries
+develop: ## install {{ cookiecutter.project_slug }} application with development libraries
 	@echo "Installing development requirements for tests and docs ..."
 	@-bash -c 'pip install -e ".[dev]"'
 
 .PHONY: start
-start: ## start service as daemon (background process)
+start: ## start {{ cookiecutter.project_slug }} service as daemon (background process)
 	@echo "Starting application ..."
 	@-bash -c "$(APP_NAME) start -d"
 
 .PHONY: stop
-stop: ## stop service
+stop: ## stop {{ cookiecutter.project_slug }} service
 	@echo "Stopping application ..."
 	@-bash -c "$(APP_NAME) stop"
 
-restart: stop start  ## restart service
+restart: stop start  ## restart {{ cookiecutter.project_slug }} service
 	@echo "Restarting application ..."
 
-status: ## show status of service
+status: ## show status of {{ cookiecutter.project_slug }} service
 	@echo "Showing status ..."
 	@-bash -c "$(APP_NAME) status"
 
@@ -98,7 +112,7 @@ clean-test: ## remove test and coverage artifacts
 	@-rm -f .coverage
 	@-rm -fr .pytest_cache
 
-clean-dist: clean  ## run git clean
+clean-dist: clean  ## remove git ignored files and directories
 	@echo "Running 'git clean' ..."
 	@git diff --quiet HEAD || echo "There are uncommitted changes! Aborting 'git clean' ..."
 	## do not use git clean -e/--exclude here, add them to .gitignore instead
@@ -122,23 +136,18 @@ lint/black: ## check style with black
 
 lint: lint/flake8{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
 
+## Testing targets:
+
 test: ## run tests quickly with the default Python
+	@echo "Running all tests (including slow and online tests) ..."
 {%- if cookiecutter.use_pytest == 'y' %}
-	@bash -c 'pytest'
+	@bash -c 'pytest -v'
 {%- else %}
 	@bash -c 'python setup.py test'
 {%- endif %}
 
-test-all: ## run tests on every Python version with tox
-	@echo "Running all tests (including slow and online tests) ..."
-	@bash -c 'pytest -v tests/'
-
-test-tox: ## run tests on every Python version with tox
+test-tox: ## run tests on every available Python version with tox
 	@bash -c 'tox'
-
-notebook-sanitizer: ## sanitize notebooks with configuration file
-	@echo "Copying notebook output sanitizer ..."
-	@-bash -c "curl -L $(SANITIZE_FILE) -o $(CURDIR)/docs/source/output-sanitize.cfg --silent"
 
 test-notebooks: notebook-sanitizer  ## run notebook-based tests
 	@echo "Running notebook-based tests"
@@ -154,24 +163,7 @@ coverage: ## check code coverage quickly with the default Python
 	@bash -c 'coverage html'
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
-	@-rm -f docs/{{ cookiecutter.project_slug }}.rst
-	@-rm -f docs/modules.rst
-	@bash -c 'sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}'
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
-
-servedocs: docs ## compile the docs watching for changes
-	@echo "Compiling the docs and watching for changes ..."
-	@watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
-
-refresh-notebooks: ## refreshing all notebook outputs under docs/source/notebooks
-	@echo "Refresh all notebook outputs under docs/source/notebooks"
-	@bash -c 'for nb in $(CURDIR)/docs/source/notebooks/*.ipynb; do WPS_URL="$(WPS_URL)" jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output "$$nb" "$$nb"; sed -i "s@$(WPS_URL)/outputs/@$(OUTPUT_URL)/@g" "$$nb"; done; cd $(APP_ROOT)'
-
-
-## Sphinx targets
+## Sphinx targets:
 
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
 	@echo "Generating docs with Sphinx ..."
@@ -180,7 +172,19 @@ docs: clean-docs ## generate Sphinx HTML documentation, including API docs
 	## do not execute xdg-open automatically since it hangs travis and job does not complete
 	@echo "xdg-open $(APP_ROOT)/docs/build/html/index.html"
 
-## Deployment targets
+servedocs: docs ## compile the docs watching for changes
+	@echo "Compiling the docs and watching for changes ..."
+	@watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+
+notebook-sanitizer: ## sanitize notebooks with configuration file
+	@echo "Copying notebook output sanitizer ..."
+	@-bash -c "curl -L $(SANITIZE_FILE) -o $(CURDIR)/docs/source/output-sanitize.cfg --silent"
+
+refresh-notebooks: ## refreshing all notebook outputs under docs/source/notebooks
+	@echo "Refresh all notebook outputs under docs/source/notebooks"
+	@bash -c 'for nb in $(CURDIR)/docs/source/notebooks/*.ipynb; do WPS_URL="$(WPS_URL)" jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output "$$nb" "$$nb"; sed -i "s@$(WPS_URL)/outputs/@$(OUTPUT_URL)/@g" "$$nb"; done; cd $(APP_ROOT)'
+
+## Deployment targets:
 
 dist: clean ## build source and wheel package
 	@echo "Building source and wheel package ..."

@@ -15,7 +15,11 @@ about = {}
 with open(os.path.join(here, '{{ cookiecutter.project_slug }}', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
+{%- if cookiecutter.use_pytest == 'n' %}
+
 test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest>=3',{%- endif %} ]
+
+{%- endif %}
 
 requirements = [line.strip() for line in open('requirements.txt')]
 
@@ -39,9 +43,10 @@ classifiers = [
     'Programming Language :: Python',
     'Natural Language :: English',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
     'Topic :: Scientific/Engineering :: Atmospheric Science',
 {%- if cookiecutter.open_source_license in license_classifiers %}
     '{{ license_classifiers[cookiecutter.open_source_license] }}',
@@ -61,15 +66,16 @@ setup(
     classifiers=classifiers,
 {%- if cookiecutter.open_source_license in license_classifiers %}
     license="{{ cookiecutter.open_source_license }}",
-{%- endif %},
+{%- endif %}
     zip_safe=False,
     keywords='wps pywps birdhouse {{ cookiecutter.project_slug }}',
     packages=find_packages(),
     include_package_data=True,
     install_requires=requirements,
-    setup_requires=setup_requirements,
-    test_suite = 'tests',
-    tests_require = test_requirements,
+{%- if cookiecutter.use_pytest == 'n' %}
+    test_suite='tests',
+    tests_require=test_requirements,
+{%- endif %}
     extras_require={
         "dev": dev_reqs,  # pip install ".[dev]"
     },

@@ -98,7 +98,7 @@ def test_bake_withspecialchars_and_run_tests(cookies):
     """Ensure that a `full_name` with double quotes does not break setup.py"""
     with bake_in_temp_dir(
         cookies,
-        extra_context={'full_name': 'name "quote" name'}
+        extra_context={'full_name': 'name "quote" name', 'use_pytest': 'n'}
     ) as result:
         assert result.project.isdir()
         run_inside_dir('python setup.py test', str(result.project)) == 0
@@ -112,7 +112,7 @@ def test_bake_with_apostrophe_and_run_tests(cookies):
         extra_context={'full_name': "O'connor"}
     ) as result:
         assert result.project.isdir()
-        run_inside_dir('python setup.py test', str(result.project)) == 0
+        run_inside_dir('pytest', str(result.project)) == 0
 
 
 # def test_bake_and_run_travis_pypi_setup(cookies):
@@ -209,8 +209,6 @@ def test_using_pytest(cookies):
         assert "import pytest" in ''.join(lines)
         # Test the new pytest target
         run_inside_dir('pytest', str(result.project)) == 0
-        # Test the test alias (which invokes pytest)
-        run_inside_dir('python setup.py test', str(result.project)) == 0
 
 
 @pytest.mark.parametrize("use_black,expected", [("y", True), ("n", False)])
