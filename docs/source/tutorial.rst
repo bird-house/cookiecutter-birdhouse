@@ -4,7 +4,7 @@ Tutorial
 .. note:: Did you find any of these instructions confusing? `Edit this file`_
           and submit a pull request with your improvements!
 
-.. _`Edit this file`: https://github.com/audreyr/cookiecutter-pypackage/blob/master/docs/tutorial.rst
+.. _`Edit this file`: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/tutorial.rst
 
 To start with, you will need a `GitHub account`_ and an account on `PyPI`_. Create these before you get started on this tutorial. If you are new to Git and GitHub, you should probably spend a few minutes on some of the tutorials at the top of the page at `GitHub Help`_.
 
@@ -53,7 +53,7 @@ Use cookiecutter, pointing it at the cookiecutter-pypackage repo:
 
 .. code-block:: bash
 
-    cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
+    cookiecutter https://github.com/audreyfeldroy/cookiecutter-pypackage.git
 
 You'll be asked to enter a bunch of values to set the package up.
 If you don't know what to enter, stick with the defaults.
@@ -75,7 +75,11 @@ You will find one folder named after the ``[project_slug]``. Move into this fold
     git add .
     git commit -m "Initial skeleton."
     git remote add origin git@github.com:myusername/mypackage.git
-    git push -u origin master
+    git push -u origin main
+
+    .. note::
+
+       GitHub has changed the default branch name from 'master' to 'main'. If you are using another Git repository hosting service that uses the Git branch naming defaults, you might need to use 'master' instead of 'main'.
 
 Where ``myusername`` and ``mypackage`` are adjusted for your username and package name.
 
@@ -100,7 +104,7 @@ Your virtualenv should still be activated. If it isn't, activate it now. Install
 Step 5: Set Up Travis CI
 ------------------------
 
-`Travis CI org`_ [*]_ is a continuous integration tool used to prevent integration problems. Every commit to the master branch will trigger automated builds of the application.
+`Travis CI com`_ is a continuous integration tool used to prevent integration problems. Every commit to the master branch will trigger automated builds of the application.
 
 Login using your Github credentials. It may take a few minutes for Travis CI to load up a list of all your GitHub repos. They will be listed with boxes to the left of the repo name, where the boxes have an ``X`` in them, meaning it is not connected to Travis CI.
 
@@ -119,9 +123,6 @@ This will:
 
 See :ref:`travis-pypi-setup` for more information.
 
-.. [*] For private projects go to `Travis CI com`_
-
-.. _`Travis CI org`: https://travis-ci.org/
 .. _`Travis CI com`: https://travis-ci.com/
 
 
@@ -162,7 +163,7 @@ When you are ready, release your package the standard Python way.
 
 See `PyPI Help`_ for more information about submitting a package.
 
-Here's a release checklist you can use: https://gist.github.com/audreyr/5990987
+Here's a release checklist you can use: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/pypi_release_checklist.rst
 
 .. _`PyPI`: https://pypi.python.org/pypi
 .. _`PyPI Help`: https://pypi.org/help/#publishing
@@ -173,4 +174,4 @@ Having problems?
 
 Visit our :ref:`troubleshooting` page for help. If that doesn't help, go to our `Issues`_ page and create a new Issue. Be sure to give as much information as possible.
 
-.. _`Issues`: https://github.com/audreyr/cookiecutter-pypackage/issues
+.. _`Issues`: https://github.com/audreyfeldroy/cookiecutter-pypackage/issues
