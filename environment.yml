@@ -2,7 +2,7 @@ name: cookiecutter-birdhouse
 channels:
   - conda-forge
 dependencies:
-  - python>=3.7
+  - python>=3.7,<3.10
   - alabaster
   - bump2version
   - cookiecutter >=2.1.0
