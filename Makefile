@@ -16,7 +16,12 @@ help:
 .PHONY: test
 test:
 	@echo "Running all tests"
-	pytest
+	@bash -c 'pytest'
+
+.PHONY: test-no-gdal
+test:
+	@echo "Running all tests"
+	@bash -c 'pytest -m "not requires_gdal"'
 
 .PHONY: clean
 clean:

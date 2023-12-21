@@ -8,9 +8,6 @@ import datetime
 import pytest
 from cookiecutter.utils import rmtree
 
-from click.testing import CliRunner
-
-import importlib
 
 @contextmanager
 def inside_dir(dirpath):
@@ -88,8 +85,9 @@ def test_bake_with_defaults(cookies):
 def test_bake_and_run_tests(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project.isdir()
+        assert run_inside_dir('which python', str(result.project)) == 0
         run_inside_dir('pip install -e .', str(result.project))
-        run_inside_dir('pytest tests', str(result.project)) == 0
+        assert run_inside_dir('pytest tests', str(result.project)) == 0
         print("test_bake_and_run_tests path", str(result.project))
 
 
@@ -101,7 +99,7 @@ def test_bake_withspecialchars_and_run_tests(cookies):
         extra_context={'full_name': 'name "quote" name', 'use_pytest': 'n'}
     ) as result:
         assert result.project.isdir()
-        run_inside_dir('python setup.py test', str(result.project)) == 0
+        assert run_inside_dir('python setup.py test', str(result.project)) == 0
 
 
 @pytest.mark.requires_gdal
@@ -112,7 +110,7 @@ def test_bake_with_apostrophe_and_run_tests(cookies):
         extra_context={'full_name': "O'connor"}
     ) as result:
         assert result.project.isdir()
-        run_inside_dir('pytest', str(result.project)) == 0
+        assert run_inside_dir('pytest', str(result.project)) == 0
 
 
 # def test_bake_and_run_travis_pypi_setup(cookies):
@@ -208,7 +206,7 @@ def test_using_pytest(cookies):
         lines = test_file_path.readlines()
         assert "import pytest" in ''.join(lines)
         # Test the new pytest target
-        run_inside_dir('pytest', str(result.project)) == 0
+        assert run_inside_dir('pytest', str(result.project)) == 0
 
 
 @pytest.mark.parametrize("use_black,expected", [("y", True), ("n", False)])
