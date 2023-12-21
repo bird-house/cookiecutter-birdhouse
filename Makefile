@@ -19,7 +19,7 @@ test:
 	@bash -c 'pytest'
 
 .PHONY: test-no-gdal
-test:
+test-no-gdal:
 	@echo "Running all tests"
 	@bash -c 'pytest -m "not requires_gdal"'
 
