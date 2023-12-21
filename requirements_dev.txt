@@ -1,9 +1,11 @@
 alabaster
 bump2version
 cookiecutter>=2.1.0
+cruft
 cryptography
-pytest-cookies
+psutil
 pytest>=6.2.4
+pytest-cookies
 pyyaml
 sphinx>=5.3.0
 tox>=4.0

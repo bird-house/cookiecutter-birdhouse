@@ -2,6 +2,9 @@
 
 from setuptools import setup
 
+with open("requirements_dev.txt") as f:
+    dev_requirements = f.read().splitlines()
+
 setup(
     name='cookiecutter-birdhouse',
     packages=[],
@@ -13,20 +16,7 @@ setup(
     url='https://github.com/bird-house/cookiecutter-birdhouse',
     keywords=['cookiecutter', 'template', 'package', 'wps' 'pywps', 'birdhouse'],
     extras_require={
-        "dev": [
-            "black",
-            "bump2version",
-            "cookiecutter",
-            "cruft",
-            "cryptography",
-            "pip",
-            "psutil",
-            "pytest",
-            "pytest-cookies",
-            "pywps",
-            "pyyaml",
-            "watchdog"
-        ]
+        "dev": dev_requirements,
     },
     python_requires='>=3.7',
     classifiers=[
