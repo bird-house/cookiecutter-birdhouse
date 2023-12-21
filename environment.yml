@@ -3,12 +3,16 @@ channels:
   - conda-forge
 dependencies:
   - python>=3.7
+  - alabaster
   - bump2version
-  - cookiecutter
+  - cookiecutter >=2.1.0
   - cruft
   - cryptography
   - pip
-  - pytest
+  - psutil
+  - pytest >=6.2.4
   - pytest-cookies
+  - pywps
   - pyyaml
+  - sphinx >=7.0.0
   - watchdog

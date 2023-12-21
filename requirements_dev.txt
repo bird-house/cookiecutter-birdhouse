@@ -1,10 +1,10 @@
 alabaster
 bump2version
-cookiecutter>=1.7.0
+cookiecutter>=2.1.0
 cryptography
 pytest-cookies
-pytest>=5.3
-PyYAML
-sphinx>=1.7
+pytest>=6.2.4
+pyyaml
+sphinx>=7.0.0
 tox>=4.0
 watchdog
