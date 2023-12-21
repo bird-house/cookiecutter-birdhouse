@@ -5,6 +5,6 @@ cryptography
 pytest-cookies
 pytest>=6.2.4
 pyyaml
-sphinx>=7.0.0
+sphinx>=5.3.0
 tox>=4.0
 watchdog
