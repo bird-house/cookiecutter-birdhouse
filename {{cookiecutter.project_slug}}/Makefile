@@ -148,7 +148,7 @@ docs: clean-docs ## generate Sphinx HTML documentation, including API docs
 	@echo "Generating docs with Sphinx ..."
 	$(MAKE) -C docs html
 	@echo "Open your browser to: file:/$(APP_ROOT)/docs/build/html/index.html"
-	## do not execute xdg-open automatically since it hangs travis and job does not complete
+	## do not execute xdg-open automatically since it hangs ReadTheDocs and job does not complete
 	@echo "xdg-open $(APP_ROOT)/docs/build/html/index.html"
 
 servedocs: docs ## compile the docs watching for changes

@@ -1,25 +1,25 @@
-{% raw %}
-name: build ⚙️
+name: {{ cookiecutter.project_name }} Testing Suite ⚙️
 
 on: [ push, pull_request ]
 
+{% raw %}
 jobs:
   build:
-
+    name: Build ⚙️
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
     - name: Checkout repository and submodules
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Install packages
       run: |
         sudo apt-get -y install pandoc
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install requirements 📦
