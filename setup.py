@@ -1,9 +1,12 @@
 # !/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
+
+with open("requirements_dev.txt") as f:
+    dev_requirements = f.read().splitlines()
 
 setup(
-    name='cookiecutter-pypackage',
+    name='cookiecutter-birdhouse',
     packages=[],
     version='0.5.0',
     description='Cookiecutter template for a PyWPS service',
@@ -12,6 +15,9 @@ setup(
     author_email='ehbrecht@dkrz.de',
     url='https://github.com/bird-house/cookiecutter-birdhouse',
     keywords=['cookiecutter', 'template', 'package', 'wps' 'pywps', 'birdhouse'],
+    extras_require={
+        "dev": dev_requirements,
+    },
     python_requires='>=3.7',
     classifiers=[
         'Development Status :: 4 - Beta',

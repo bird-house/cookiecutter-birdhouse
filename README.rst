@@ -6,9 +6,9 @@ Cookiecutter for Birdhouse
    :target: http://cookiecutter-birdhouse.readthedocs.org/en/latest/?badge=latest
    :alt: Documentation Status
 
-.. image:: https://travis-ci.org/bird-house/cookiecutter-birdhouse.svg?branch=master
-   :target: https://travis-ci.org/bird-house/cookiecutter-birdhouse
-   :alt: Travis Build
+.. image:: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml
+   :alt: GitHub Workflows
 
 .. image:: https://readthedocs.org/projects/cookiecutter-pypackage/badge/?version=latest
    :target: https://cookiecutter-pypackage.readthedocs.io/en/latest/?badge=latest
@@ -48,10 +48,10 @@ Features
 --------
 
 * Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
-* Travis-CI_: Ready for Travis Continuous Integration testing
-* Tox_ testing: Setup to easily test for Python 3.6, 3.7, 3.8
-* Sphinx_ docs: Documentation ready for generation with, for example, ReadtheDocs_
-* bumpversion_: Pre-configured version bumping with a single command
+* GitHub_Workflows_: Ready for GitHub Workflows Continuous Integration testing
+* Tox_ testing: Setup to easily test for Python 3.7, 3.8, 3.9, 3.10, and 3.11
+* Sphinx_ docs: Documentation ready for generation with, for example, ReadTheDocs_
+* bump2version_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * A :file:`Makefile` to install the code, start, stop and poll the server and more
 
@@ -102,15 +102,14 @@ your generated bird.
 Usage
 -----
 
-After answering the questions asked during installation, a *bird* Python package will be
-created in your current working directory. This package will contain a configurable PyWPS
-service with some initial test processes.
+After answering the questions asked during installation, a *bird* Python package will be created in your current working directory.
+This package will contain a configurable PyWPS service with some initial test processes.
 
 Then:
 
-* Create a repo and put it there.
-* Add the repo to your Travis-CI_ account.
-* Add the repo to your ReadTheDocs_ account + turn on the ReadTheDocs service hook.
+* Create a repository on GitHub and upload files there.
+* Enable GitHub_Workflows_ for the repository.
+* Add the repo to your ReadTheDocs_ account, then turn on the ReadTheDocs service hook.
 
 For more details, see the `cookiecutter-pypackage tutorial`_.
 
@@ -123,7 +122,7 @@ To keep the generated bird up-to-date with the cookiecutter template:
     $ cruft update  # uses configurations in the .cruft.json file
 
 Cruft can be configured to ignore template changes to certain files, see
-https://timothycrosley.github.io/cruft/#updating-a-project.  Potential files to
+https://cruft.github.io/cruft/#updating-a-project.  Potential files to
 ignore:
 
 * demonstration files, because they are meant to be erased
@@ -191,23 +190,23 @@ Make a new version of this Cookiecutter in the following steps:
 
   * Make sure everything is commit to GitHub.
   * Update ``CHANGES.rst`` with the next version.
-  * Dry Run: ``bumpversion --dry-run --verbose --new-version 0.3.1 patch``
-  * Do it: ``bumpversion --new-version 0.3.1 patch``
-  * ... or: ``bumpversion --new-version 0.4.0 minor``
+  * Dry Run: ``bump2version --dry-run --verbose --new-version 0.3.1 patch``
+  * Do it: ``bump2version --new-version 0.3.1 patch``
+  * ... or: ``bump2version --new-version 0.4.0 minor``
   * Push it: ``git push --tags``
 
-See the bumpversion_ documentation for details.
+See the bump2version_ documentation for details.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _Cruft: https://timothycrosley.github.io/cruft/
+.. _Cruft: https://cruft.github.io/cruft/
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 .. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
 .. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
-.. _Travis-CI: http://travis-ci.org/
+.. _GitHub_Workflows: https://docs.github.com/en/actions/using-workflows
 .. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.io/
-.. _bumpversion: https://pypi.org/project/bumpversion/
+.. _bump2version: https://pypi.org/project/bump2version/
 .. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
 .. _Poetry: https://python-poetry.org/
 .. _PyPi: https://pypi.python.org/pypi

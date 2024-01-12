@@ -7,8 +7,8 @@
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
 
-.. image:: https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.svg
-        :target: https://travis-ci.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+.. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg
+        :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml
 
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.project_slug | replace("_", "-") }}/badge/?version=latest
         :target: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?version=latest
@@ -31,18 +31,16 @@
 Documentation
 -------------
 
-Learn more about {{ cookiecutter.project_name }} in its official documentation at
-https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io.
+Learn more about {{ cookiecutter.project_name }} in its official documentation at https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io.
 
-Submit bug reports, questions and feature requests at
-https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/issues
+Submit bug reports, questions and feature requests at https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/issues
 
 Contributing
 ------------
 
 You can find information about contributing in our `Developer Guide`_.
 
-Please use bumpversion_ to release a new version.
+Please use bump2version_ to release a new version.
 
 {% if is_open_source %}
 License
@@ -60,4 +58,4 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`bird-house/cookiecutter-birdhouse`: https://github.com/bird-house/cookiecutter-birdhouse
 .. _`Developer Guide`: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html
-.. _bumpversion: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version
+.. _bump2version: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version

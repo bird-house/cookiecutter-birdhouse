@@ -20,11 +20,9 @@
 import os
 import sys
 
-# Add {{ cookiecutter.project_slug }} to sys.path to avoid having to full
-# install {{ cookiecutter.project_slug }} for autodoc.
-# Full install of {{ cookiecutter.project_slug }} will burst memory limit on ReadTheDocs.
 sys.path.insert(0, os.path.abspath("../../"))
 
+import {{ cookiecutter.project_slug }}
 
 # -- General configuration ---------------------------------------------
 
@@ -36,28 +34,30 @@ sys.path.insert(0, os.path.abspath("../../"))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.imgconverter",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
-    "pywps.ext_autodoc",
-    "sphinx.ext.autosectionlabel",
-    "sphinx.ext.imgconverter",
-    "nbsphinx",
+    "sphinx.ext.viewcode",
     "IPython.sphinxext.ipython_console_highlighting",
+    "nbsphinx",
+    "pywps.ext_autodoc",
 ]
 
 # To avoid having to install these and burst memory limit on ReadTheDocs.
 # List of all tested working mock imports from all birds so new birds can
 # inherit without having to test which work which do not.
-autodoc_mock_imports = ["numpy", "xarray", "fiona", "rasterio", "shapely",
-                        "osgeo", "geopandas", "pandas", "statsmodels",
-                        "affine", "rasterstats", "spotpy", "matplotlib",
-                        "scipy", "unidecode", "gdal", "sentry_sdk", "dask",
-                        "numba", "parse", "siphon", "sklearn", "cftime",
-                        "netCDF4", "bottleneck", "ocgis", "geotiff", "geos",
-                        "hdf4", "hdf5", "zlib", "pyproj", "proj", "cartopy",
-                        "scikit-learn", "cairo"]
+autodoc_mock_imports = [
+    "numpy", "xarray", "fiona", "rasterio", "shapely",
+    "osgeo", "geopandas", "pandas", "statsmodels",
+    "affine", "rasterstats", "spotpy", "matplotlib",
+    "scipy", "unidecode", "gdal", "sentry_sdk", "dask",
+    "numba", "parse", "siphon", "sklearn", "cftime",
+    "netCDF4", "bottleneck", "ocgis", "geotiff", "geos",
+    "hdf4", "hdf5", "zlib", "pyproj", "proj", "cartopy",
+    "scikit-learn", "cairo"
+]
 
 # Monkeypatch constant because the following are mock imports.
 # Only works if numpy is actually installed and at the same time being mocked.
@@ -98,7 +98,7 @@ release = {{ cookiecutter.project_slug }}.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

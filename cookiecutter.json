@@ -11,6 +11,7 @@
   "open_source_license": ["Apache Software License 2.0", "MIT license", "BSD license", "ISC license", "GNU General Public License v3", "Not open source"],
   "http_port": "5000",
   "use_pytest": "y",
+  "use_black": "n",
   "create_author_file": "y",
   "_copy_without_render": [
         "{{cookiecutter.project_slug}}/templates/*.cfg"

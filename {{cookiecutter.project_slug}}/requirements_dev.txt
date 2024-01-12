@@ -1,16 +1,20 @@
-pytest>=6.0
-pytest-runner
-pytest-cov
-flake8
-tox
-pytest-flake8
-ipython
-pytest-notebook
-nbsphinx
-nbval>=0.9.6
-nbconvert
-sphinx>=1.8.5
-bump2version
-Click
+pip>=23.1.0
+{%- if cookiecutter.use_black == 'y' %}
+black>=23.12.0
+{%- endif %}
+bump2version>=0.5.11
+coverage>=4.5.4
+click>=7.0
 cruft
-# Changing dependencies above this comment will create merge conflicts when updating the cookiecutter template with cruft. Add extra requirements below this line.
+flake8
+nbval>=0.10.0
+{%- if cookiecutter.use_pytest == 'y' %}
+pytest>=6.2.4
+pytest-cov
+pytest-flake8
+pytest-notebook
+{%- endif %}
+sphinx>=1.8.5
+tox>=4.0
+twine>=4.0
+wheel
