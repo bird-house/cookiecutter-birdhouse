@@ -202,7 +202,7 @@ See the bump2version_ documentation for details.
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 .. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
 .. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
-.. _GitHub_Workflows:: https://docs.github.com/en/actions/using-workflows
+.. _GitHub_Workflows: https://docs.github.com/en/actions/using-workflows
 .. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.io/
