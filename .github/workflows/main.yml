@@ -27,6 +27,8 @@ jobs:
             python-version: "3.10"
           - tox-env: py311
             python-version: "3.11"
+          - tox-env: py312
+            python-version: "3.12"
           - tox-env: pypy38-nogdal
             python-version: "pypy-3.8"
           - tox-env: pypy310-nogdal
