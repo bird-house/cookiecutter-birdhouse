@@ -130,7 +130,11 @@ test-tox: ## run tests on every available Python version with tox
 
 test-notebooks: notebook-sanitizer  ## run notebook-based tests
 	@echo "Running notebook-based tests"
-	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval --verbose $(CURDIR)/docs/source/notebooks/ --sanitize-with $(CURDIR)/docs/source/output-sanitize.cfg --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
+	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --sanitize-with $(CURDIR)/docs/source/output-sanitize.cfg --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
+
+test-notebooks-lax: notebook-sanitizer  ## run tests on notebooks but don't be so strict about outputs
+	@echo "Running notebook-based tests"
+	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval-lax --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
 
 coverage: ## check code coverage quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
