@@ -2,17 +2,19 @@ name: cookiecutter-birdhouse
 channels:
   - conda-forge
 dependencies:
-  - python>=3.7,<3.10
-  - alabaster
+  - python>=3.9,<3.13
+  - alabaster >=0.7.16
   - bump2version
-  - cookiecutter >=2.1.0
+  - cookiecutter >=2.6.0
   - cruft
   - cryptography
   - pip
   - psutil
-  - pytest >=6.2.4
-  - pytest-cookies
+  - pytest >=8.0.0
+  - pytest-cookies >=0.7.0
   - pywps
   - pyyaml
+  - ruff >=0.3.5
   - sphinx >=5.3.0
-  - watchdog
+  - tox >=4.14.2
+  - watchdog >=4.0.0

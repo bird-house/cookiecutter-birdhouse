@@ -101,7 +101,7 @@ Before you submit a pull request, check that it meets these guidelines:
 
 1. The pull request should include tests.
 2. If the pull request adds functionality, the docs should be updated. Put your new functionality into a function with a docstring, and add the feature to the list in README.rst.
-3. The pull request should work for Python 3.7, 3.8, 3.9, 3.10 and 3.11. Check https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions and make sure that the tests pass for all supported Python versions.
+3. The pull request should work for all supported Python versions. Check https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions and make sure that the tests pass for all supported Python versions.
 
 Tips
 ----
@@ -121,10 +121,9 @@ A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
-    $ bump2version patch # possible: major / minor / patch
+    $ bump-my-version bump patch # possible: major / minor / patch
     $ git push
     $ git push --tags
-
 
 Code of Conduct
 ---------------

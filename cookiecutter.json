@@ -16,5 +16,4 @@
   "_copy_without_render": [
         "{{cookiecutter.project_slug}}/templates/*.cfg"],
   "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
-
 }

@@ -8,8 +8,8 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
-REQUIRES_PYTHON = ">=3.6.0"
+CHANGES = open(os.path.join(here, 'CHANGELOG.rst')).read()
+REQUIRES_PYTHON = ">=3.9.0"
 
 about = {}
 with open(os.path.join(here, '{{ cookiecutter.project_slug }}', '__version__.py'), 'r') as f:
@@ -43,10 +43,10 @@ classifiers = [
     'Programming Language :: Python',
     'Natural Language :: English',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Topic :: Scientific/Engineering :: Atmospheric Science',
 {%- if cookiecutter.open_source_license in license_classifiers %}
     '{{ license_classifiers[cookiecutter.open_source_license] }}',

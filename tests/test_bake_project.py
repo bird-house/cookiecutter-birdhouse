@@ -132,8 +132,8 @@ def test_bake_without_author_file(cookies):
             assert 'installation\n   configuration\n   notebooks/index\n   dev_guide' \
                    '\n   processes\n   changes\n' in index_file.read()
 
-        manifest_path = result.project.join('MANIFEST.in')
-        with open(str(manifest_path)) as manifest_file:
+        pyproject_path = result.project.join('pyproject.toml')
+        with open(str(pyproject_path)) as manifest_file:
             assert 'AUTHORS.rst' not in manifest_file.read()
 
 
@@ -199,7 +199,7 @@ def test_black(cookies, use_black, expected):
         extra_context={'use_black': use_black}
     ) as result:
         assert result.project.isdir()
-        requirements_path = result.project.join('requirements_dev.txt')
+        requirements_path = result.project.join('pyproject.toml')
         assert ("black" in requirements_path.read()) is expected
         makefile_path = result.project.join('Makefile')
         assert ("black --check" in makefile_path.read()) is expected
