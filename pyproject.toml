@@ -37,11 +37,11 @@ classifiers = [
 [project.optional-dependencies]
 dev = [
     "alabaster>=0.7.16",
+    "build>=1.2.1",
     "cookiecutter>=2.6.0",
-    "cruft",
-    "cryptography",
-    "psutil",
-    "pytest>=8.0.0",
+    "coverage>=7.5.1",
+    "flit>=3.9.0,<4.0",
+    "pytest>=8.2.0",
     "pytest-cookies>=0.7.0",
     "pyyaml",
     "ruff>=0.5.7",
@@ -67,15 +67,15 @@ exclude = [
 [tool.coverage.run]
 omit = ["tests/*"]
 
-[tool.pytest]
+[tool.pytest.ini_options]
 addopts = [
 	"--strict",
 	"--tb=native",
 	"--verbose",
-	"tests/",
-    ]
+]
 markers = [
     "online: mark test to need internet connection",
     "slow: mark test to be slow",
     "requires_gdal: mark test as needing GDAL",
-    ]
+]
+testpaths = ["tests"]

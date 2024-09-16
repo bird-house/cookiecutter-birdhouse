@@ -1,5 +1,5 @@
-COOKIES_DIR=$(CURDIR)/cookies
-BAKE_OPTIONS=--no-input --output-dir $(COOKIES_DIR)
+COOKIES_DIR = $(CURDIR)/cookies
+BAKE_OPTIONS ?= --no-input --output-dir $(COOKIES_DIR)
 
 .DEFAULT_GOAL := all
 

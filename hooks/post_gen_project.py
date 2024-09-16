@@ -1,12 +1,17 @@
 #!/usr/bin/env python
-import pathlib
+from pathlib import Path
+
+PROJECT_DIRECTORY = Path().cwd().absolute()
+
+def remove_file(filepath):
+    Path(PROJECT_DIRECTORY).joinpath(filepath).unlink()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    if '{{ cookiecutter.create_author_file }}' != 'y':
-        pathlib.Path('AUTHORS.rst').unlink()
-        pathlib.Path('docs', 'authors.rst').unlink()
+    if "{{ cookiecutter.create_author_file }}" != "y":
+        remove_file("AUTHORS.rst")
+        remove_file("docs/source//authors.rst")
 
-    if 'Not open source' == '{{ cookiecutter.open_source_license }}':
-        pathlib.Path('LICENSE').unlink()
+    if "Not open source" == "{{ cookiecutter.open_source_license }}":
+        remove_file("LICENSE")

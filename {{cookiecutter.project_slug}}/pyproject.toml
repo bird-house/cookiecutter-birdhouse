@@ -53,7 +53,8 @@ dependencies = [
 dev = [
 "pip >=24.2.0",
 {%- if cookiecutter.use_black == 'y' %}
-"black >=24.8.0",
+"black ==24.8.0",
+"isort == 5.13.2",
 {%- endif %}
 "bump-my-version >=0.26.0",
 "coverage >=7.5.0",
@@ -84,7 +85,6 @@ dev = [
 
 [tool.black]
 target-version = [
-  "py38",
   "py39",
   "py310",
   "py311",
@@ -196,14 +196,16 @@ disable_error_code = "attr-defined"
 {%- if cookiecutter.use_pytest == 'y' %}
 
 [tool.pytest.ini_options]
-addopts =
-    --ignore=setup.py
-	--strict-markers
-	--tb=native
-python_files = test_*.py
-markers =
-	online: mark test to need internet connection
-	slow: mark test to be slow
+addopts = [
+    "--color=yes",
+    "--strict-markers",
+	"--tb=native"
+]
+python_files = ["test_*.py"]
+markers = [
+	"online: mark test to need internet connection",
+	"slow: mark test to be slow"
+]
 {%- endif %}
 
 [tool.ruff]
