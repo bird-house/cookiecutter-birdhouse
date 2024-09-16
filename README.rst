@@ -37,6 +37,7 @@ You may at any time update your project using the latest cookiecutter template u
 * GitHub repo: https://github.com/bird-house/cookiecutter-birdhouse/
 * Documentation: http://cookiecutter-birdhouse.readthedocs.io/en/latest/
 * Free software: BSD license
+* Discord: https://discord.gg/PWXJr3upUE
 
 
 .. warning::
