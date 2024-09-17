@@ -25,7 +25,9 @@ jobs:
             python-version: "3.11"
           - tox-env: py312
             python-version: "3.12"
-          - tox-env: pypy310
+          - tox-env: pypy39-nogdal
+            python-version: "pypy-3.9"
+          - tox-env: pypy310-nogdal
             python-version: "pypy-3.10"
     steps:
       - name: Checkout repository and submodules
