@@ -36,4 +36,4 @@ jobs:
     - name: Build docs 🏗️
       run: make docs
       if: matrix.python-version == 3.7
-{% endraw %}
+{%- endraw %}

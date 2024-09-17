@@ -8,12 +8,20 @@
   "project_readthedocs_name": "{{ cookiecutter.project_repo_name.replace('_', '-') }}",
   "project_short_description": "A Web Processing Service for Climate Data Analysis.",
   "version": "0.1.0",
-  "open_source_license": ["Apache Software License 2.0", "MIT license", "BSD license", "ISC license", "GNU General Public License v3", "Not open source"],
+  "open_source_license": [
+    "Apache Software License 2.0",
+    "MIT license",
+    "BSD license",
+    "ISC license",
+    "GNU General Public License v3",
+    "Not open source"
+  ],
   "http_port": "5000",
   "use_pytest": "y",
   "use_black": "n",
   "create_author_file": "y",
   "_copy_without_render": [
-        "{{cookiecutter.project_slug}}/templates/*.cfg"],
+    "{{cookiecutter.project_slug}}/templates/*.cfg"
+  ],
   "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
 }

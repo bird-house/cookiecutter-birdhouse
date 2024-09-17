@@ -4,7 +4,6 @@ import os
 import sys
 from pathlib import Path
 import subprocess
-import yaml  # noqa
 import datetime
 import pytest
 from cookiecutter.utils import rmtree
