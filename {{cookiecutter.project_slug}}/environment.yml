@@ -3,11 +3,10 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-- pip
-- python>=3.8,<3.12
+- python>=3.9,<3.13
 - pywps>=4.5.1,<4.6
 - jinja2
-- click
+- click >=8.1.7
 - psutil
 # tests
 - pytest

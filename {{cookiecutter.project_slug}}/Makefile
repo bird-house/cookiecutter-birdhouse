@@ -105,7 +105,7 @@ clean-docs: ## remove documentation artifacts
 
 lint/flake8: ## check style with flake8
 	@echo "Running flake8 code style checks ..."
-	@bash -c 'flake8 {{ cookiecutter.project_slug }} tests'
+	@bash -c 'ruff check {{ cookiecutter.project_slug }} tests'
 
 {%- if cookiecutter.use_black == 'y' %}
 lint/black: ## check style with black
@@ -122,7 +122,7 @@ test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
 	@bash -c 'pytest -v'
 {%- else %}
-	@bash -c 'python setup.py test'
+	@bash -c 'python -m unittest discover -v'
 {%- endif %}
 
 test-tox: ## run tests on every available Python version with tox
@@ -136,7 +136,7 @@ coverage: ## check code coverage quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
 	@bash -c 'coverage run --source {{ cookiecutter.project_slug }} -m pytest'
 {%- else %}
-	@bash -c 'coverage run --source {{ cookiecutter.project_slug }} setup.py test'
+	@bash -c 'coverage run --source {{ cookiecutter.project_slug }} -m unittest discover'
 {%- endif %}
 	@bash -c 'coverage report -m'
 	@bash -c 'coverage html'
@@ -167,10 +167,9 @@ refresh-notebooks: ## refreshing all notebook outputs under docs/source/notebook
 
 dist: clean ## build source and wheel package
 	@echo "Building source and wheel package ..."
-	@python setup.py sdist
-	@python setup.py bdist_wheel
+	@python -m build --sdist
 	@bash -c 'ls -l dist/'
 
 release: dist ## upload source and wheel packages
 	@echo "Uploading source and wheel packages ..."
-	@bash -c 'twine upload dist/*'
+	@python -m flit publish dist/*'

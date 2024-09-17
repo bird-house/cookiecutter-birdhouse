@@ -1,3 +1,5 @@
+"""Processes module."""
+
 from .wps_say_hello import SayHello
 
 processes = [
