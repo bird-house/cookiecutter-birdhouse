@@ -41,12 +41,14 @@ dev = [
     "cookiecutter>=2.6.0",
     "coverage>=7.5.1",
     "flit>=3.9.0,<4.0",
+    "pre-commit>=3.8.0",
     "pytest>=8.2.0",
     "pytest-cookies>=0.7.0",
     "pyyaml",
     "ruff>=0.5.7",
     "sphinx>=7.0.0",
     "tox>=4.18.0",
+    "twine>=5.1.1",
     "watchdog>=4.0.0",
 ]
 
@@ -75,7 +77,8 @@ addopts = [
 ]
 markers = [
     "online: mark test to need internet connection",
-    "slow: mark test to be slow",
+    "precommit: mark test as needing pre-commit",
     "requires_gdal: mark test as needing GDAL",
+    "slow: mark test to be slow",
 ]
 testpaths = ["tests"]

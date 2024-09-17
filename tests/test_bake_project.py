@@ -105,6 +105,22 @@ def test_bake_and_run_tests(cookies):
         print("test_bake_and_run_tests path", str(result.project_path))
 
 
+@pytest.mark.precommit
+def test_bake_and_run_pre_commit(cookies):
+    with bake_in_temp_dir(cookies) as result:
+        assert result.project_path.is_dir()
+        assert run_inside_dir("git init", str(result.project_path)) == 0
+        assert run_inside_dir("git add *", str(result.project_path)) == 0
+        assert run_inside_dir("pre-commit install", str(result.project_path)) == 0
+        assert (
+            run_inside_dir(
+                "pre-commit run --all-files --show-diff-on-failure",
+                str(result.project_path),
+            )
+            == 0
+        )
+        print("test_bake_and_run_pre_commit path", str(result.project_path))
+
 def test_bake_and_build_package(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project_path.is_dir()
