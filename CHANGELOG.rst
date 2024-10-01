@@ -1,12 +1,18 @@
 CHANGES
 ********
 
-0.6.0
-=====
+1.0.0 (2024-10-02)
+==================
 
 Changes:
 
 * Replace `search` by `parse` in the bumpversion config for `docs/conf.py` to support the `version|release` expression.
+* Dropped support for Python2 as well as Python3.8 and below.
+* Dropped Travis CI and migrated to using GitHub Actions for CI/CD.
+* Top-level documentation has been updated to reflect the changes in the project.
+* Now using `bump-my-version` for version management and `pre-commit` for code formatting.
+* Projects now use a `src`-based directory structure.
+* Both the top-level package and rendered templates are now PEP 517 and PEP 621 compliant (`pyproject.toml`).
 
 0.5.0 (2020-10-07)
 ==================

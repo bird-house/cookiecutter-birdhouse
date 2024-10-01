@@ -14,20 +14,19 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+from datetime import datetime as dt
+import importlib.metadata as ilm
 
 # -- Project information -----------------------------------------------------
 
 project = 'Cookiecutter for Birdhouse'
-copyright = '2021, Birdhouse'
+copyright = f'2018-{dt.now().year}, Birdhouse'
 author = 'Birdhouse'
 
 # The short X.Y version
-# FIXME: this should reflect the version of cookiecutter-birdhouse
-version = ''
+version = ilm.version('cookiecutter-birdhouse').split('+')[0]
 # The full version, including alpha/beta/rc tags
-# FIXME: this should reflect the version of cookiecutter-birdhouse
-release = ''
+release = ilm.version('cookiecutter-birdhouse')
 
 
 # -- General configuration ---------------------------------------------------
@@ -52,9 +51,7 @@ templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-#
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {".rst": "restructuredtext"}
 
 # The master toctree document.
 master_doc = 'index'
