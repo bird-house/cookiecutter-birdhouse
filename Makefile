@@ -1,5 +1,6 @@
 COOKIES_DIR = $(CURDIR)/cookies
-BAKE_OPTIONS ?= --no-input --output-dir $(COOKIES_DIR)
+BAKE_OPTIONS ?= --no-input
+NO_CRUFT = generated_with_cruft=n
 
 .DEFAULT_GOAL := all
 
@@ -30,7 +31,8 @@ clean:
 .PHONY: bake
 bake:
 	@echo "Creating a new project with default settings"
-	@bash -c 'cookiecutter $(BAKE_OPTIONS) . --overwrite-if-exists'
+	@mkdir -p "cookies"
+	@bash -c 'cookiecutter $(BAKE_OPTIONS) . --output-dir $(COOKIES_DIR) --overwrite-if-exists $(NO_CRUFT)'
 
 .PHONY: docs
 docs:
@@ -40,8 +42,8 @@ docs:
 	@-bash -c 'xdg-open $(CURDIR)/docs/build/html/index.html'
 
 # generate project using defaults and watch for changes
-# watch: bake
-# 	watchmedo shell-command -p '*.*' -c 'make bake -e BAKE_OPTIONS=$(BAKE_OPTIONS)' -W -R -D \{{cookiecutter.project_slug}}/
+watch: bake
+	watchmedo shell-command -p '*.*' -c 'make bake -e BAKE_OPTIONS=$(BAKE_OPTIONS)' -W -R -D \{{cookiecutter.project_slug}}/
 #
 # replay last cookiecutter run and watch for changes
 # replay: BAKE_OPTIONS=--replay

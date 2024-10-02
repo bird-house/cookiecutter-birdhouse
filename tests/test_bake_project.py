@@ -83,6 +83,7 @@ def test_bake_with_defaults(cookies):
         assert "Makefile" in found_toplevel_files
         assert "README.rst" in found_toplevel_files
         assert "environment.yml" in found_toplevel_files
+        assert "environment-dev.yml" in found_toplevel_files
         assert "environment-docs.yml" in found_toplevel_files
         assert 'pyproject.toml' in found_toplevel_files
         assert 'tox.ini' in found_toplevel_files

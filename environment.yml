@@ -4,17 +4,17 @@ channels:
 dependencies:
   - python>=3.9,<3.13
   - alabaster >=0.7.16
-  - bump2version
+  - bump-my-version >=0.26.0
   - cookiecutter >=2.6.0
-  - cruft
+  - cruft >=2.15.0
   - cryptography
-  - pip
-  - psutil
+  - pip >=24.2.0
+  - psutil >=6.0.0
   - pytest >=8.0.0
   - pytest-cookies >=0.7.0
-  - pywps
-  - pyyaml
-  - ruff >=0.3.5
-  - sphinx >=5.3.0
-  - tox >=4.14.2
+  - pywps >=4.6
+  - pyyaml >=6.0.2
+  - ruff >=0.5.7
+  - sphinx >=7.0.0
+  - tox >=4.18.0
   - watchdog >=4.0.0

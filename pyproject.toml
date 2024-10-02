@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cookiecutter-birdhouse"
 dynamic = ["version"]
 description = "Cookiecutter template for a PyWPS service"
+readme = "README.rst"
 authors = [
   {name = "Carsten Ehbrecht", email = "ehbrecht@dkrz.de"},
   {name = "Trevor James Smith", email = "smith.trevorj@ouranos.ca"}
@@ -44,7 +45,7 @@ dev = [
   "pre-commit>=3.8.0",
   "pytest>=8.2.0",
   "pytest-cookies>=0.7.0",
-  "pyyaml",
+  "pyyaml >=6.0.0",
   "ruff>=0.5.7",
   "sphinx>=7.0.0",
   "tox>=4.18.0",

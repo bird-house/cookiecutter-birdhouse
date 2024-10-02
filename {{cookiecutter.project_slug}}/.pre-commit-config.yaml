@@ -57,6 +57,7 @@ repos:
     hooks:
       - id: blackdoc
         additional_dependencies: [ 'black==24.8.0' ]
+      - id: blackdoc-autoupdate-black
   {%- endif %}
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.35.1

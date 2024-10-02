@@ -15,7 +15,6 @@ Getting Started
    readme
    tutorial
    pypi_release_checklist
-   troubleshooting
 
 Basics
 ------
@@ -24,15 +23,6 @@ Basics
    :maxdepth: 2
 
    prompts
-
-Advanced Features
------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   console_script_setup
-
 
 Indices and tables
 ==================

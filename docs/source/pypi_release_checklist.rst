@@ -8,33 +8,34 @@ Before Your First Release
 
     .. code-block:: bash
 
-        python setup.py register
+        python -m flit build
+        python -m flit publish
 
 #. Visit PyPI to make sure it registered.
 
 For Every Release
--------------------
+-----------------
 
-#. Update HISTORY.rst
+#. Update CHANGELOG.rst
 
 #. Commit the changes:
 
     .. code-block:: bash
 
-        git add HISTORY.rst
+        git add CHANGELOG.rst
         git commit -m "Changelog for upcoming release 0.1.1."
 
 #. Update version number (can also be patch or major)
 
     .. code-block:: bash
 
-        bump2version minor
+        bump-my-version bump minor
 
 #. Install the package again for local development, but with the new version number:
 
     .. code-block:: bash
 
-        python setup.py develop
+        python -m pip install --editable ".[dev]"
 
 #. Run the tests:
 
@@ -62,10 +63,12 @@ For Every Release
 
         .. code-block:: bash
 
-            pip install readme_renderer
-            python setup.py check -r -s
+            python -m pip install flit twine
+            python -m flit build
+            python -m twine check dist/*
 
-#. Edit the release on GitHub (e.g. https://github.com/audreyr/cookiecutter/releases). Paste the release notes into the release's release page, and come up with a title for the release.
+#. Edit the release on GitHub (e.g. https://github.com/bird-house/cookiecutter-birdhouse/releases).
+Paste the release notes into the release's release page, and come up with a title for the release.
 
 About This Checklist
 --------------------

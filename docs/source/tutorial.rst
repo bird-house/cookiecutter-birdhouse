@@ -1,8 +1,7 @@
 Tutorial
 ========
 
-.. note:: Did you find any of these instructions confusing? `Edit this file`_
-          and submit a pull request with your improvements!
+.. note:: Did you find any of these instructions confusing? `Edit this file`_ and submit a pull request with your improvements!
 
 .. _`Edit this file`: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/tutorial.rst
 
@@ -30,7 +29,7 @@ Activate your environment:
 
     source bin/activate
 
-On Windows, activate it like this. You may find that using a Command Prompt window works better than gitbash.
+On Windows, activate it like this. You may find that using a Command Prompt window works better than `gitbash`.
 
 .. code-block:: powershell
 
@@ -65,7 +64,7 @@ If you don't know what to enter, press Enter to stick with the defaults.
 Step 3: Create a GitHub Repo
 ----------------------------
 
-Go to your GitHub account and create a new repo named ``mypackage``, where ``mypackage`` matches the ``[project_slug]`` from your answers to running cookiecutter. This is so that pyup.io can find it when we get to Step 6.
+Go to your GitHub account and create a new repo named ``mypackage``, where ``mypackage`` matches the ``[project_slug]`` from your answers to running cookiecutter.
 
 You will find one folder named after the ``[project_slug]``. Move into this folder, and then setup git to use your GitHub repo and upload the code:
 
@@ -113,8 +112,8 @@ Now your documentation will get rebuilt when you make documentation changes to y
 Step 6: Set Up pyup.io
 ----------------------
 
-`pyup.io`_ is a service that helps you to keep your requirements files up to date. It sends you automated
-pull requests whenever there's a new release for one of your dependencies.
+`pyup.io`_ is a service that helps you to keep your requirements files up to date.
+It sends you automated pull requests whenever there's a new release for one of your dependencies.
 
 To use it, create a new account at `pyup.io`_ or log into your existing account.
 

@@ -1,31 +1,30 @@
 # vim:set ft=dockerfile:
 FROM continuumio/miniconda3
-MAINTAINER https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
+ARG DEBIAN_FRONTEND=noninteractive
+ENV PIP_ROOT_USER_ACTION=ignore
+LABEL org.opencontainers.image.authors=https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
 LABEL Description="{{ cookiecutter.project_name }} WPS" Vendor="Birdhouse" Version="{{ cookiecutter.version }}"
 
-# Update Debian system
-RUN apt-get update && apt-get install -y \
- build-essential \
-&& rm -rf /var/lib/apt/lists/*
+# Set the working directory to /code
+WORKDIR /code
 
-# Update conda
-RUN conda update -n base conda
+# Create conda environment
+COPY environment.yml .
+RUN conda env create -n {{ cookiecutter.project_name }} -f environment.yml && conda install -n gunicorn && conda clean --all --yes
+
+# Add the project conda environment to the path
+ENV PATH=/opt/conda/envs/rook/bin:$PATH
 
 # Copy WPS project
-COPY . /opt/wps
+COPY . /code
 
-WORKDIR /opt/wps
-
-# Create conda environment with PyWPS
-RUN ["conda", "env", "create", "-n", "wps", "-f", "environment.yml"]
-
-# Install WPS
-RUN ["/bin/bash", "-c", "source activate wps && pip install -e ."]
+# Install WPS project
+RUN pip install . --no-deps
 
 # Start WPS service on port {{ cookiecutter.http_port }} on 0.0.0.0
 EXPOSE {{ cookiecutter.http_port }}
-ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["source activate wps && exec {{ cookiecutter.project_slug }} start -b 0.0.0.0 -c /opt/wps/etc/demo.cfg"]
+
+CMD ["gunicorn", "--bind=0.0.0.0:{{ cookiecutter.http_port }}", "{{ cookiecutter.project_slug }}.wsgi:application"]
 
 # docker build -t {{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }} .
 # docker run -p {{ cookiecutter.http_port }}:{{ cookiecutter.http_port }} {{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
