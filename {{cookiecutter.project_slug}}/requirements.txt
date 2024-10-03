@@ -1,4 +1,0 @@
-click
-jinja2
-psutil
-pywps>=4.5.1,<4.6

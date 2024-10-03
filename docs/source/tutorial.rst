@@ -1,8 +1,7 @@
 Tutorial
 ========
 
-.. note:: Did you find any of these instructions confusing? `Edit this file`_
-          and submit a pull request with your improvements!
+.. note:: Did you find any of these instructions confusing? `Edit this file`_ and submit a pull request with your improvements!
 
 .. _`Edit this file`: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/tutorial.rst
 
@@ -30,12 +29,15 @@ Activate your environment:
 
     source bin/activate
 
-On Windows, activate it like this. You may find that using a Command Prompt window works better than gitbash.
+On Windows, activate it like this. You may find that using a Command Prompt window works better than `gitbash`.
 
 .. code-block:: powershell
 
     > \path\to\env\Scripts\activate
 
+.. note::
+
+    If you create your virtual environment folder in a different location within your project folder, be sure to add that path to your .gitignore file.
 
 Install cookiecutter:
 
@@ -55,16 +57,14 @@ Use cookiecutter, pointing it at the cookiecutter-pypackage repo:
 
     cookiecutter https://github.com/audreyfeldroy/cookiecutter-pypackage.git
 
-You'll be asked to enter a bunch of values to set the package up.
-If you don't know what to enter, stick with the defaults.
+You'll be asked to enter various values to set the package up.
+If you don't know what to enter, press Enter to stick with the defaults.
 
 
 Step 3: Create a GitHub Repo
 ----------------------------
 
-Go to your GitHub account and create a new repo named ``mypackage``, where ``mypackage`` matches the ``[project_slug]`` from your answers to running cookiecutter. This is so that pyup.io can find it when we get to Step 6.
-
-``If your virtualenv folder is within your project folder, be sure to add the virtualenv folder name to your .gitignore file.``
+Go to your GitHub account and create a new repo named ``mypackage``, where ``mypackage`` matches the ``[project_slug]`` from your answers to running cookiecutter.
 
 You will find one folder named after the ``[project_slug]``. Move into this folder, and then setup git to use your GitHub repo and upload the code:
 
@@ -76,10 +76,6 @@ You will find one folder named after the ``[project_slug]``. Move into this fold
     git commit -m "Initial skeleton."
     git remote add origin git@github.com:myusername/mypackage.git
     git push -u origin main
-
-    .. note::
-
-       GitHub has changed the default branch name from 'master' to 'main'. If you are using another Git repository hosting service that uses the Git branch naming defaults, you might need to use 'master' instead of 'main'.
 
 Where ``myusername`` and ``mypackage`` are adjusted for your username and package name.
 
@@ -116,8 +112,8 @@ Now your documentation will get rebuilt when you make documentation changes to y
 Step 6: Set Up pyup.io
 ----------------------
 
-`pyup.io`_ is a service that helps you to keep your requirements files up to date. It sends you automated
-pull requests whenever there's a new release for one of your dependencies.
+`pyup.io`_ is a service that helps you to keep your requirements files up to date.
+It sends you automated pull requests whenever there's a new release for one of your dependencies.
 
 To use it, create a new account at `pyup.io`_ or log into your existing account.
 

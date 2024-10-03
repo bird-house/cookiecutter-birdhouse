@@ -7,9 +7,9 @@ on:
   pull_request:
 
 concurrency:
-  # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on master.
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+  # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on main.
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   test:
@@ -17,10 +17,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - tox-env: py37
-            python-version: "3.7"
-          - tox-env: py38
-            python-version: "3.8"
           - tox-env: py39
             python-version: "3.9"
           - tox-env: py310
@@ -29,24 +25,26 @@ jobs:
             python-version: "3.11"
           - tox-env: py312
             python-version: "3.12"
-          - tox-env: pypy38-nogdal
-            python-version: "pypy-3.8"
-          - tox-env: pypy310-nogdal
+          - tox-env: pypy39
+            python-version: "pypy-3.9"
+          - tox-env: pypy310
             python-version: "pypy-3.10"
     steps:
       - name: Checkout repository and submodules
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           submodules: recursive
       - name: Install packages
         run: |
           sudo apt-get -y install pandoc
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install tox
+          cache: "pip"
+      - name: Install CI dependencies
         run: |
-          pip install tox
+          python -m pip install --require-hashes -r CI/requirements_ci.txt
       - name: Test with pytest and tox ⚙️
-        run:  tox -e ${{ matrix.tox-env }}
+        run: |
+          python -m tox -e ${{ matrix.tox-env }}

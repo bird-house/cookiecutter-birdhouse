@@ -1,2 +1,19 @@
+include CHANGELOG.rst
+include CONTRIBUTING.rst
+include LICENSE
 include Makefile
-include requirements_dev.txt
+include README.rst
+include cookiecutter.json
+include tox.ini
+
+exclude .editorconfig
+exclude .gitignore
+exclude .readthedocs.yml
+
+recursive-include {{cookiecutter.project_slug}} *
+recursive-include docs *.rst conf.py Makefile *.svg *.ico
+recursive-include hooks *.py
+recursive-include tests *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude .github *

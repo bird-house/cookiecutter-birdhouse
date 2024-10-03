@@ -31,5 +31,5 @@ def test_template(cookies, context):
 
     assert result.exit_code == 0
     assert result.exception is None
-    assert result.project.basename == 'testbird'
-    assert result.project.isdir()
+    assert result.project_path.name == 'testbird'
+    assert result.project_path.is_dir()
