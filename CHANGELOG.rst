@@ -1,18 +1,22 @@
 CHANGES
 ********
 
-1.0.0 (2024-10-02)
+1.0.0 (2024-10-03)
 ==================
 
 Changes:
 
-* Replace `search` by `parse` in the bumpversion config for `docs/conf.py` to support the `version|release` expression.
-* Dropped support for Python2 as well as Python3.8 and below.
-* Dropped Travis CI and migrated to using GitHub Actions for CI/CD.
-* Top-level documentation has been updated to reflect the changes in the project.
-* Now using `bump-my-version` for version management and `pre-commit` for code formatting.
-* Projects now use a `src`-based directory structure.
-* Both the top-level package and rendered templates are now PEP 517 and PEP 621 compliant (`pyproject.toml`).
+* Replace `search` by `parse` in the bumpversion config for `docs/conf.py` to support the `version|release` expression. (#107, #108).
+* Dropped Travis CI and migrated to using GitHub Actions for CI/CD (#112).
+* Updated PyWPS to 4.5.0 (#112).
+* Ported upstream changes from `cookiecutter-pypackage` and re-enabled testing (#115).
+* Added a Makefile command for running `nb-val` with `lax` flags (#116).
+* Updated the package metadata to reflect the current state of the project (#117).
+* Dropped support for Python2 as well as Python3.8 and below (#120).
+* Top-level documentation has been updated to reflect the changes in the project (#120).
+* Now using `bump-my-version` for version management and `pre-commit` for code formatting (#120).
+* Projects now use a `src`-based directory structure (#120).
+* Both the top-level package and rendered templates are now PEP 517 and PEP 621 compliant (`pyproject.toml`) (#120).
 
 0.5.0 (2020-10-07)
 ==================
