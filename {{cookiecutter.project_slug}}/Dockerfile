@@ -10,10 +10,10 @@ WORKDIR /code
 
 # Create conda environment
 COPY environment.yml .
-RUN conda env create -n {{ cookiecutter.project_name }} -f environment.yml && conda install -n gunicorn && conda clean --all --yes
+RUN conda env create -n {{ cookiecutter.project_name }} -f environment.yml && conda install -n {{ cookiecutter.project_name }} gunicorn && conda clean --all --yes
 
 # Add the project conda environment to the path
-ENV PATH=/opt/conda/envs/rook/bin:$PATH
+ENV PATH=/opt/conda/envs/{{ cookiecutter.project_name }}/bin:$PATH
 
 # Copy WPS project
 COPY . /code
