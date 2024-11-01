@@ -9,8 +9,16 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      actions:
+        patterns:
+          - "*"
 
   - package-ecosystem: "pip"
     directory: "/CI"
     schedule:
       interval: "monthly"
+    groups:
+      python:
+        patterns:
+          - "*"
