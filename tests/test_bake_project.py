@@ -212,7 +212,6 @@ def test_bake_selecting_license(cookies):
             )
 
 
-
 def test_bake_not_open_source(cookies):
     with bake_in_temp_dir(
         cookies,

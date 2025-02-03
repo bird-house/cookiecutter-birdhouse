@@ -6,7 +6,6 @@ services:
     ports:
       - "{{ cookiecutter.http_port }}:{{ cookiecutter.http_port }}"
 
-
 # docker-compose build
 # docker-compose up
 # docker-compose down

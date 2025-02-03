@@ -1,0 +1,58 @@
+name: Docker-based Testing Suite
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on master.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and Test Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            auth.docker.io:443
+            conda.anaconda.org:443
+            files.pythonhosted.org:443
+            github.com:443
+            production.cloudflare.docker.com:443
+            pypi.org:443
+            registry-1.docker.io:443
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@6524bf65af31da8d45b59e8c27de4bd072b392f5 # v3.8.0
+      - name: Build Docker image (no push)
+        uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # v6.13.0
+        with:
+          context: .
+          file: "Dockerfile"
+          tags: local${{ cookiecutter }}:latest
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          push: false
+      - name: Run Docker image
+        uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185 # v3.0.0
+        with:
+          image: localfinch:latest
+          options: -p 5000:5000
+          run: |
+            finch start -d
+            sleep 2s
+            finch status
+            finch stop

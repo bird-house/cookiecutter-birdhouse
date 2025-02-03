@@ -3,27 +3,30 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python >=3.9,<3.13
+  - python >=3.10,<3.14
   - pywps >=4.6
   - jinja2 >=3.1.4
   - click >=8.1.7
   - psutil >=6.0.0
   # development
 {%- if cookiecutter.use_black == 'y' %}
-  - black ==24.8.0
-  - isort ==5.13.2
+  - black ==25.1.0
 {%- endif %}
   - bump-my-version >=0.26.0
   - coverage >=7.5.0
   - cruft >=2.15.0
   - flit >=3.9.0,<4.0
+  - ipython >=8.5.0
+{%- if cookiecutter.use_black == 'y' %}
+  - isort ==6.0.0
+{%- endif %}
   - nbsphinx >=0.9.5
   - nbval >=0.10.0
 {%- if cookiecutter.use_pytest == 'y' %}
   - pytest >=8.0.0
   - pytest-cov >=5.0.0
 {%- endif %}
-  - ruff >=0.5.7
-  - sphinx >=7.0.0
-  - tox >=4.18.0
+  - ruff >=0.9.0
+  - sphinx >=7.1.0
+  - tox >=4.24.1
   - watchdog >=4.0.0
