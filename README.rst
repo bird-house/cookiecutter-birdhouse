@@ -197,16 +197,16 @@ Make a new version of this Cookiecutter in the following steps:
 
 See the bump-my-version_ documentation for details.
 
+.. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Cruft: https://cruft.github.io/cruft/
-.. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
-.. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
-.. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
 .. _GitHub_Workflows: https://docs.github.com/en/actions/using-workflows
-.. _Tox: http://testrun.org/tox/
-.. _Sphinx: http://sphinx-doc.org/
-.. _ReadTheDocs: https://readthedocs.io/
-.. _bump-my-version: https://github.com/callowayproject/bump-my-version
-.. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
-.. _PyPI: https://pypi.python.org/pypi
 .. _Mkdocs: https://pypi.org/project/mkdocs/
+.. _PyPI: https://pypi.python.org/pypi
+.. _ReadTheDocs: https://readthedocs.io/
+.. _Sphinx: http://sphinx-doc.org/
+.. _Tox: http://testrun.org/tox/
+.. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
+.. _bump-my-version: https://github.com/callowayproject/bump-my-version
+.. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
+.. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a

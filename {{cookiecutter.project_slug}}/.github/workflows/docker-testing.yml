@@ -6,10 +6,12 @@ on:
       - main
   pull_request:
 
+{% raw -%}
 concurrency:
   # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on master.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+{%- endraw %}
 
 permissions:
   contents: read
@@ -41,7 +43,7 @@ jobs:
         with:
           context: .
           file: "Dockerfile"
-          tags: local${{ cookiecutter }}:latest
+          tags: local${{ cookiecutter.project_slug }}:latest
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -49,10 +51,10 @@ jobs:
       - name: Run Docker image
         uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185 # v3.0.0
         with:
-          image: localfinch:latest
+          image: local${{ cookiecutter.project_slug }}:latest
           options: -p 5000:5000
           run: |
-            finch start -d
+            ${{ cookiecutter.project_slug }} start -d
             sleep 2s
-            finch status
-            finch stop
+            ${{ cookiecutter.project_slug }} status
+            ${{ cookiecutter.project_slug }} stop

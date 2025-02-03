@@ -6,6 +6,7 @@ on:
       - main
   pull_request:
 
+{% raw -%}
 concurrency:
   # For a given workflow, if we push to the same branch, cancel all previous builds on that branch except on main.
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,7 +15,6 @@ concurrency:
 permissions:
   contents: read
 
-{% raw -%}
 jobs:
   lint:
     name: Code linting

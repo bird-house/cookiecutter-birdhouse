@@ -17,8 +17,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - tox-env: py39
-            python-version: "3.9"
           - tox-env: py310
             python-version: "3.10"
           - tox-env: py311
@@ -33,10 +31,7 @@ jobs:
       - name: Checkout repository and submodules
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          submodules: recursive
-      - name: Install packages
-        run: |
-          sudo apt-get -y install pandoc
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:

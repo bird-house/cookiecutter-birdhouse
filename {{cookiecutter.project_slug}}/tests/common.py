@@ -8,7 +8,7 @@ xpath_ns = get_xpath_ns(VERSION)
 
 
 class WpsTestClient(WpsClient):
-    def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs):  # noqa: F841
         query = "?"
         for key, value in kwargs.items():
             query += f"{key}={value}&"

@@ -6,6 +6,7 @@ channels:
 dependencies:
   - python >=3.9,<3.13
   - pywps >=4.6
+  - alabaster >=1.0.0
   - sphinx >=7.1.0
   - nbsphinx >=0.9.5
   - ipython >=8.5.0

@@ -67,6 +67,7 @@ repos:
       - id: ruff
         args: [ '--fix' ]
       - id: ruff-format
+        exclude: ^tests/
   - repo: https://github.com/jendrikseipp/vulture
     rev: 'v2.14'
     hooks:

@@ -7,9 +7,9 @@ import pytest
 {% else %}
 import unittest
 {%- endif %}
-from click.testing import CliRunner
+from click.testing import CliRunner  # noqa: F401
 
-import {{ cookiecutter.project_slug }}
+import {{ cookiecutter.project_slug }}  # noqa: F401
 from {{ cookiecutter.project_slug }} import cli
 
 {%- if cookiecutter.use_pytest == 'y' %}
