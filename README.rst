@@ -2,25 +2,7 @@
 Cookiecutter for Birdhouse
 ==========================
 
-.. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
-   :target: http://cookiecutter-birdhouse.readthedocs.org/en/latest/?badge=latest
-   :alt: Documentation Status
-
-.. image:: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml/badge.svg
-   :target: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml
-   :alt: GitHub Workflows
-
-.. image:: https://readthedocs.org/projects/cookiecutter-pypackage/badge/?version=latest
-   :target: https://cookiecutter-pypackage.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
-
-.. image:: https://img.shields.io/github/license/bird-house/cookiecutter-birdhouse.svg
-   :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
-   :alt: GitHub license
-
-.. image:: https://badges.gitter.im/bird-house/birdhouse.svg
-   :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-   :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+|build| |docs| |license| |gitter|
 
 Cookiecutter_ template for a Python package.
 
@@ -210,3 +192,20 @@ See the bump-my-version_ documentation for details.
 .. _bump-my-version: https://github.com/callowayproject/bump-my-version
 .. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
 .. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
+
+
+.. |docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
+        :target: http://cookiecutter-birdhouse.readthedocs.org/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. |build| image:: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml/badge.svg
+        :target: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml
+        :alt: GitHub Workflows
+
+.. |license| image:: https://img.shields.io/github/license/bird-house/cookiecutter-birdhouse.svg
+        :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
+        :alt: License
+
+.. |gitter| image:: https://badges.gitter.im/bird-house/birdhouse.svg
+        :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+        :alt: Bird-house Gitter chat
