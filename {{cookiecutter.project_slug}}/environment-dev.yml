@@ -15,7 +15,7 @@ dependencies:
   - bump-my-version >=0.30.1
   - coverage >=7.5.0
   - cruft >=2.15.0
-  - flit >=3.9.0,<4.0
+  - flit >=3.10.1,<4.0
   - ipython >=8.5.0
 {%- if cookiecutter.use_black == 'y' %}
   - isort ==6.0.0
