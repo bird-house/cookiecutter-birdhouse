@@ -2,25 +2,7 @@
 Cookiecutter for Birdhouse
 ==========================
 
-.. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
-   :target: http://cookiecutter-birdhouse.readthedocs.org/en/latest/?badge=latest
-   :alt: Documentation Status
-
-.. image:: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml/badge.svg
-   :target: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml
-   :alt: GitHub Workflows
-
-.. image:: https://readthedocs.org/projects/cookiecutter-pypackage/badge/?version=latest
-   :target: https://cookiecutter-pypackage.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
-
-.. image:: https://img.shields.io/github/license/bird-house/cookiecutter-birdhouse.svg
-   :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
-   :alt: GitHub license
-
-.. image:: https://badges.gitter.im/bird-house/birdhouse.svg
-   :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-   :alt: Join the chat at https://gitter.im/bird-house/birdhouse
+|build| |docs| |license| |gitter|
 
 Cookiecutter_ template for a Python package.
 
@@ -197,16 +179,33 @@ Make a new version of this Cookiecutter in the following steps:
 
 See the bump-my-version_ documentation for details.
 
+.. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Cruft: https://cruft.github.io/cruft/
-.. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
-.. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
-.. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
 .. _GitHub_Workflows: https://docs.github.com/en/actions/using-workflows
-.. _Tox: http://testrun.org/tox/
-.. _Sphinx: http://sphinx-doc.org/
-.. _ReadTheDocs: https://readthedocs.io/
-.. _bump-my-version: https://github.com/callowayproject/bump-my-version
-.. _0.2.x: https://github.com/bird-house/cookiecutter-birdhouse/tree/0.2.x
-.. _PyPI: https://pypi.python.org/pypi
 .. _Mkdocs: https://pypi.org/project/mkdocs/
+.. _PyPI: https://pypi.python.org/pypi
+.. _ReadTheDocs: https://readthedocs.io/
+.. _Sphinx: http://sphinx-doc.org/
+.. _Tox: http://testrun.org/tox/
+.. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
+.. _bump-my-version: https://github.com/callowayproject/bump-my-version
+.. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
+.. _cruft_skip: https://github.com/bird-house/emu/commit/fb1ff9ffdf9e7f0282b36ff0727996cba3bf081a
+
+
+.. |docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
+        :target: http://cookiecutter-birdhouse.readthedocs.org/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. |build| image:: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml/badge.svg
+        :target: https://github.com/bird-house/cookiecutter-birdhouse/actions/workflows/main.yml
+        :alt: GitHub Workflows
+
+.. |license| image:: https://img.shields.io/github/license/bird-house/cookiecutter-birdhouse.svg
+        :target: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/LICENSE
+        :alt: License
+
+.. |gitter| image:: https://badges.gitter.im/bird-house/birdhouse.svg
+        :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+        :alt: Bird-house Gitter chat

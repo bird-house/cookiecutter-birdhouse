@@ -7,7 +7,7 @@ WPS_URL = http://localhost:{{ cookiecutter.http_port }}
 # Used in target refresh-notebooks to make it looks like the notebooks have
 # been refreshed from the production server below instead of from the local dev
 # instance so the notebooks can also be used as tutorial notebooks.
-OUTPUT_URL = https://pavics.ouranos.ca/wpsoutputs
+OUTPUT_URL = https://pavics.ouranos.ca/wpsoutputs/{{ cookiecutter.project_slug }}
 
 SANITIZE_FILE := https://github.com/Ouranosinc/PAVICS-e2e-workflow-tests/raw/master/notebooks/output-sanitize.cfg
 
@@ -44,17 +44,14 @@ install: ## install {{ cookiecutter.project_slug }} application
 	@-bash -c 'pip install -e .'
 	@echo "\nStart service with \`make start\` and stop with \`make stop\`."
 
-.PHONY: develop
 develop: ## install {{ cookiecutter.project_slug }} application with development libraries
 	@echo "Installing development requirements for tests and docs ..."
 	@-bash -c 'pip install -e ".[dev]"'
 
-.PHONY: start
 start: ## start {{ cookiecutter.project_slug }} service as daemon (background process)
 	@echo "Starting application ..."
 	@-bash -c "$(APP_NAME) start -d"
 
-.PHONY: stop
 stop: ## stop {{ cookiecutter.project_slug }} service
 	@echo "Stopping application ..."
 	@-bash -c "$(APP_NAME) stop"
@@ -103,7 +100,7 @@ clean-docs: ## remove documentation artifacts
 	@-rm -f docs/modules.rst
 	$(MAKE) -C docs clean
 
-lint/flake8: ## check style with flake8
+lint/ruff: ## check style with ruff
 	@echo "Running flake8 code style checks ..."
 	@bash -c 'ruff check {{ cookiecutter.project_slug }} tests'
 
@@ -113,7 +110,7 @@ lint/black: ## check style with black
 	@bash -c 'black --check {{ cookiecutter.project_slug }} tests'
 {%- endif %}
 
-lint: lint/flake8{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
+lint: lint/ruff{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
 
 ## Testing targets:
 
@@ -128,11 +125,11 @@ test: ## run tests quickly with the default Python
 test-tox: ## run tests on every available Python version with tox
 	@bash -c 'tox'
 
-test-notebooks: notebook-sanitizer  ## run notebook-based tests
+test-notebooks: notebook-sanitizer ## run notebook-based tests
 	@echo "Running notebook-based tests"
 	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --sanitize-with $(CURDIR)/docs/source/output-sanitize.cfg --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
 
-test-notebooks-lax: notebook-sanitizer  ## run tests on notebooks but don't be so strict about outputs
+test-notebooks-lax: notebook-sanitizer ## run tests on notebooks but don't be so strict about outputs
 	@echo "Running notebook-based tests"
 	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval-lax --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
 

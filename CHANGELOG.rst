@@ -1,6 +1,20 @@
 CHANGES
 ********
 
+1.1.0 (2025-02-04)
+==================
+
+Changes:
+
+* Fixed a bug the Dockerfile configuration. (hotfix)
+* Added several workflows to help with testing, docker images, and version bumping. (#129).
+* Reorganized README files to organize badges better. (#129).
+* Added several pre-commit hooks to help with code organization, docstrings, finding dead code blocks, etc. (#129).
+* Dropped support for Python3.9, extended support for Python3.13. (#129).
+* Now using a CI folder for managing CI-specific Python dependencies.(#129).
+* Updated several development dependencies. (#129).
+* Now using a Dependabot configuration for managing Python and GitHub Actions updates. (#129).
+
 1.0.0 (2024-10-03)
 ==================
 
