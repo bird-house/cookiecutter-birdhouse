@@ -25,8 +25,8 @@ jobs:
             python-version: "3.12"
           - tox-env: py313
             python-version: "3.13"
-          - tox-env: pypy310
-            python-version: "pypy-3.10"
+          - tox-env: pypy311
+            python-version: "pypy-3.11"
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
