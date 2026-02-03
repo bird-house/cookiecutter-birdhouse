@@ -3,7 +3,7 @@ name: Dependabot CI Updates
 on:
   pull_request:
     branches:
-      - main
+      - master
     types:
       - opened
       - synchronize
@@ -28,11 +28,18 @@ jobs:
           disable-sudo: true
           egress-policy: audit
 
+      - name: Generate GitHub App token
+        id: token_generator
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        with:
+          app-id: ${{ secrets.BIRDHOUSE_HELPER_BOT_ID }}
+          private-key: ${{ secrets.BIRDHOUSE_HELPER_BOT_KEY }}
+
       - name: Fetch Dependabot metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.token_generator.outputs.token }}
 
       - name: Stop workflow if not minor update or patch update
         id: skip-condition
@@ -47,8 +54,8 @@ jobs:
         if: steps.skip-condition.outputs.skip != 'true'
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
+          token: ${{ steps.token_generator.outputs.token }}
 
       - name: Approve Changes
         if: steps.skip-condition.outputs.skip != 'true'
@@ -60,7 +67,7 @@ jobs:
             echo "PR already approved: skipping approval."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.token_generator.outputs.token }}
           PR_URL: ${{ github.event.pull_request.html_url }}
 
       - name: Enable auto-merge on Pull Request
@@ -68,5 +75,5 @@ jobs:
         run: |
           gh pr merge --auto --merge "$PR_URL"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.token_generator.outputs.token }}
           PR_URL: ${{ github.event.pull_request.html_url }}
