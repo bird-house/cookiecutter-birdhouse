@@ -21,7 +21,7 @@ test:
 
 .PHONY: test-no-gdal
 test-no-gdal:
-	@echo "Running all tests"
+	@echo "Running all tests (without GDAL)"
 	@bash -c 'pytest -m "not requires_gdal"'
 
 .PHONY: clean
@@ -34,10 +34,13 @@ bake:
 	@mkdir -p "cookies"
 	@bash -c 'cookiecutter $(BAKE_OPTIONS) . --output-dir $(COOKIES_DIR) --overwrite-if-exists $(NO_CRUFT)'
 
-.PHONY: docs
-docs:
+.PHONY: build-docs
+build-docs:
 	@echo "Generating docs with Sphinx ..."
 	@-bash -c '$(MAKE) -C $@ clean html'
+
+.PHONY: docs
+docs: build-docs
 	@echo "Opening browser to: file:/$(CURDIR)/docs/build/html/index.html"
 	@-bash -c 'xdg-open $(CURDIR)/docs/build/html/index.html'
 
