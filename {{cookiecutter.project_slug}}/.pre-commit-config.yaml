@@ -3,12 +3,12 @@ default_language_version:
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.1
+    rev: v3.21.2
     hooks:
       - id: pyupgrade
-        args: [ '--py39-plus' ]
+        args: [ '--py311-plus' ]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -22,18 +22,18 @@ repos:
       - id: check-yaml
         args: [ '--allow-multiple-documents' ]
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.23.1
+    rev: v0.24.4
     hooks:
       - id: toml-sort-fix
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.35.1
+    rev: v1.38.0
     hooks:
       - id: yamllint
         args: [ '--config-file=.yamllint.yaml' ]
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
-      # - id: python-check-blanket-noqa
+      - id: python-check-blanket-noqa
       - id: python-check-blanket-type-ignore
       - id: python-no-eval
       - id: python-no-log-warn
@@ -41,14 +41,6 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
       - id: text-unicode-replacement-char
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
-    hooks:
-      - id: python-check-blanket-noqa
-      - id: python-no-eval
-      - id: python-no-log-warn
-      - id: python-use-type-annotations
-      - id: rst-inline-touching-normal
 {%- if cookiecutter.use_black == 'y' %}
   - repo: https://github.com/psf/black-pre-commit-mirror
     rev: 25.1.0
@@ -62,14 +54,14 @@ repos:
         exclude: ^docs/
 {%- endif %}
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.0
+    rev: v0.15.0
     hooks:
-      - id: ruff
-        args: [ '--fix' ]
+      - id: ruff-check
+        args: [ '--fix', '--show-fixes' ]
       - id: ruff-format
         exclude: ^tests/
   - repo: https://github.com/jendrikseipp/vulture
-    rev: 'v2.14'
+    rev: v2.16
     hooks:
       - id: vulture
 {%- if cookiecutter.use_black == 'y' %}
@@ -81,12 +73,12 @@ repos:
       - id: blackdoc-autoupdate-black
 {%- endif %}
   - repo: https://github.com/numpy/numpydoc
-    rev: v1.8.0
+    rev: v1.10.0
     hooks:
       - id: numpydoc-validation
         exclude: ^docs/|^tests/
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.29.1
+    rev: 0.37.1
     hooks:
       - id: check-github-workflows
       - id: check-readthedocs

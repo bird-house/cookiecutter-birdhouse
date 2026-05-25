@@ -2,6 +2,36 @@
 requires = ["setuptools>=61.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
+[dependency-groups]
+docs = [
+  "alabaster >=1.0.0",
+  "sphinx >=8.0.0"
+]
+test = [
+  "coverage >=7.13.0",
+  "pywps >=4.6.0",
+  "pytest >=8.2.0",
+  "pytest-cookies >=0.7.0",
+]
+tox = [
+  "tox >=4.52.0",
+  "tox-gh >=1.7.1"
+]
+dev = [
+  "build >=1.4.2",
+  "cookiecutter >=2.7.0",
+  "cruft >=2.15.0",
+  "flit >=3.12.0,<4.0",
+  "prek >=0.4.0",
+  "pyyaml >=6.0.2",
+  "ruff >=0.15.0",
+  "twine >=6.2.0",
+  "watchdog >=6.0.0",
+  {include-group = "docs"},
+  {include-group = "test"},  
+  {include-group = "tox"}
+]
+
 [project]
 name = "cookiecutter-birdhouse"
 dynamic = ["version"]
@@ -17,7 +47,7 @@ maintainers = [
 ]
 license = {file = "LICENSE"}
 keywords = ["cookiecutter", "template", "package", "wps", "pywps", "birdhouse"]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
   "Development Status :: 4 - Beta",
   "Environment :: Console",
@@ -26,35 +56,16 @@ classifiers = [
   "License :: OSI Approved :: BSD License",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
   "Topic :: Software Development"
 ]
 dependencies = [
-    "cookiecutter >=2.6.0",
-]
-
-[project.optional-dependencies]
-dev = [
-  "alabaster >=1.0",
-  "build >=1.2.2",
-  "bump-my-version >=0.30.1",
-  "coverage >=7.5.1",
-  "cruft >=2.15.0",
-  "flit >=3.9.0,<4.0",
-  "pre-commit >=4.0.0",
-  "pytest >=8.2.0",
-  "pytest-cookies >=0.7.0",
-  "pyyaml >=6.0.0",
-  "ruff >=0.5.7",
-  "sphinx >=7.1.0",
-  "tox >=4.24.1",
-  "twine >=5.1.1",
-  "watchdog >=4.0.0"
+    "cookiecutter >=2.7.0",
 ]
 
 [project.urls]
@@ -87,3 +98,40 @@ exclude = [
 include = [""]
 
 [tool.setuptools_scm]
+
+[tool.tox]
+env_list = [
+  {product = [{prefix = "py3.", start = 10, stop = 14}]},
+  "pypy3.11",
+  "docs"
+]
+skip_missing_interpreters = true
+
+[tool.tox.env.docs]
+changedir = "docs"
+dependency_groups = ["docs"]
+commands = [
+  ["sphinx-build", "-b", "html", "-d", "{envtmpdir}/doctrees", ".", "{envtmpdir}/html"]
+]
+
+[tool.tox.env."pypy3.11"]
+set_env.PYTEST_ADDOPTS = { replace = "env", name = "PYTEST_ADDOPTS", default = "--color=yes --mark 'not requires_gdal'" }
+
+
+[tool.tox.env_run_base]
+set_env = {PYTEST_ADDOPTS = "--color=yes", PYTHONPATH = "{toxinidir}", TOX = "1"}
+dependency_groups = ["dev"]
+download = true
+commands_pre = [
+  ["pip", "list"],
+  ["-", "pip", "check"]
+]
+commands = [["pytest", "{toxinidir}/tests/test_bake_project.py"]]
+
+[tool.tox.gh.python]
+"3.10" = ["py3.10"]
+"3.11" = ["py3.11"]
+"3.12" = ["py3.12"]
+"3.13" = ["py3.13"]
+"3.14" = ["py3.14"]
+"pypy3.11" = ["pypy3.11"]
