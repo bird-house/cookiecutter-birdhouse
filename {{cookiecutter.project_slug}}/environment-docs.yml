@@ -5,8 +5,8 @@ channels:
   - nodefaults
 dependencies:
   - python >=3.11,<3.12
-  - pywps >=4.6
+  - pywps >=4.7.0
   - alabaster >=1.0.0
   - sphinx >=9.0.0
   - nbsphinx >=0.9.8
-  - ipython >=8.5.0
+  - ipython >=9.0.0

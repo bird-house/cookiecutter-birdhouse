@@ -17,9 +17,12 @@ formats: [ ]
 
 # Optionally set the version of Python and requirements required to build your docs
 build:
-  os: "ubuntu-24.04"
+  os: "ubuntu-26.04"
   tools:
-    python: "mambaforge-23.11"
+    python: "miniforge3-25.11"
+  jobs:
+    install:
+      - pip install --groups docs
 
 conda:
   environment: environment-docs.yml
@@ -29,5 +32,3 @@ python:
   install:
     - method: pip
       path: .
-      extra_requirements:
-        - dev

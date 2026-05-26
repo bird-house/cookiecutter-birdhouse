@@ -4,7 +4,7 @@ include LICENSE
 include Makefile
 include README.rst
 include cookiecutter.json
-include tox.ini
+include tox.toml
 
 exclude .editorconfig
 exclude .gitignore

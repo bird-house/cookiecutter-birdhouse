@@ -170,7 +170,7 @@ Bump a new version
 Make a new version of this Cookiecutter in the following steps:
 
   * Make sure everything is commit to GitHub.
-  * Update ``CHANGES.rst`` with the next version.
+  * Update ``CHANGELOG.rst`` with the next version.
   * Dry Run: ``bump-my-version bump --dry-run --verbose --new-version 0.3.1 patch``
   * Do it: ``bump-my-version bump --new-version 0.3.1 patch``
   * ... or: ``bump-my-version bump --new-version 0.4.0 minor``

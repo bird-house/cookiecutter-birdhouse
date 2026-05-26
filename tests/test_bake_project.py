@@ -86,14 +86,13 @@ def test_bake_with_defaults(cookies):
         assert "environment-dev.yml" in found_toplevel_files
         assert "environment-docs.yml" in found_toplevel_files
         assert 'pyproject.toml' in found_toplevel_files
-        assert 'tox.ini' in found_toplevel_files
+        assert 'tox.toml' in found_toplevel_files
         assert 'tests' in found_toplevel_files
         assert "src" in found_toplevel_files
         assert (
             "babybird"
             in next(result.project_path.joinpath("src").iterdir()).name
         )
-        assert "tox.ini" in found_toplevel_files
 
 @pytest.mark.requires_gdal
 def test_bake_and_run_tests(cookies):

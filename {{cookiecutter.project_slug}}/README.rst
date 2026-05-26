@@ -13,7 +13,7 @@
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
 {%- endif %}
-| Coding Standards           | |pre-commit| |ruff|                                 |
+| Coding Standards           | |ruff| |prek| |pre-commit-ci|                       |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
@@ -82,9 +82,13 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
         :alt: Python Package Index Build
 {%- endif %}
 
-.. |pre-commit| image:: https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main.svg
+.. |pre-commit-ci| image:: https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main.svg
         :target: https://results.pre-commit.ci/latest/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main
         :alt: pre-commit.ci status
+
+.. |prek| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json
+        :target: https://github.com/j178/prek
+        :alt: prek
 
 .. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
         :target: https://github.com/astral-sh/ruff
