@@ -46,8 +46,5 @@ http_port
 use_pytest
     Whether to use `pytest <https://docs.pytest.org/en/latest/>`_ or `unittest <https://docs.python.org/3/library/unittest.html>`_.
 
-use_black
-    Whether to use `black <https://black.readthedocs.io/en/stable/>`_ for code formatting.
-
 create_author_file
     Whether to create an authors file

@@ -13,13 +13,7 @@
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
 {%- endif %}
-{%- if cookiecutter.use_black == 'y' %}
-+----------------------------+-----------------------------------------------------+
-| Coding Standards           | |black| |isort| |pre-commit| |ruff|                 |
-{%- else %}
-+----------------------------+-----------------------------------------------------+
 | Coding Standards           | |pre-commit| |ruff|                                 |
-{%- endif %}
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
@@ -61,12 +55,6 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. _`Developer Guide`: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html
 .. _bump-my-version: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version
 
-{% if cookiecutter.use_black == 'y' -%}
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-        :target: https://github.com/psf/black
-        :alt: Python Black
-
-{% endif -%}
 .. |build| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg
         :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml
         :alt: Build Status
@@ -82,13 +70,6 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. |gitter| image:: https://badges.gitter.im/bird-house/birdhouse.svg
         :target: https://gitter.im/bird-house/birdhouse
         :alt: Bird-house Gitter Chat
-
-{%- if cookiecutter.use_black == 'y' %}
-
-.. |isort| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
-        :target: https://pycqa.github.io/isort/
-        :alt: Isort
-{%- endif -%}
 
 {%- if is_open_source %}
 

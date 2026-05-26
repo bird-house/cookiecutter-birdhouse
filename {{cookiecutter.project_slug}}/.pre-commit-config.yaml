@@ -41,18 +41,6 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
       - id: text-unicode-replacement-char
-{%- if cookiecutter.use_black == 'y' %}
-  - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 25.1.0
-    hooks:
-      - id: black
-        exclude: ^docs/
-  - repo: https://github.com/PyCQA/isort
-    rev: 6.0.0
-    hooks:
-      - id: isort
-        exclude: ^docs/
-{%- endif %}
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.0
     hooks:
@@ -64,14 +52,6 @@ repos:
     rev: v2.16
     hooks:
       - id: vulture
-{%- if cookiecutter.use_black == 'y' %}
-  - repo: https://github.com/keewis/blackdoc
-    rev: v0.3.9
-    hooks:
-      - id: blackdoc
-        additional_dependencies: [ 'black==25.1.0' ]
-      - id: blackdoc-autoupdate-black
-{%- endif %}
   - repo: https://github.com/numpy/numpydoc
     rev: v1.10.0
     hooks:

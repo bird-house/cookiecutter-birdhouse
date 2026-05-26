@@ -219,15 +219,3 @@ def test_bake_not_open_source(cookies):
         assert 'pyproject.toml' in found_toplevel_files
         assert 'LICENSE' not in found_toplevel_files
         assert 'License' not in result.project_path.joinpath('README.rst').read_text()
-
-
-@pytest.mark.parametrize("use_black,expected", [("y", True), ("n", False)])
-def test_black(cookies, use_black, expected):
-    with bake_in_temp_dir(cookies, extra_context={"use_black": use_black}) as result:
-        assert result.project_path.is_dir()
-        requirements_path = result.project_path.joinpath("pyproject.toml")
-        assert ("black ==" in requirements_path.read_text()) is expected
-        assert ("isort ==" in requirements_path.read_text()) is expected
-        assert ("[tool.black]" in requirements_path.read_text()) is expected
-        makefile_path = result.project_path.joinpath("Makefile")
-        assert ("black --check" in makefile_path.read_text()) is expected

@@ -104,13 +104,7 @@ lint/ruff: ## check style with ruff
 	@echo "Running flake8 code style checks ..."
 	@bash -c 'ruff check {{ cookiecutter.project_slug }} tests'
 
-{%- if cookiecutter.use_black == 'y' %}
-lint/black: ## check style with black
-	@echo "Running black code style checks ..."
-	@bash -c 'black --check {{ cookiecutter.project_slug }} tests'
-{%- endif %}
-
-lint: lint/ruff{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
+lint: lint/ruff ## check style
 
 ## Testing targets:
 
