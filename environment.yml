@@ -1,6 +1,7 @@
 name: cookiecutter-birdhouse
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
   - python>=3.11,<3.15
   - alabaster >=1.0.0
@@ -16,7 +17,7 @@ dependencies:
   - pywps >=4.6.0
   - pyyaml >=6.0.2
   - ruff >=0.15.0
-  - sphinx >=8.0.0
+  - sphinx >=9.0.2
   - tox >=4.52.0
   - tox-gh >=1.7.1
   - twine >=6.2.0

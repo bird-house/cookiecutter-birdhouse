@@ -47,21 +47,25 @@ jobs:
             files.pythonhosted.org:443
             github.com:443
             pypi.org:443
+
       - name: Generate App Token
         id: token_generator
         uses: actions/create-github-app-token@136412a57a7081aa63c935a2cc2918f76c34f514 # v1.11.2
         with:
           app-id: ${{ secrets.BIRDHOUSE_HELPER_BOT_ID }}
           private-key: ${{ secrets.BIRDHOUSE_HELPER_BOT_KEY }}
+
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           token: ${{ steps.token_generator.outputs.token }}
           persist-credentials: false
+
       - name: Set up Python3
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: "3.x"
+
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@cb9bde2e2525e640591a934b1fd28eef1dcaf5e5 # v6.2.0
         with:
@@ -70,9 +74,11 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
           trust_level: 5
+    
       - name: Install CI libraries
         run: |
           python -m pip install --require-hashes -r CI/requirements_ci.txt
+
       - name: Conditional Bump
         run: |
           CURRENT_VERSION=$(bump-my-version show current_version)
@@ -84,6 +90,7 @@ jobs:
             bump-my-version bump patch
           fi
           echo "new_version=$(bump-my-version show current_version)"
+
       - name: Push Changes
         uses: ad-m/github-push-action@d91a481090679876dfc4178fef17f286781251df # v0.8.0
         with:
