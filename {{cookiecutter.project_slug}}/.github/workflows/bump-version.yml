@@ -74,7 +74,7 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
           trust_level: 5
-    
+
       - name: Install CI libraries
         run: |
           python -m pip install --require-hashes -r CI/requirements_ci.txt

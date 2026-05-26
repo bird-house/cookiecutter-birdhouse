@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11", "3.11", "3.12", "3.13", "3.14", "pypy3.11" ]
+        python-version: [ "3.11", "3.12", "3.13", "3.14", "pypy3.11" ]
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
