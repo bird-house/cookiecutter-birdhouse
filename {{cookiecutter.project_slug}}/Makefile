@@ -120,7 +120,7 @@ install-tox: ## install base dependencies needed for running tox
 
 lint: ## check style
 	@echo "Running flake8 code style checks ..."
-	@bash -c 'ruff check {{ cookiecutter.project_slug }} tests'
+	@bash -c 'ruff check src/{{ cookiecutter.project_slug }} tests'
 
 ## Testing targets:
 

@@ -103,6 +103,9 @@ dependencies = [
   "pywps >=4.7.0"
 ]
 
+[project.optional-dependencies]
+extras = []
+
 [project.scripts]
 {{cookiecutter.project_slug}} = "{{cookiecutter.project_slug}}.cli:cli"
 
