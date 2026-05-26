@@ -48,7 +48,7 @@ jobs:
           cache: "pip"
 
       - name: Install GDAL
-        if: ${ matrix.tox-env != 'pypy3.11' }
+        if: (matrix.tox-env != 'pypy3.11')
         run: |
           sudo apt-get update
           sudo apt-get install -y gdal
