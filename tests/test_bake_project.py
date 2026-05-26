@@ -160,7 +160,7 @@ def test_bake_without_author_file(cookies):
         docs_index_path = result.project_path.joinpath('docs/source/index.rst')
         with open(str(docs_index_path)) as index_file:
             assert 'installation\n   configuration\n   notebooks/index\n   dev_guide' \
-                   '\n   processes\n   changes\n' in index_file.read()
+                   '\n   processes\n   changelog\n' in index_file.read()
 
         pyproject_path = result.project_path.joinpath("pyproject.toml")
         with open(str(pyproject_path)) as pyproject_file:
