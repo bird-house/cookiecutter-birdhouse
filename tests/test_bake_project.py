@@ -106,7 +106,7 @@ def test_bake_and_run_tests(cookies):
 
 
 @pytest.mark.precommit
-def test_bake_and_run_pre_commit(cookies):
+def test_bake_and_run_prek(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project_path.is_dir()
         assert run_inside_dir("git init", str(result.project_path)) == 0
@@ -119,7 +119,7 @@ def test_bake_and_run_pre_commit(cookies):
             )
             == 0
         )
-        print("test_bake_and_run_pre_commit path", str(result.project_path))
+        print("test_bake_and_run_prek path", str(result.project_path))
 
 def test_bake_and_build_package(cookies):
     with bake_in_temp_dir(cookies) as result:
@@ -129,7 +129,6 @@ def test_bake_and_build_package(cookies):
         print("test_bake_and_build_package path", str(result.project_path))
 
 
-@pytest.mark.requires_gdal
 def test_bake_with_special_chars_and_run_tests(cookies):
     """Ensure that a `full_name` with double quotes does not break pyproject.toml."""
     with bake_in_temp_dir(
@@ -139,7 +138,6 @@ def test_bake_with_special_chars_and_run_tests(cookies):
         assert run_inside_dir("python -m coverage", str(result.project_path)) == 0
 
 
-@pytest.mark.requires_gdal
 def test_bake_with_apostrophe_and_run_tests(cookies):
     """Ensure that a `full_name` with apostrophes does not break pyproject.toml."""
     with bake_in_temp_dir(
