@@ -11,7 +11,7 @@ test = [
   "coverage >=7.13.0",
   "pywps >=4.6.0",
   "pytest >=9.0.2",
-  "pytest-cookies >=0.7.0",
+  "pytest-cookies >=0.7.0"
 ]
 tox = [
   "tox >=4.52.0",
@@ -28,7 +28,7 @@ dev = [
   "twine >=6.2.0",
   "watchdog >=6.0.0",
   {include-group = "docs"},
-  {include-group = "test"},  
+  {include-group = "test"},
   {include-group = "tox"}
 ]
 
@@ -65,7 +65,7 @@ classifiers = [
   "Topic :: Software Development"
 ]
 dependencies = [
-    "cookiecutter >=2.7.0",
+  "cookiecutter >=2.7.0"
 ]
 
 [project.urls]
@@ -115,8 +115,7 @@ commands = [
 ]
 
 [tool.tox.env."pypy3.11"]
-set_env.PYTEST_ADDOPTS = { replace = "env", name = "PYTEST_ADDOPTS", default = "--color=yes --mark 'not requires_gdal'" }
-
+set_env.PYTEST_ADDOPTS = {replace = "env", name = "PYTEST_ADDOPTS", default = "--color=yes --mark 'not requires_gdal'"}
 
 [tool.tox.env_run_base]
 set_env = {PYTEST_ADDOPTS = "--color=yes", PYTHONPATH = "{toxinidir}", TOX = "1"}
