@@ -77,9 +77,9 @@ Once cookiecutter clones the template, you will be asked a series of questions r
     http_port [5000]:
     use_pytest [y]:
     create_author_file [y]:
+    generated_with_cruft [y]:
 
-The answer to all those questions are recorded in the ``.cruft.json`` file in
-your generated bird.
+The answer to all those questions are recorded in the ``.cruft.json`` file in your generated bird.
 
 Usage
 -----
@@ -103,8 +103,7 @@ To keep the generated bird up-to-date with the cookiecutter template:
 
     $ cruft update  # uses configurations in the .cruft.json file
 
-Cruft can be configured to ignore template changes to certain files, see
-https://cruft.github.io/cruft/#updating-a-project.
+Cruft can be configured to ignore template changes to certain files, see: https://cruft.github.io/cruft/#updating-a-project.
 Potential files to ignore:
 
 * demonstration files, because they are meant to be erased
@@ -154,7 +153,8 @@ environment as follows:
 
   # bake a new bird with default settings
   $ make bake
-
+  Creating a new project with default settings
+  
   # the new "baked" bird is created in the cookies folder
   $ ls -l cookies/
   babybird
