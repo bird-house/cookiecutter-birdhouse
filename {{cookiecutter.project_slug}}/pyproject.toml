@@ -198,7 +198,7 @@ source = ["{{ cookiecutter.project_slug }}"]
 
 [tool.flit.sdist]
 include = [
-  {%- if cookiecutter.open_source_license in license_classifiers %}
+  {%- if cookiecutter.open_source_license in license_spdx_codes %}
   ".zenodo.json",
   {%- endif %}
   {%- if cookiecutter.create_author_file == 'y' %}
@@ -206,7 +206,7 @@ include = [
   {% endif -%}
   "CHANGELOG.rst",
   "CONTRIBUTING.rst",
-  {%- if cookiecutter.open_source_license in license_classifiers %}
+  {%- if cookiecutter.open_source_license in license_spdx_codes %}
   "LICENSE",
   {%- endif %}
   "Makefile",
