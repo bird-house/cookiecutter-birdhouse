@@ -37,10 +37,6 @@ jobs:
           python-version: "3.x"
           cache: pip
 
-      - name: Install CI libraries
-        run: |
-          python -m pip install --require-hashes -r CI/requirements_ci.txt
-
       - name: Run pre-commit
         uses: j178/prek-action@bdca6f102f98e2b4c7029491a53dfd366469e33d # v2.0.4
 
