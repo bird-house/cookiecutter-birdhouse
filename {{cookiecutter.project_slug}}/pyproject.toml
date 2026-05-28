@@ -163,14 +163,26 @@ search = "__version__ = \"{current_version}\""
 replace = "__version__ = \"{new_version}\""
 
 [[tool.bumpversion.files]]
-filenam = "Dockerfile"
+filename = "Dockerfile"
 search = "Version=\"{current_version}\""
 replace = "Version=\"{new_version}\""
+{%- if cookiecutter.generated_with_cruft == 'y' %}
 
 [[tool.bumpversion.files]]
 filename = ".cruft.json"
 search = "\"version\": \"{current_version}\""
 replace = "\"version\": \"{new_version}\""
+{%- endif %}
+
+[tool.bumpversion.parts.build]
+independent = false
+
+[tool.bumpversion.parts.release]
+optional_value = "release"
+values = [
+  "dev",
+  "release"
+]
 
 [tool.codespell]
 ignore-words-list = "astroid,thirdparty"
