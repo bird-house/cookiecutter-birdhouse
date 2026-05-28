@@ -154,7 +154,7 @@ environment as follows:
   # bake a new bird with default settings
   $ make bake
   Creating a new project with default settings
-  
+
   # the new "baked" bird is created in the cookies folder
   $ ls -l cookies/
   babybird
