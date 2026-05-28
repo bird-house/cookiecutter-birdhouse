@@ -110,9 +110,9 @@ extras = []
 {{cookiecutter.project_slug}} = "{{cookiecutter.project_slug}}.cli:cli"
 
 [project.urls]
-"Issue tracker" = "{{cookiecutter.__gh_slug}}/issues"
-"Changelog" = "{{cookiecutter.__gh_slug}}/blob/master/changelog.rst"
-"Homepage" = "{{cookiecutter.__gh_slug}}"
+"Issue tracker" = "{{ cookiecutter.__gh_slug }}/issues"
+"Changelog" = "{{ cookiecutter.__gh_slug }}/blob/master/changelog.rst"
+"Homepage" = "{{ cookiecutter.__gh_slug }}"
 
 [tool]
 
@@ -120,9 +120,42 @@ extras = []
 current_version = "{{ cookiecutter.version }}"
 commit = true
 commit_args = "--no-verify"
-tag = true
+tag = false
 tag_name = "v{new_version}"
 allow_dirty = true
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(\\-(?P<release>[a-z]+)(\\.(?P<build>\\d+)))?"
+serialize = [
+  "{major}.{minor}.{patch}-{release}.{build}",
+  "{major}.{minor}.{patch}"
+]
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.rst"
+include_bumps = ["release"]
+search = """\
+`Unreleased <{{ cookiecutter.__gh_slug }}>`_ (latest)
+{{ '-' * ('`Unreleased <' + cookiecutter.__gh_slug + '>`_ (latest)')|length }}
+"""
+replace = """\
+..
+    `Unreleased <{{ cookiecutter.__gh_slug }}>`_ (latest)
+    {{ '-' * ('`Unreleased <' + cookiecutter.__gh_slug + '>`_ (latest)')|length }}
+
+    Contributors:
+
+    Changes
+    ^^^^^^^
+    * No change.
+
+    Fixes
+    ^^^^^
+    * No change.
+
+.. _changes_{new_version}:
+
+`v{new_version} <{{ cookiecutter.__gh_slug }}/tree/{new_version}>`_ ({now:%Y-%m-%d})
+{{ '-' * ('`v' + cookiecutter.version + ' <' + cookiecutter.__gh_slug + '/tree/' + cookiecutter.version + '>`_ ' + '({now:%Y-%m-%d})' )|length }}
+"""
 
 [[tool.bumpversion.files]]
 filename = "src/{{ cookiecutter.project_slug }}/__version__.py"
@@ -184,7 +217,6 @@ include = [
 exclude = [
   "*.py[co]",
   "__pycache__",
-  ".codacy.yml",
   ".dockerignore",
   ".editorconfig",
   ".gitignore",
