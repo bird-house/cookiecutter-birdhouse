@@ -222,6 +222,7 @@ include = [
   "docs/source/conf.py",
   "docs/source/notebooks/*.ipynb",
   "docs/source/notebooks/*.rst",
+  "pyproject.toml",
   "src/{{ cookiecutter.project_slug }}",
   "tests/*.py",
   "tox.toml"
