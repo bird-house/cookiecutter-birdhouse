@@ -25,15 +25,7 @@ jobs:
         uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
         with:
           disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            auth.docker.io:443
-            conda.anaconda.org:443
-            files.pythonhosted.org:443
-            github.com:443
-            production.cloudflare.docker.com:443
-            pypi.org:443
-            registry-1.docker.io:443
+          egress-policy: audit
 
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -55,12 +47,10 @@ jobs:
           push: false
 
       - name: Run Docker image
-        uses: vijk/docker-run@623c9adf6ee99fc8f9fa4e3b0b6b0c25859b69ee # v1
-        with:
-          image: local${{ cookiecutter.project_slug }}:latest
-          options: -p 5000:5000
-          command: |
+        run: |
+          docker run --rm -p 9099:9099 local${{ cookiecutter.project_slug }}:latest sh -c '
             ${{ cookiecutter.project_slug }} start -d
             sleep 2s
             ${{ cookiecutter.project_slug }} status
             ${{ cookiecutter.project_slug }} stop
+          '
