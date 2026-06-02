@@ -1,6 +1,40 @@
 CHANGES
 *******
 
+2.0.0 (2026-06-02)
+==================
+
+Template changes:
+
+* PyPy3.10 support has been dropped. (#143)
+* `pyproject.toml` now uses PEP 639 for licensing metadata standards. (#162)
+* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162)
+* Removed `black`, `isort` and `pylint` in favour of `ruff`. (#162)
+* Minimum supported Python for generated projects is now 3.11. (#162)
+* `pre-commit` has been replaced with `prek`. All hooks have been updated. Added `codespell`, `gitleaks`, and `zizmor`. Removed `black`, `isort`, and duplicated `pygrep` hooks. (#162)
+* Renamed `CHANGES.rst` to `CHANGELOG.rst` (more conventional naming). (#162)
+* Conda environment configurations no longer use `defaults` (due to licensing issues). (#162)
+* ReadTheDocs configuration now uses latest Ubuntu and Conda images. (#162)
+* Makefile now uses `dependency-groups` conventions for installing necessary dependencies. (#162)
+* Package-building now relies entirely on `flit`. (#162)
+* `bump-my-version` updated. New configurations: (#162)
+  * Now handles entries in `CHANGELOG.rst` when bumping `release`.
+  * Now tracks development versions (`-dev.#`).
+  * No longer tags commits by default.
+* `pytest` updated to v9.0. Uses modern configuration entry. (#162)
+* `tox` now uses the TOML configuration. (#162)
+* Replace `addnab/docker-run-action` with a good, old-fashioned docker call. (#162)
+* Constrained the token-creation actions not to generate tokens with more permissions that required. (#162)
+
+Top-level changes:
+
+* GitHub Actions updatess are now managed using an automated workflow for merging patch and minor changes. (#154)
+* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162)
+* `tox` configuration now found in `pyproject.toml`. (#162)
+* README updates. (#162)
+* Now uses `prek` for a handful of QA checks. (#162)
+* More tests are enabled for PyPy-based template generation. (#162)
+
 1.1.0 (2025-02-04)
 ==================
 
