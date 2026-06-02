@@ -28,7 +28,7 @@ Template changes:
 
 Top-level changes:
 
-* GitHub Actions updatess are now managed using an automated workflow for merging patch and minor changes. (#154) 
+* GitHub Actions updatess are now managed using an automated workflow for merging patch and minor changes. (#154)
 * `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162)
 * `tox` configuration now found in `pyproject.toml`. (#162)
 * README updates. (#162)
