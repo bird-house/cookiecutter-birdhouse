@@ -15,7 +15,6 @@ def context():
         "open_source_license": "MIT license",
         "http_port": "5000",
         "use_pytest": "y",
-        "use_black": "y",
         "create_author_file": "y",
     }
 

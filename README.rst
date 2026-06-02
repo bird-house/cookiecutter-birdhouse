@@ -76,11 +76,10 @@ Once cookiecutter clones the template, you will be asked a series of questions r
     Choose from 1, 2, 3, 4, 5, 6 [1]:
     http_port [5000]:
     use_pytest [y]:
-    use_black [y]:
     create_author_file [y]:
+    generated_with_cruft [y]:
 
-The answer to all those questions are recorded in the ``.cruft.json`` file in
-your generated bird.
+The answer to all those questions are recorded in the ``.cruft.json`` file in your generated bird.
 
 Usage
 -----
@@ -104,8 +103,7 @@ To keep the generated bird up-to-date with the cookiecutter template:
 
     $ cruft update  # uses configurations in the .cruft.json file
 
-Cruft can be configured to ignore template changes to certain files, see
-https://cruft.github.io/cruft/#updating-a-project.
+Cruft can be configured to ignore template changes to certain files, see: https://cruft.github.io/cruft/#updating-a-project.
 Potential files to ignore:
 
 * demonstration files, because they are meant to be erased
@@ -155,6 +153,7 @@ environment as follows:
 
   # bake a new bird with default settings
   $ make bake
+  Creating a new project with default settings
 
   # the new "baked" bird is created in the cookies folder
   $ ls -l cookies/
@@ -171,7 +170,7 @@ Bump a new version
 Make a new version of this Cookiecutter in the following steps:
 
   * Make sure everything is commit to GitHub.
-  * Update ``CHANGES.rst`` with the next version.
+  * Update ``CHANGELOG.rst`` with the next version.
   * Dry Run: ``bump-my-version bump --dry-run --verbose --new-version 0.3.1 patch``
   * Do it: ``bump-my-version bump --new-version 0.3.1 patch``
   * ... or: ``bump-my-version bump --new-version 0.4.0 minor``

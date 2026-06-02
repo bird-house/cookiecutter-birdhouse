@@ -86,14 +86,13 @@ def test_bake_with_defaults(cookies):
         assert "environment-dev.yml" in found_toplevel_files
         assert "environment-docs.yml" in found_toplevel_files
         assert 'pyproject.toml' in found_toplevel_files
-        assert 'tox.ini' in found_toplevel_files
+        assert 'tox.toml' in found_toplevel_files
         assert 'tests' in found_toplevel_files
         assert "src" in found_toplevel_files
         assert (
             "babybird"
             in next(result.project_path.joinpath("src").iterdir()).name
         )
-        assert "tox.ini" in found_toplevel_files
 
 @pytest.mark.requires_gdal
 def test_bake_and_run_tests(cookies):
@@ -106,20 +105,20 @@ def test_bake_and_run_tests(cookies):
 
 
 @pytest.mark.precommit
-def test_bake_and_run_pre_commit(cookies):
+def test_bake_and_run_prek(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project_path.is_dir()
         assert run_inside_dir("git init", str(result.project_path)) == 0
         assert run_inside_dir("git add *", str(result.project_path)) == 0
-        assert run_inside_dir("pre-commit install", str(result.project_path)) == 0
+        assert run_inside_dir("prek install", str(result.project_path)) == 0
         assert (
             run_inside_dir(
-                "pre-commit run --all-files --show-diff-on-failure",
+                "prek run --all-files --show-diff-on-failure",
                 str(result.project_path),
             )
             == 0
         )
-        print("test_bake_and_run_pre_commit path", str(result.project_path))
+        print("test_bake_and_run_prek path", str(result.project_path))
 
 def test_bake_and_build_package(cookies):
     with bake_in_temp_dir(cookies) as result:
@@ -129,7 +128,6 @@ def test_bake_and_build_package(cookies):
         print("test_bake_and_build_package path", str(result.project_path))
 
 
-@pytest.mark.requires_gdal
 def test_bake_with_special_chars_and_run_tests(cookies):
     """Ensure that a `full_name` with double quotes does not break pyproject.toml."""
     with bake_in_temp_dir(
@@ -139,7 +137,6 @@ def test_bake_with_special_chars_and_run_tests(cookies):
         assert run_inside_dir("python -m coverage", str(result.project_path)) == 0
 
 
-@pytest.mark.requires_gdal
 def test_bake_with_apostrophe_and_run_tests(cookies):
     """Ensure that a `full_name` with apostrophes does not break pyproject.toml."""
     with bake_in_temp_dir(
@@ -163,7 +160,7 @@ def test_bake_without_author_file(cookies):
         docs_index_path = result.project_path.joinpath('docs/source/index.rst')
         with open(str(docs_index_path)) as index_file:
             assert 'installation\n   configuration\n   notebooks/index\n   dev_guide' \
-                   '\n   processes\n   changes\n' in index_file.read()
+                   '\n   processes\n   changelog\n' in index_file.read()
 
         pyproject_path = result.project_path.joinpath("pyproject.toml")
         with open(str(pyproject_path)) as pyproject_file:
@@ -184,20 +181,11 @@ def test_make_help(cookies):
 
 def test_bake_selecting_license(cookies):
     license_strings = {
-        "MIT license": ("MIT", "License :: OSI Approved :: MIT License"),
-        "BSD license": (
-            "Redistributions of source code must retain the above copyright notice, this",
-            "License :: OSI Approved :: BSD License",
-        ),
-        "ISC license": ("ISC License", "License :: OSI Approved :: ISC License"),
-        "Apache Software License 2.0": (
-            "Licensed under the Apache License, Version 2.0",
-            "License :: OSI Approved :: Apache Software License",
-        ),
-        "GNU General Public License v3": (
-            "GNU GENERAL PUBLIC LICENSE",
-            "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        ),
+        'MIT license': 'MIT',
+        'BSD license': 'BSD-3-Clause',
+        'ISC license': 'ISC',
+        'Apache Software License 2.0': 'Apache-2.0',
+        'GNU General Public License v3': 'GPL-3.0-or-later'
     }
     for license_code, target_strings in license_strings.items():
         with bake_in_temp_dir(
@@ -221,15 +209,3 @@ def test_bake_not_open_source(cookies):
         assert 'pyproject.toml' in found_toplevel_files
         assert 'LICENSE' not in found_toplevel_files
         assert 'License' not in result.project_path.joinpath('README.rst').read_text()
-
-
-@pytest.mark.parametrize("use_black,expected", [("y", True), ("n", False)])
-def test_black(cookies, use_black, expected):
-    with bake_in_temp_dir(cookies, extra_context={"use_black": use_black}) as result:
-        assert result.project_path.is_dir()
-        requirements_path = result.project_path.joinpath("pyproject.toml")
-        assert ("black ==" in requirements_path.read_text()) is expected
-        assert ("isort ==" in requirements_path.read_text()) is expected
-        assert ("[tool.black]" in requirements_path.read_text()) is expected
-        makefile_path = result.project_path.joinpath("Makefile")
-        assert ("black --check" in makefile_path.read_text()) is expected

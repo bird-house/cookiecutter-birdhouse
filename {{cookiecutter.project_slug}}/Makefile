@@ -37,16 +37,7 @@ help: ## print this help message. (Default)
 	@echo "Please use 'make <target>' where <target> is one of:"
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-## Build targets:
-
-install: ## install {{ cookiecutter.project_slug }} application
-	@echo "Installing application ..."
-	@-bash -c 'pip install -e .'
-	@echo "\nStart service with \`make start\` and stop with \`make stop\`."
-
-develop: ## install {{ cookiecutter.project_slug }} application with development libraries
-	@echo "Installing development requirements for tests and docs ..."
-	@-bash -c 'pip install -e ".[dev]"'
+## Service targets:
 
 start: ## start {{ cookiecutter.project_slug }} service as daemon (background process)
 	@echo "Starting application ..."
@@ -62,6 +53,17 @@ restart: stop start  ## restart {{ cookiecutter.project_slug }} service
 status: ## show status of {{ cookiecutter.project_slug }} service
 	@echo "Showing status ..."
 	@-bash -c "$(APP_NAME) status"
+
+## Build targets:
+
+install: ## install {{ cookiecutter.project_slug }} application
+	@echo "Installing application ..."
+	@-bash -c 'pip install -e .'
+	@echo "\nStart service with \`make start\` and stop with \`make stop\`."
+
+develop: install-dev ## install {{ cookiecutter.project_slug }} application with development libraries
+	@python -m pip install .
+	@-bash -c 'prek install'
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -100,17 +102,25 @@ clean-docs: ## remove documentation artifacts
 	@-rm -f docs/modules.rst
 	$(MAKE) -C docs clean
 
-lint/ruff: ## check style with ruff
+install-dev:
+	@echo "Installing development requirements for tests and docs ..."
+	@python -m pip install --group dev
+
+install-lint: ## install dependencies needed for linting
+	@python -m pip install --quiet --group lint
+
+install-docs: ## install dependencies needed for building the docs
+	@python -m pip install --quiet --group docs
+
+install-test: ## install dependencies needed for standard testing
+	@python -m pip install --quiet --group test
+
+install-tox: ## install base dependencies needed for running tox
+	@python -m pip install --quiet --group tox
+
+lint: ## check style
 	@echo "Running flake8 code style checks ..."
-	@bash -c 'ruff check {{ cookiecutter.project_slug }} tests'
-
-{%- if cookiecutter.use_black == 'y' %}
-lint/black: ## check style with black
-	@echo "Running black code style checks ..."
-	@bash -c 'black --check {{ cookiecutter.project_slug }} tests'
-{%- endif %}
-
-lint: lint/ruff{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
+	@bash -c 'ruff check src/{{ cookiecutter.project_slug }} tests'
 
 ## Testing targets:
 
@@ -145,16 +155,24 @@ coverage: ## check code coverage quickly with the default Python
 
 ## Sphinx targets:
 
-docs: clean-docs ## generate Sphinx HTML documentation, including API docs
+autodoc: install-docs clean-docs ## create sphinx-apidoc files:
+	@bash -c 'sphinx-apidoc -o docs/source/apidoc --private --module-first src/{{ cookiecutter.project_slug }}'
+
+build-docs: autodoc ## generate Sphinx HTML documentation, including API docs
 	@echo "Generating docs with Sphinx ..."
 	$(MAKE) -C docs html
+
+docs: build-docs ## generate Sphinx HTML documentation, including API docs
 	@echo "Open your browser to: file:/$(APP_ROOT)/docs/build/html/index.html"
 	## do not execute xdg-open automatically since it hangs ReadTheDocs and job does not complete
 	@echo "xdg-open $(APP_ROOT)/docs/build/html/index.html"
+ifndef READTHEDOCS
+	$(BROWSER) docs/_build/html/index.html
+endif
 
 servedocs: docs ## compile the docs watching for changes
 	@echo "Compiling the docs and watching for changes ..."
-	@watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+	$(MAKE) -C docs livehtml
 
 notebook-sanitizer: ## sanitize notebooks with configuration file
 	@echo "Copying notebook output sanitizer ..."
@@ -168,7 +186,7 @@ refresh-notebooks: ## refreshing all notebook outputs under docs/source/notebook
 
 dist: clean ## build source and wheel package
 	@echo "Building source and wheel package ..."
-	@python -m build --sdist
+	@python -m flit build
 	@bash -c 'ls -l dist/'
 
 release: dist ## upload source and wheel packages

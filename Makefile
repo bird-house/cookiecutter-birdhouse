@@ -9,10 +9,12 @@ all: help
 
 .PHONY: help
 help:
-	@echo "bake 	to generate project using defaults"
-	@echo "test 	to test cookiecutter template generation"
-	@echo "clean 	to remove baked cookies"
-	@echo "docs   to generate Sphinx docs"
+	@echo "bake 	     to generate project using defaults"
+	@echo "test 	     to test cookiecutter template generation"
+	@echo "test-no-gdal  to test cookiecutter template generation (without gdal tests)"
+	@echo "clean 	     to remove baked cookies"
+	@echo "docs          to generate Sphinx docs"
+	@echo "watch         to continuously bake cookies while waiting for changes"
 
 .PHONY: test
 test:
@@ -21,7 +23,7 @@ test:
 
 .PHONY: test-no-gdal
 test-no-gdal:
-	@echo "Running all tests"
+	@echo "Running all tests (without GDAL)"
 	@bash -c 'pytest -m "not requires_gdal"'
 
 .PHONY: clean
@@ -34,18 +36,17 @@ bake:
 	@mkdir -p "cookies"
 	@bash -c 'cookiecutter $(BAKE_OPTIONS) . --output-dir $(COOKIES_DIR) --overwrite-if-exists $(NO_CRUFT)'
 
-.PHONY: docs
-docs:
+.PHONY: build-docs
+build-docs:
 	@echo "Generating docs with Sphinx ..."
 	@-bash -c '$(MAKE) -C $@ clean html'
+
+.PHONY: docs
+docs: build-docs
 	@echo "Opening browser to: file:/$(CURDIR)/docs/build/html/index.html"
 	@-bash -c 'xdg-open $(CURDIR)/docs/build/html/index.html'
 
 # generate project using defaults and watch for changes
+.PHONY: watch
 watch: bake
 	watchmedo shell-command -p '*.*' -c 'make bake -e BAKE_OPTIONS=$(BAKE_OPTIONS)' -W -R -D \{{cookiecutter.project_slug}}/
-#
-# replay last cookiecutter run and watch for changes
-# replay: BAKE_OPTIONS=--replay
-# replay: watch
-# 	;

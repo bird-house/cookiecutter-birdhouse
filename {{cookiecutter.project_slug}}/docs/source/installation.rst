@@ -7,13 +7,6 @@ Installation
     :local:
     :depth: 1
 
-Install from Conda
-------------------
-
-.. warning::
-
-   TODO: Prepare Conda package.
-
 Install from GitHub
 -------------------
 
@@ -35,17 +28,17 @@ Install {{ cookiecutter.project_name }} app:
 
 .. code-block:: console
 
-  $ pip install -e .
-  OR
-  make install
+   $ pip install -e .
+   OR
+   $ make install
 
 For development you can use this command:
 
 .. code-block:: console
 
-  $ pip install -e .[dev]
-  OR
-  $ make develop
+   $ pip install -e .[dev]
+   OR
+   $ make develop
 
 Start {{ cookiecutter.project_name }} PyWPS service
 -{{ '-' * (cookiecutter.project_name|count + 19) }}
@@ -89,10 +82,10 @@ You can also use the ``Makefile`` to start and stop the service:
 
 .. code-block:: console
 
-  $ make start
-  $ make status
-  $ tail -f pywps.log
-  $ make stop
+   $ make start
+   $ make status
+   $ tail -f pywps.log
+   $ make stop
 
 
 Run {{ cookiecutter.project_name }} as Docker container

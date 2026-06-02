@@ -13,13 +13,7 @@
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
 {%- endif %}
-{%- if cookiecutter.use_black == 'y' %}
-+----------------------------+-----------------------------------------------------+
-| Coding Standards           | |black| |isort| |pre-commit| |ruff|                 |
-{%- else %}
-+----------------------------+-----------------------------------------------------+
-| Coding Standards           | |pre-commit| |ruff|                                 |
-{%- endif %}
+| Coding Standards           | |ruff| |prek| |pre-commit-ci|                       |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
@@ -61,12 +55,6 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. _`Developer Guide`: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html
 .. _bump-my-version: https://{{ cookiecutter.project_readthedocs_name }}.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version
 
-{% if cookiecutter.use_black == 'y' -%}
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-        :target: https://github.com/psf/black
-        :alt: Python Black
-
-{% endif -%}
 .. |build| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg
         :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml
         :alt: Build Status
@@ -83,13 +71,6 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
         :target: https://gitter.im/bird-house/birdhouse
         :alt: Bird-house Gitter Chat
 
-{%- if cookiecutter.use_black == 'y' %}
-
-.. |isort| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
-        :target: https://pycqa.github.io/isort/
-        :alt: Isort
-{%- endif -%}
-
 {%- if is_open_source %}
 
 .. |license| image:: https://img.shields.io/github/license/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}.svg
@@ -101,9 +82,13 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
         :alt: Python Package Index Build
 {%- endif %}
 
-.. |pre-commit| image:: https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main.svg
+.. |pre-commit-ci| image:: https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main.svg
         :target: https://results.pre-commit.ci/latest/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main
         :alt: pre-commit.ci status
+
+.. |prek| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json
+        :target: https://github.com/j178/prek
+        :alt: prek
 
 .. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
         :target: https://github.com/astral-sh/ruff

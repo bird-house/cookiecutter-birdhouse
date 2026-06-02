@@ -35,6 +35,7 @@ import {{ cookiecutter.project_slug }}
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
+    "sphinx.ext.extlinks",
     "sphinx.ext.imgconverter",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
@@ -43,7 +44,19 @@ extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
     "nbsphinx",
     "pywps.ext_autodoc",
+    'sphinx_codeautolink',
+    'sphinx_copybutton',
 ]
+
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 2
+
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": True,
+    "private-members": False,
+    "special-members": False,
+}
 
 # To avoid having to install these and burst memory limit on ReadTheDocs.
 # List of all tested working mock imports from all birds so new birds can
@@ -86,6 +99,10 @@ autodoc_mock_imports = [
     "xarray",
     "zlib",
 ]
+
+extlinks = {
+    "user": ("https://github.com/%s", "@%s"),
+}
 
 # Monkeypatch constant because the following are mock imports.
 # Only works if numpy is actually installed and at the same time being mocked.
