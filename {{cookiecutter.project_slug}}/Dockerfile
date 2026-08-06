@@ -1,19 +1,26 @@
 # vim:set ft=dockerfile:
-FROM continuumio/miniconda3
+FROM condaforge/miniconda3
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PIP_ROOT_USER_ACTION=ignore
-LABEL org.opencontainers.image.authors=https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
-LABEL Description="{{ cookiecutter.project_name }} WPS" Vendor="Birdhouse" Version="{{ cookiecutter.version }}"
+LABEL org.opencontainers.image.authors="Birdhouse"
+LABEL org.opencontainers.image.created="2000-01-02T03:04:05Z"
+LABEL org.opencontainers.image.title="{{ cookiecutter.project_name }}WPS"
+LABEL org.opencontainers.image.source=https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
+LABEL org.opencontainers.image.vendor="Birdhouse"
+LABEL org.opencontainers.image.version="{{ cookiecutter.version }}"
+LABEL Description="{{ cookiecutter.project_name }} WPS"
 
 # Set the working directory to /code
 WORKDIR /code
 
 # Create conda environment
 COPY environment.yml .
-RUN conda env create -n {{ cookiecutter.project_name }} -f environment.yml && conda install -n {{ cookiecutter.project_name }} gunicorn && conda clean --all --yes
+RUN conda env create -n {{ cookiecutter.project_name }} -f environment.yml && \
+    conda install -n {{ cookiecutter.project_name }} gunicorn && \
+    conda clean --all --yes
 
 # Add the project conda environment to the path
-ENV PATH=/opt/conda/envs/{{ cookiecutter.project_name }}/bin:$PATH
+ENV PATH="/opt/conda/envs/{{ cookiecutter.project_name }}/bin:$PATH"
 
 # Copy WPS project
 COPY . /code
