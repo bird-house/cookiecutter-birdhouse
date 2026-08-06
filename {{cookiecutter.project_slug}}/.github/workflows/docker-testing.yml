@@ -40,7 +40,7 @@ jobs:
         with:
           context: .
           file: "Dockerfile"
-          tags: local${{ cookiecutter.project_slug }}:latest
+          tags: local{{ cookiecutter.project_slug }}:latest
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -48,9 +48,9 @@ jobs:
 
       - name: Run Docker image
         run: |
-          docker run --rm -p 9099:9099 local${{ cookiecutter.project_slug }}:latest sh -c '
-            ${{ cookiecutter.project_slug }} start -d
+          docker run --rm -p 9099:9099 local{{ cookiecutter.project_slug }}:latest sh -c '
+            {{ cookiecutter.project_slug }} start -d
             sleep 2s
-            ${{ cookiecutter.project_slug }} status
-            ${{ cookiecutter.project_slug }} stop
+            {{ cookiecutter.project_slug }} status
+            {{ cookiecutter.project_slug }} stop
           '
