@@ -1,14 +1,14 @@
 # vim:set ft=dockerfile:
-FROM condaforge/miniconda3
+FROM condaforge/miniconda3:26.3.2-3
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PIP_ROOT_USER_ACTION=ignore
 LABEL org.opencontainers.image.authors="Birdhouse"
 LABEL org.opencontainers.image.created="2000-01-02T03:04:05Z"
-LABEL org.opencontainers.image.title="{{ cookiecutter.project_name }}WPS"
+LABEL org.opencontainers.image.description="{{ cookiecutter.project_name }} WPS"
 LABEL org.opencontainers.image.source=https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
+LABEL org.opencontainers.image.title="{{ cookiecutter.project_name }}WPS"
 LABEL org.opencontainers.image.vendor="Birdhouse"
 LABEL org.opencontainers.image.version="{{ cookiecutter.version }}"
-LABEL Description="{{ cookiecutter.project_name }} WPS"
 
 # Set the working directory to /code
 WORKDIR /code
