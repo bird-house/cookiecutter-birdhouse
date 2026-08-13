@@ -8,7 +8,8 @@ Cookiecutter_ template for a Python package.
 
 *A Cookiecutter template for a Birdhouse bird package*
 
-Cookiecutter_ is a command-line utility to create projects from templates. This `cookiecutter-birdhouse` template creates a barebones PyWPS server adhering to Birdhouse conventions.
+Cookiecutter_ is a command-line utility to create projects from templates.
+This `cookiecutter-birdhouse` template creates a barebones PyWPS server adhering to Birdhouse conventions.
 It comes complete with a framework for installation, configuration, deployment, documentation and tests.
 It even includes a `Dockerfile` for containerization!
 Create your project then get started writing new WPS processes in minutes.
@@ -18,7 +19,6 @@ You may at any time update your project using the latest cookiecutter template u
 * GitHub repo: https://github.com/bird-house/cookiecutter-birdhouse/
 * Documentation: http://cookiecutter-birdhouse.readthedocs.io/en/latest/
 * Free software: BSD license
-* Discord: https://discord.gg/PWXJr3upUE
 
 .. warning::
 
@@ -29,11 +29,11 @@ Features
 --------
 
 * Testing setup with ``pytest`` and ``tox``
-* GitHub_Workflows_: Ready for GitHub Workflows Continuous Integration testing
-* Tox_ testing: Setup to easily test for Python 3.9, 3.10, 3.11, and 3.12
+* GitHub_Workflows_: Ready for GitHub Workflows Continuous Integration (CI) testing
+* Tox_ testing: Setup to easily test for Python 3.11, 3.12, 3.13, and 3.14
 * Sphinx_ docs: Documentation ready for generation with, for example, ReadTheDocs_
 * bump-my-version_: Pre-configured version bumping with a single command
-* Auto-release to PyPI_ when you push a new tag to master (optional)
+* Auto-release to TestPyPI_ and PyPI_ when you push a new tag to `main` and publish a new version
 * A `Makefile` to install the code, start, stop, poll the server and more
 
 Installation
@@ -44,8 +44,7 @@ This is achieved via the following commands:
 
 .. code-block:: console
 
-    $ python -m pip install cookiecutter
-    $ python -m pip install cruft
+    $ python -m pip install cookiecutter cruft
 
 With cookiecutter and cruft installed, the cookiecutter-birdhouse template can be installed with:
 
@@ -95,8 +94,6 @@ Then:
 
 For more details, see the `cookiecutter-pypackage tutorial`_.
 
-See the `babybird <http://babybird.rtfd.io/>`_ example of a generated bird.
-
 To keep the generated bird up-to-date with the cookiecutter template:
 
 .. code-block:: console
@@ -111,8 +108,7 @@ Potential files to ignore:
 
 See cruft_skip_ example.
 
-To link already generated project that was not initially generated using
-``cruft create``:
+To link already generated project that was not initially generated using ``cruft create``:
 
 .. code-block:: console
 
@@ -131,8 +127,7 @@ above.
 Development
 -----------
 
-If you want to extend the cookiecutter template then prepare your development
-environment as follows:
+If you want to extend the cookiecutter template, prepare your development environment as follows:
 
 .. code-block:: console
 
@@ -164,16 +159,14 @@ environment as follows:
   # finally you may clean it all up
   $ make clean
 
-Bump a new version
-------------------
+Versioning
+----------
 
-Make a new version of this Cookiecutter in the following steps:
+Prepare a new version of this Cookiecutter in the following steps:
 
-  * Make sure everything is commit to GitHub.
-  * Update ``CHANGELOG.rst`` with the next version.
-  * Dry Run: ``bump-my-version bump --dry-run --verbose --new-version 0.3.1 patch``
-  * Do it: ``bump-my-version bump --new-version 0.3.1 patch``
-  * ... or: ``bump-my-version bump --new-version 0.4.0 minor``
+  * Make sure all code changes have been committed and pushed to `main` (including a new entry in CHANGELOG.rst).
+  * Merge all changes to the `main` branch.
+  * Tag the last commit of `main` with the desired version (``git tag v1.2.3``).
   * Push it: ``git push --tags``
 
 See the bump-my-version_ documentation for details.

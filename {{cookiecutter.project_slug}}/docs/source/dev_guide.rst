@@ -36,7 +36,8 @@ First activate the ``{{ cookiecutter.project_slug }}`` Conda environment and ins
 .. code-block:: console
 
     $ source activate {{ cookiecutter.project_slug }}
-    $ pip install -r requirements_dev.txt  # if not already installed
+    $ python -m pip install --group dev
+    $ python -m pip install --editable .
     OR
     $ make develop
 
@@ -44,7 +45,7 @@ Run quick tests (skip slow and online):
 
 .. code-block:: console
 
-    $ pytest -m 'not slow and not online'"
+    $ pytest -m 'not slow and not online'
 
 Run all tests:
 
@@ -52,11 +53,6 @@ Run all tests:
 
     $ pytest
 
-Check pep8:
-
-.. code-block:: console
-
-    $ flake8
 
 Run tests the lazy way
 ----------------------
@@ -68,6 +64,12 @@ Do the same as above using the ``Makefile``.
     $ make test
     $ make test-all
     $ make lint
+
+or, alternatively:
+
+.. code-block:: console
+
+    $ tox
 
 Prepare a release
 -----------------
@@ -87,18 +89,23 @@ Update the Conda specification file to build identical environments_ on a specif
 .. _environments: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#building-identical-conda-environments
 
 
-Bump a new version
-------------------
+Deploying
+---------
 
-Make a new version of {{ cookiecutter.project_name }} in the following steps:
+A reminder for the maintainers on how to deploya new version.
 
-* Make sure everything is commit to GitHub.
-* Update ``CHANGELOG.rst`` with the next version.
-* Dry Run: ``bumpversion --dry-run --verbose --new-version 0.8.1 patch``
-* Do it: ``bumpversion --new-version 0.8.1 patch``
-* ... or: ``bumpversion --new-version 0.9.0 minor``
-* Push it: ``git push``
-* Push tag: ``git push --tags``
+  * Make sure all code changes have been committed and pushed to `main` (including an entry in CHANGELOG.rst).
+  * Create a new branch and Pull Request (`prepare-release-vX.Y.Z`).
+  * Update ``CHANGELOG.rst`` history under `unreleased`.
+  * Dry run: ``bump-my-version bump major|minor|patch|build --dry-run --verbose``
+  * Do it for real: ``bump-my-version bump major|minor|patch``
+  * Prepare release version: ``bump-my-version bump release``
+  * Push it: ``git push``
+  * Merge your Pull Request to `main`.
+  * Tag the last commit on `main`.
+
+GitHub Workflow automation should then prepare a deployment to Docker Hub and to `TestPyPI`.
+Once the version has been published, the next deployment will then be to the official `PyPI`.
 
 See the bumpversion_ documentation for details.
 
