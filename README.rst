@@ -2,7 +2,7 @@
 Cookiecutter for Birdhouse
 ==========================
 
-|build| |docs| |license| |gitter|
+|build| |docs| |license| |gitter| |zizmor|
 
 Cookiecutter_ template for a Python package.
 
@@ -208,3 +208,7 @@ See the bump-my-version_ documentation for details.
 .. |gitter| image:: https://badges.gitter.im/bird-house/birdhouse.svg
         :target: https://gitter.im/bird-house/birdhouse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
         :alt: Bird-house Gitter chat
+
+.. |zizmor| image:: https://img.shields.io/badge/%F0%9F%8C%88-zizmor-white?labelColor=white
+        :target: https://zizmor.sh/
+        :alt: zizmor

@@ -13,7 +13,8 @@
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
 {%- endif %}
-| Coding Standards           | |ruff| |prek| |pre-commit-ci|                       |
++----------------------------+-----------------------------------------------------+
+| Coding Standards           | |ruff| |prek| |pre-commit-ci| |zizmor|              |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
@@ -101,3 +102,7 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. |versions| image:: https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
         :alt: Supported Python Versions
+
+.. |zizmor| image:: https://img.shields.io/badge/%F0%9F%8C%88-zizmor-white?labelColor=white
+        :target: https://zizmor.sh/
+        :alt: zizmor
