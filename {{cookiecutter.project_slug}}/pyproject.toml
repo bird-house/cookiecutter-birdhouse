@@ -112,6 +112,7 @@ extras = []
 "Issue tracker" = "{{ cookiecutter.__gh_slug }}/issues"
 "Changelog" = "{{ cookiecutter.__gh_slug }}/blob/master/changelog.rst"
 "Homepage" = "{{ cookiecutter.__gh_slug }}"
+"About Birdhouse" = "https://birdhouse.readthedocs.io"
 
 [tool]
 

@@ -71,6 +71,7 @@ dependencies = [
 [project.urls]
 Source = "https://github.com/bird-house/cookiecutter-birdhouse"
 Documentation = "https://cookiecutter-birdhouse.readthedocs.io/en/latest/"
+"About Birdhouse" = "https://birdhouse.readthedocs.io"
 
 [tool.coverage.run]
 omit = ["tests/*"]
