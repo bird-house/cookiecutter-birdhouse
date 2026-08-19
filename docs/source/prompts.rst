@@ -17,6 +17,9 @@ email
 github_username
     Your GitHub username.
 
+orcid_id
+    Your `ORCID <https://orcid.org/>`_ identifier.
+
 project_name
     The name of your new Python package project. This is used in documentation, so spaces and any characters are fine here.
 

@@ -158,6 +158,13 @@ replace = """\
 """
 
 [[tool.bumpversion.files]]
+filename = "CITATION.cff"
+include_bumps = ["release"]
+search = "^version: \"[0-9]+\\.[0-9]+\\.[0-9]\""
+replace = "version: \"{new_version}\""
+regex = true
+
+[[tool.bumpversion.files]]
 filename = "Dockerfile"
 search = "LABEL org.opencontainers.image.version=\"{current_version}\""
 replace = "LABEL org.opencontainers.image.version=\"{new_version}\""
