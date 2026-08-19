@@ -2,36 +2,6 @@
 requires = ["setuptools>=77.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
-[dependency-groups]
-docs = [
-  "alabaster >=1.0.0",
-  "sphinx >=9.0.2"
-]
-test = [
-  "coverage >=7.13.0",
-  "pytest >=9.0.2",
-  "pytest-cookies >=0.7.0"
-]
-tox = [
-  "tox >=4.52.0",
-  "tox-gh >=1.7.1"
-]
-dev = [
-  "build >=1.4.2",
-  "cookiecutter >=2.7.0",
-  "cruft >=2.15.0",
-  "flit >=3.11.0,<4.0",
-  "flit_core >=3.11.0,<4.0",
-  "prek >=0.4.0",
-  "pyyaml >=6.0.2",
-  "ruff >=0.15.0",
-  "twine >=6.2.0",
-  "watchdog >=6.0.0",
-  {include-group = "docs"},
-  {include-group = "test"},
-  {include-group = "tox"}
-]
-
 [project]
 name = "cookiecutter-birdhouse"
 dynamic = ["version"]
@@ -73,6 +43,36 @@ Source = "https://github.com/bird-house/cookiecutter-birdhouse"
 Documentation = "https://cookiecutter-birdhouse.readthedocs.io/en/latest/"
 "About Birdhouse" = "https://birdhouse.readthedocs.io"
 
+[dependency-groups]
+docs = [
+  "alabaster >=1.0.0",
+  "sphinx >=9.0.2"
+]
+test = [
+  "coverage >=7.13.0",
+  "pytest >=9.0.2",
+  "pytest-cookies >=0.7.0"
+]
+tox = [
+  "tox >=4.52.0",
+  "tox-gh >=1.7.1"
+]
+dev = [
+  "build >=1.4.2",
+  "cookiecutter >=2.7.0",
+  "cruft >=2.15.0",
+  "flit >=3.11.0,<4.0",
+  "flit_core >=3.11.0,<4.0",
+  "prek >=0.4.0",
+  "pyyaml >=6.0.2",
+  "ruff >=0.15.0",
+  "twine >=6.2.0",
+  "watchdog >=6.0.0",
+  {include-group = "docs"},
+  {include-group = "test"},
+  {include-group = "tox"}
+]
+
 [tool.coverage.run]
 omit = ["tests/*"]
 
@@ -99,6 +99,9 @@ exclude = [
 include = [""]
 
 [tool.setuptools_scm]
+
+[tool.tomlsort]
+sort_first = ["build-system", "project"]
 
 [tool.tox]
 env_list = [
