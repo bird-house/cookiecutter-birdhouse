@@ -159,8 +159,8 @@ replace = """\
 
 [[tool.bumpversion.files]]
 filename = "Dockerfile"
-parse = "LABEL org.opencontainers.image.version=\"{current_version}\""
-replace = "{new_version}"
+search = "LABEL org.opencontainers.image.version=\"{current_version}\""
+replace = "LABEL org.opencontainers.image.version=\"{new_version}\""
 
 [[tool.bumpversion.files]]
 filename = 'Dockerfile'
@@ -170,19 +170,19 @@ regex = true
 
 [[tool.bumpversion.files]]
 filename = "src/{{ cookiecutter.project_slug }}/__version__.py"
-parse = "__version__ = \"{current_version}\""
-replace = "{new_version}"
+search = "__version__ = \"{current_version}\""
+replace = "__version__ = \"{new_version}\""
 
 [[tool.bumpversion.files]]
 filename = "Dockerfile"
-parse = "Version=\"{current_version}\""
-replace = "{new_version}"
+search = "Version=\"{current_version}\""
+replace = "Version=\"{new_version}\""
 {%- if cookiecutter.generated_with_cruft == 'y' %}
 
 [[tool.bumpversion.files]]
 filename = ".cruft.json"
-parse = "\"version\": \"{current_version}\""
-replace = "{new_version}"
+search = "\"version\": \"{current_version}\""
+replace = "\"version\": \"{new_version}\""
 {%- endif %}
 
 [tool.bumpversion.parts.build]
