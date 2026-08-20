@@ -59,6 +59,7 @@ Once cookiecutter clones the template, you will be asked a series of questions r
     full_name [Full Name]:
     email [your@email]:
     github_username [bird-house]:
+    orcid_id [N/A]:
     project_name [Babybird]:
     project_slug [babybird]:
     project_repo_name [babybird]:
@@ -164,10 +165,10 @@ Versioning
 
 Prepare a new version of this Cookiecutter in the following steps:
 
-  * Make sure all code changes have been committed and pushed to `main` (including a new entry in CHANGELOG.rst).
-  * Merge all changes to the `main` branch.
-  * Tag the last commit of `main` with the desired version (``git tag v1.2.3``).
-  * Push it: ``git push --tags``
+* Make sure all code changes have been committed and pushed to `main` (including a new entry in CHANGELOG.rst).
+* Merge all changes to the `main` branch.
+* Tag the last commit of `main` with the desired version (``git tag v1.2.3``).
+* Push it (``git push --tags``).
 
 See the bump-my-version_ documentation for details.
 

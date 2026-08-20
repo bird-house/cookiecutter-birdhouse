@@ -14,13 +14,13 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-from datetime import datetime as dt
 import importlib.metadata as ilm
+from datetime import datetime as dt
 
 # -- Project information -----------------------------------------------------
 
 project = 'Cookiecutter for Birdhouse'
-copyright = f'2018-{dt.now().year}, Birdhouse'
+copyright = f'2018-{dt.now().astimezone().year}, Birdhouse'
 author = 'Birdhouse'
 
 # The short X.Y version
