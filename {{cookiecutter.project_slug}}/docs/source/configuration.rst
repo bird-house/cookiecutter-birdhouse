@@ -32,22 +32,22 @@ For example change the hostname (*demo.org*) and logging level:
 
 .. code-block:: console
 
-   $ cd {{ cookiecutter.project_slug }}
-   $ vim etc/custom.cfg
-   $ cat etc/custom.cfg
-   [server]
-   url = http://demo.org:{{ cookiecutter.http_port }}/wps
-   outputurl = http://demo.org:{{ cookiecutter.http_port }}/outputs
+    $ cd {{ cookiecutter.project_slug }}
+    $ vim etc/custom.cfg
+    $ cat etc/custom.cfg
+    [server]
+    url = http://demo.org:{{ cookiecutter.http_port }}/wps
+    outputurl = http://demo.org:{{ cookiecutter.http_port }}/outputs
 
-   [logging]
-   level = DEBUG
+    [logging]
+    level = DEBUG
 
 Start the service with your custom configuration:
 
 .. code-block:: console
 
-   # start the service with this configuration
-   $ {{ cookiecutter.project_slug }} start -c etc/custom.cfg
+    # start the service with this configuration
+    $ {{ cookiecutter.project_slug }} start -c etc/custom.cfg
 
 
 .. _PyWPS: http://pywps.org/

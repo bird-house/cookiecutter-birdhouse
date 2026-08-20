@@ -13,6 +13,7 @@ dependencies:
   - coverage >=7.13.0
   - cruft >=2.16.0
   - flit >=3.11.0,<4.0
+  - flit-core >=3.11.0,<4.0
   - ipython >=9.0.0
   - nbsphinx >=0.9.8
   - nbval >=0.10.0

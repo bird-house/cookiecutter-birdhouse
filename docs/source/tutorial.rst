@@ -3,7 +3,7 @@ Tutorial
 
 .. note:: Did you find any of these instructions confusing? `Edit this file`_ and submit a pull request with your improvements!
 
-.. _`Edit this file`: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/tutorial.rst
+.. _`Edit this file`: https://github.com/bird-house/cookiecutter-birdhouse/blob/master/docs/tutorial.rst
 
 To start with, you will need a `GitHub account`_ and an account on `PyPI`_. Create these before you get started on this tutorial. If you are new to Git and GitHub, you should probably spend a few minutes on some of the tutorials at the top of the page at `GitHub Help`_.
 
@@ -55,7 +55,7 @@ Use cookiecutter, pointing it at the cookiecutter-pypackage repo:
 
 .. code-block:: bash
 
-    cookiecutter https://github.com/audreyfeldroy/cookiecutter-pypackage.git
+    cookiecutter https://github.com/bird-house/cookiecutter-birdhouse.git
 
 You'll be asked to enter various values to set the package up.
 If you don't know what to enter, press Enter to stick with the defaults.
@@ -88,13 +88,14 @@ You'll need a ssh key to push the repo. You can `Generate`_ a key or `Add`_ an e
 Step 4: Install Dev Requirements
 --------------------------------
 
-You should still be in the folder containing the ``requirements_dev.txt`` file.
+You should still be in the folder containing the ``pyproject.toml`` file.
 
 Your virtualenv should still be activated. If it isn't, activate it now. Install the new project's local development requirements:
 
 .. code-block:: bash
 
-    pip install -r requirements_dev.txt
+    pip install --group dev
+
 
 Step 5: Set Up Read the Docs
 ----------------------------
@@ -109,23 +110,8 @@ Now your documentation will get rebuilt when you make documentation changes to y
 
 .. _`Read the Docs`: https://readthedocs.org/
 
-Step 6: Set Up pyup.io
-----------------------
 
-`pyup.io`_ is a service that helps you to keep your requirements files up to date.
-It sends you automated pull requests whenever there's a new release for one of your dependencies.
-
-To use it, create a new account at `pyup.io`_ or log into your existing account.
-
-Click on the green ``Add Repo`` button in the top left corner and select the repo you created in Step 3.
-A popup will ask you whether you want to pin your dependencies.
-Click on ``Pin`` to add the repo.
-
-Once your repo is set up correctly, the pyup.io badge will show your current update status.
-
-.. _`pyup.io`: https://pyup.io/
-
-Step 7: Release on PyPI
+Step 6: Release on PyPI
 -----------------------
 
 The Python Package Index or `PyPI`_ is the official third-party software repository for the Python programming language. Python developers intend it to be a comprehensive catalog of all open source Python packages.
@@ -137,6 +123,7 @@ See `PyPI Help`_ for more information about submitting a package.
 Here's a release checklist you can use: https://github.com/audreyfeldroy/cookiecutter-pypackage/blob/master/docs/pypi_release_checklist.rst
 
 .. _`PyPI Help`: https://pypi.org/help/#publishing
+
 
 Having problems?
 ----------------

@@ -9,60 +9,6 @@
 requires = ["flit_core >=3.11.0,<4"]
 build-backend = "flit_core.buildapi"
 
-[dependency-groups]
-lint = [
-  # Linting tools
-  "codespell >=2.4.2",
-  "deptry >=0.25.1",
-  "flake8 >=7.3.0",
-  "flake8-rst-docstrings >=0.4.0",
-  "mypy >=1.20.0",
-  "numpydoc >=1.10.0",
-  "ruff >=0.15.0",
-  "vulture >=2.14",
-  "yamllint >=1.38.0"
-]
-docs = [
-  # Documentation and example support
-  "alabaster >=1.0.0",
-  "ipykernel",
-  "ipython >=8.10.0",
-  "jupyter_client",
-  "nbsphinx >=0.9.8",
-  "sphinx >=9.0.2",
-  "sphinx-autobuild >=2024.4.16",
-  "sphinx-click",
-  "sphinx-codeautolink >=0.16.2",
-  "sphinx-copybutton >=0.5.2"
-]
-test = [
-  "coverage >=7.5.0"
-{%- if cookiecutter.use_pytest == 'y' %},
-  "nbval >=0.11.0",
-  "pytest >=9.0.0",
-  "pytest-cov >=7.1.0"
-{%- endif %}
-]
-tox = [
-  "tox >=4.52.0",
-  "tox-gh >=1.7.1"
-]
-dev = [
-  # Development and testing tools
-  "bump-my-version >=1.3.0",
-  "cruft >=2.16.0",
-  "flit >=3.11.0,<4.0",
-  "pip >=26.1",
-  "prek >=0.4.0",
-  "watchdog >=6.0.0",
-  {include-group = "docs"},
-  {include-group = "lint"},
-  {%- if cookiecutter.use_pytest == 'y' %}
-  {include-group = "test"},
-  {%- endif %}
-  {include-group = "tox"}
-]
-
 [project]
 name = "{{ cookiecutter.project_slug }}"
 authors = [
@@ -111,6 +57,62 @@ extras = []
 "Issue tracker" = "{{ cookiecutter.__gh_slug }}/issues"
 "Changelog" = "{{ cookiecutter.__gh_slug }}/blob/master/changelog.rst"
 "Homepage" = "{{ cookiecutter.__gh_slug }}"
+"About Birdhouse" = "https://birdhouse.readthedocs.io"
+
+[dependency-groups]
+lint = [
+  # Linting tools
+  "codespell >=2.4.2",
+  "deptry >=0.25.1",
+  "flake8 >=7.3.0",
+  "flake8-rst-docstrings >=0.4.0",
+  "mypy >=1.20.0",
+  "numpydoc >=1.10.0",
+  "ruff >=0.15.0",
+  "vulture >=2.14",
+  "yamllint >=1.38.0"
+]
+docs = [
+  # Documentation and example support
+  "alabaster >=1.0.0",
+  "ipykernel",
+  "ipython >=8.10.0",
+  "jupyter_client",
+  "nbsphinx >=0.9.8",
+  "sphinx >=9.0.2",
+  "sphinx-autobuild >=2024.4.16",
+  "sphinx-click",
+  "sphinx-codeautolink >=0.16.2",
+  "sphinx-copybutton >=0.5.2"
+]
+test = [
+  "coverage >=7.5.0"
+{%- if cookiecutter.use_pytest == 'y' %},
+  "nbval >=0.11.0",
+  "pytest >=9.0.0",
+  "pytest-cov >=7.1.0"
+{%- endif %}
+]
+tox = [
+  "tox >=4.52.0",
+  "tox-gh >=1.7.1"
+]
+dev = [
+  # Development and testing tools
+  "bump-my-version >=1.3.0",
+  "cruft >=2.16.0",
+  "flit >=3.11.0,<4.0",
+  "flit_core >=3.11.0,<4.0",
+  "pip >=26.1",
+  "prek >=0.4.0",
+  "watchdog >=6.0.0",
+  {include-group = "docs"},
+  {include-group = "lint"},
+  {%- if cookiecutter.use_pytest == 'y' %}
+  {include-group = "test"},
+  {%- endif %}
+  {include-group = "tox"}
+]
 
 [tool]
 
@@ -154,6 +156,24 @@ replace = """\
 `v{new_version} <{{ cookiecutter.__gh_slug }}/tree/{new_version}>`_ ({now:%Y-%m-%d})
 {{ '-' * ('`v' + cookiecutter.version + ' <' + cookiecutter.__gh_slug + '/tree/' + cookiecutter.version + '>`_ ' + '({now:%Y-%m-%d})' )|length }}
 """
+
+[[tool.bumpversion.files]]
+filename = "CITATION.cff"
+include_bumps = ["release"]
+search = "^version: \"[0-9]+\\.[0-9]+\\.[0-9]\""
+replace = "version: \"{new_version}\""
+regex = true
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+search = "LABEL org.opencontainers.image.version=\"{current_version}\""
+replace = "LABEL org.opencontainers.image.version=\"{new_version}\""
+
+[[tool.bumpversion.files]]
+filename = 'Dockerfile'
+search = "LABEL org.opencontainers.image.created=\"\\d{{4}}-\\d{{2}}-\\d{{2}}T\\d{{2}}:\\d{{2}}:\\d{{2}}Z\""
+replace = "LABEL org.opencontainers.image.created=\"{utcnow:%Y-%m-%dT%H:%M:%SZ}\""
+regex = true
 
 [[tool.bumpversion.files]]
 filename = "src/{{ cookiecutter.project_slug }}/__version__.py"
@@ -366,6 +386,9 @@ max-doc-length = 180
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.tomlsort]
+sort_first = ["build-system", "project"]
 
 [tool.vulture]
 exclude = []

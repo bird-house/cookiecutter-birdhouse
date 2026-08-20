@@ -14,31 +14,31 @@ Check out code from the {{ cookiecutter.project_name }} GitHub repo and start th
 
 .. code-block:: console
 
-   $ git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}.git
-   $ cd {{ cookiecutter.project_slug }}
+    $ git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}.git
+    $ cd {{ cookiecutter.project_slug }}
 
 Create Conda environment named `{{ cookiecutter.project_slug }}`:
 
 .. code-block:: console
 
-   $ conda env create -f environment.yml
-   $ source activate {{ cookiecutter.project_slug }}
+    $ conda env create -f environment.yml
+    $ source activate {{ cookiecutter.project_slug }}
 
 Install {{ cookiecutter.project_name }} app:
 
 .. code-block:: console
 
-   $ pip install -e .
-   OR
-   $ make install
+    $ pip install -e .
+    OR
+    $ make install
 
 For development you can use this command:
 
 .. code-block:: console
 
-   $ pip install -e .[dev]
-   OR
-   $ make develop
+    $ pip install -e .[dev]
+    OR
+    $ make develop
 
 Start {{ cookiecutter.project_name }} PyWPS service
 -{{ '-' * (cookiecutter.project_name|count + 19) }}
@@ -47,14 +47,14 @@ After successful installation you can start the service using the ``{{ cookiecut
 
 .. code-block:: console
 
-   $ {{ cookiecutter.project_slug }} --help # show help
-   $ {{ cookiecutter.project_slug }} start  # start service with default configuration
+    $ {{ cookiecutter.project_slug }} --help # show help
+    $ {{ cookiecutter.project_slug }} start  # start service with default configuration
 
-   OR
+    OR
 
-   $ {{ cookiecutter.project_slug }} start --daemon # start service as daemon
-   loading configuration
-   forked process id: 42
+    $ {{ cookiecutter.project_slug }} start --daemon # start service as daemon
+    loading configuration
+    forked process id: 42
 
 The deployed WPS service is by default available on:
 
@@ -66,14 +66,13 @@ You can find which process uses a given port using the following command (here f
 
 .. code-block:: console
 
-   $ netstat -nlp | grep :5000
-
+    $ netstat -nlp | grep :5000
 
 Check the log files for errors:
 
 .. code-block:: console
 
-   $ tail -f  pywps.log
+    $ tail -f pywps.log
 
 ... or do it the lazy way
 +++++++++++++++++++++++++
@@ -82,10 +81,10 @@ You can also use the ``Makefile`` to start and stop the service:
 
 .. code-block:: console
 
-   $ make start
-   $ make status
-   $ tail -f pywps.log
-   $ make stop
+    $ make start
+    $ make status
+    $ tail -f pywps.log
+    $ make stop
 
 
 Run {{ cookiecutter.project_name }} as Docker container
