@@ -1,6 +1,39 @@
 CHANGES
 *******
 
+2.1.0 (2026-08-20)
+==================
+
+Template changes:
+
+* `CI` folder Python requirements files are now in `.github`.
+* The `pyproject.toml` now lists project information higher.
+* `zizmor` has been added to `pre-commit` hooks.
+* A new Dependabot "auto-accept patch and minor dependency changes" workflow has been added.
+* A new workflow for building and publishing Docker images has been added.
+* Dependabot is now configured to perform updates to pins of base images.
+* The base image for Docker images has migrated from the deprecated `continuumio/miniconda3` to the maintained `condaforge/miniforge3`.
+* Docker metadata is now much more descriptive, with versioning and author information now listed.
+* `bump-my-version` now manages date and version information in Docker image.
+* Guidelines on how to use `bump-my-version` to perform updates and deployments have been added.
+* ReadTheDocs Ubuntu and Python distributions have both been updated.
+* The expected default branch is now `main`.
+* Rendered documentation now uses a dynamic date variable to ensure year is up-to-date (as of last build).
+* `flit` and `flit-core` are now both pinned below v4.0 (due to breaking changes).
+* Added new files:
+    * `CITATION.cff`: For citing software directly from GitHub.
+    * `.zenodo.json`: For archiving software on Zenodo.
+
+Top-level changes:
+
+* `CI` folder Python requirements files are now in `.github`.
+* The `pyproject.toml` now lists project information higher.
+* `zizmor` has been added to `prek` hooks.
+* The documentation has been slightly adjusted to better reflect the current state of the template.
+* The cookiecutter now has prompts describing each field when generating a new project.
+* Documentation formatting/rendering is nicer.
+* Added a prompt for `ORCID` number.
+
 2.0.0 (2026-06-02)
 ==================
 
