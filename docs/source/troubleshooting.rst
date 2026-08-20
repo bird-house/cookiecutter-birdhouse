@@ -4,6 +4,12 @@
 Troubleshooting
 ===============
 
+.. note::
+
+        Can you help improve this file? `Edit this file`_ and submit a pull request with your improvements!
+
+.. _`Edit this file`: https://github.com/Ouranosinc/cookiecutter-pypackage/blob/main/docs/troubleshooting.rst
+
 I created a cookiecutter, but it doesn't work, and I can't figure out why
 -------------------------------------------------------------------------
 
