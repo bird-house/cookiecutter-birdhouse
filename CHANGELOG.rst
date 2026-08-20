@@ -1,75 +1,75 @@
-CHANGES
-*******
+Changelog
+=========
 
 2.1.0 (2026-08-20)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Template changes:
 
-* `CI` folder Python requirements files are now in `.github`.
-* The `pyproject.toml` now lists project information higher.
-* `zizmor` has been added to `pre-commit` hooks.
-* A new Dependabot "auto-accept patch and minor dependency changes" workflow has been added.
-* A new workflow for building and publishing Docker images has been added.
-* Dependabot is now configured to perform updates to pins of base images.
-* The base image for Docker images has migrated from the deprecated `continuumio/miniconda3` to the maintained `condaforge/miniforge3`.
-* Docker metadata is now much more descriptive, with versioning and author information now listed.
-* `bump-my-version` now manages date and version information in Docker image.
-* Guidelines on how to use `bump-my-version` to perform updates and deployments have been added.
-* ReadTheDocs Ubuntu and Python distributions have both been updated.
-* The expected default branch is now `main`.
-* Rendered documentation now uses a dynamic date variable to ensure year is up-to-date (as of last build).
-* `flit` and `flit-core` are now both pinned below v4.0 (due to breaking changes).
-* Added new files:
+* `CI` folder Python requirements files are now in `.github`. (#168).
+* The `pyproject.toml` now lists project information higher. (#168).
+* `zizmor` has been added to `pre-commit` hooks. (#168).
+* A new Dependabot "auto-accept patch and minor dependency changes" workflow has been added. (#168).
+* A new workflow for building and publishing Docker images has been added. (#168).
+* Dependabot is now configured to perform updates to pins of base images. (#168).
+* The base image for Docker images has migrated from the deprecated `continuumio/miniconda3` to the maintained `condaforge/miniforge3`. (#168).
+* Docker metadata is now much more descriptive, with versioning and author information now listed. (#168).
+* `bump-my-version` now manages date and version information in Docker image. (#168).
+* Guidelines on how to use `bump-my-version` to perform updates and deployments have been added. (#168).
+* ReadTheDocs Ubuntu and Python distributions have both been updated. (#168).
+* The expected default branch is now `main`. (#168).
+* Rendered documentation now uses a dynamic date variable to ensure year is up-to-date (as of last build). (#168).
+* `flit` and `flit-core` are now both pinned below v4.0 (due to breaking changes). (#168).
+* Added new files (#168):
     * `CITATION.cff`: For citing software directly from GitHub.
     * `.zenodo.json`: For archiving software on Zenodo.
 
 Top-level changes:
 
-* `CI` folder Python requirements files are now in `.github`.
-* The `pyproject.toml` now lists project information higher.
-* `zizmor` has been added to `prek` hooks.
-* The documentation has been slightly adjusted to better reflect the current state of the template.
-* The cookiecutter now has prompts describing each field when generating a new project.
-* Documentation formatting/rendering is nicer.
-* Added a prompt for `ORCID` number.
+* `CI` folder Python requirements files are now in `.github`. (#168).
+* The `pyproject.toml` now lists project information higher. (#168).
+* `zizmor` has been added to `pre-commit` hooks. (#168).
+* The documentation has been slightly adjusted to better reflect the current state of the template. (#168).
+* The cookiecutter now has prompts describing each field when generating a new project. (#168).
+* Documentation formatting/rendering is nicer. (#168).
+* Added a prompt for `ORCID` number. (#168).
 
 2.0.0 (2026-06-02)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Template changes:
 
-* PyPy3.10 support has been dropped. (#143)
-* `pyproject.toml` now uses PEP 639 for licensing metadata standards. (#162)
-* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162)
-* Removed `black`, `isort` and `pylint` in favour of `ruff`. (#162)
-* Minimum supported Python for generated projects is now 3.11. (#162)
+* PyPy3.10 support has been dropped. (#143).
+* `pyproject.toml` now uses PEP 639 for licensing metadata standards. (#162).
+* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162).
+* Removed `black`, `isort` and `pylint` in favour of `ruff`. (#162).
+* Minimum supported Python for generated projects is now 3.11. (#162).
 * `pre-commit` has been replaced with `prek`. All hooks have been updated. Added `codespell`, `gitleaks`, and `zizmor`. Removed `black`, `isort`, and duplicated `pygrep` hooks. (#162)
-* Renamed `CHANGES.rst` to `CHANGELOG.rst` (more conventional naming). (#162)
-* Conda environment configurations no longer use `defaults` (due to licensing issues). (#162)
-* ReadTheDocs configuration now uses latest Ubuntu and Conda images. (#162)
-* Makefile now uses `dependency-groups` conventions for installing necessary dependencies. (#162)
-* Package-building now relies entirely on `flit`. (#162)
-* `bump-my-version` updated. New configurations: (#162)
-  * Now handles entries in `CHANGELOG.rst` when bumping `release`.
-  * Now tracks development versions (`-dev.#`).
-  * No longer tags commits by default.
-* `pytest` updated to v9.0. Uses modern configuration entry. (#162)
-* `tox` now uses the TOML configuration. (#162)
-* Replace `addnab/docker-run-action` with a good, old-fashioned docker call. (#162)
-* Constrained the token-creation actions not to generate tokens with more permissions that required. (#162)
+* Renamed `CHANGES.rst` to `CHANGELOG.rst` (more conventional naming). (#162).
+* Conda environment configurations no longer use `defaults` (due to licensing issues). (#162).
+* ReadTheDocs configuration now uses latest Ubuntu and Conda images. (#162).
+* Makefile now uses `dependency-groups` conventions for installing necessary dependencies. (#162).
+* Package-building now relies entirely on `flit`. (#162).
+* `bump-my-version` updated. New configurations (#162):
+    * Now handles entries in `CHANGELOG.rst` when bumping `release`.
+    * Now tracks development versions (`-dev.#`).
+    * No longer tags commits by default.
+* `pytest` updated to v9.0. Uses modern configuration entry. (#162).
+* `tox` now uses the TOML configuration. (#162).
+* Replace `addnab/docker-run-action` with a good, old-fashioned docker call. (#162).
+* Constrained the token-creation actions not to generate tokens with more permissions that required. (#162).
 
 Top-level changes:
 
-* GitHub Actions updatess are now managed using an automated workflow for merging patch and minor changes. (#154)
-* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162)
-* `tox` configuration now found in `pyproject.toml`. (#162)
-* README updates. (#162)
-* Now uses `prek` for a handful of QA checks. (#162)
-* More tests are enabled for PyPy-based template generation. (#162)
+* GitHub Actions updatess are now managed using an automated workflow for merging patch and minor changes. (#154).
+* `pyproject.toml` now uses PEP 735 (dependency-groups) for managing non-package docs, linting, and testing dependencies. (#162).
+* `tox` configuration now found in `pyproject.toml`. (#162).
+* README updates. (#162).
+* Now uses `prek` for a handful of QA checks. (#162).
+* More tests are enabled for PyPy-based template generation. (#162).
 
 1.1.0 (2025-02-04)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Changes:
 
@@ -83,7 +83,7 @@ Changes:
 * Now using a Dependabot configuration for managing Python and GitHub Actions updates. (#129).
 
 1.0.0 (2024-10-03)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Changes:
 
@@ -100,7 +100,7 @@ Changes:
 * Both the top-level package and rendered templates are now PEP 517 and PEP 621 compliant (`pyproject.toml`) (#120).
 
 0.5.0 (2020-10-07)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Changes:
 
@@ -111,7 +111,7 @@ Changes:
 * Other fixes (#92, #93, #96, #100).
 
 0.4.2 (2020-01-07)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Changes:
 
@@ -121,7 +121,7 @@ Changes:
 * Added setuptools to conda environment (#72).
 
 0.4.1 (2019-09-27)
-==================
+^^^^^^^^^^^^^^^^^^
 
 This is the Bucharest release.
 
@@ -130,7 +130,7 @@ Changes:
 * Skipped conda environment handling in makefile (#70).
 
 0.4.0 (2019-04-17)
-==================
+^^^^^^^^^^^^^^^^^^
 
 This is the San Francisco release.
 
@@ -143,7 +143,7 @@ Changes:
 
 
 0.3.1 (2018-12-05)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Bugfixes for Washington release.
 
@@ -154,7 +154,7 @@ Changes:
 * Keep only a single *hello* process (#53).
 
 0.3.0 (2018-09-05)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Cookiecutter template prepared for Ansible deployment of PyWPS.
 
@@ -168,14 +168,14 @@ Changes:
 * numerous fixes.
 
 0.2.0 (2018-05-22)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Initial Cookiecutter Birdhouse release.
 
 A Cookiecutter template for a minimal PyWPS server with example processes.
 
 0.1.1 (2016-06-04)
-==================
+^^^^^^^^^^^^^^^^^^
 
 Original Cookiecutter:
 https://github.com/audreyr/cookiecutter-pypackage/tree/v0.1.1
