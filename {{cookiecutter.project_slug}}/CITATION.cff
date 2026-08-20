@@ -29,6 +29,7 @@ contact:
     orcid: "https://orcid.org/{{ cookiecutter.orcid_id }}"
     {%- endif %}
 repository-code: "{{ cookiecutter.__gh_slug }}"
+# doi: "ADD-THIS-INFORMATION-LATER/zenodo.XYZ"
 abstract: "{{ cookiecutter.project_short_description }}"
 {%- if cookiecutter.open_source_license != 'Not open source' %}
 license: "{{ license_spdx_codes.get(cookiecutter.open_source_license) }}"
