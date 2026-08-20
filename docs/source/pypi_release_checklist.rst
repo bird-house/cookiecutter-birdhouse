@@ -33,6 +33,7 @@ Trusted Publishing
     * Environment name:
         * TestPyPI: "staging"
         * PyPI: "production"
+
 #. Go to Settings > Environments > New environment and create both a "staging" and "production" environments.
 
 .. note::
@@ -63,13 +64,13 @@ In a new branch based off the latest commit of `main` open a Pull Request (PR):
 
 #. Update (bump) the version number (by ``major``, ``minor``, or ``patch``)
 
-   .. code-block:: console
+    .. code-block:: console
 
-       $ bump-my-version bump { major | minor | patch }
+        $ bump-my-version bump { major | minor | patch }
 
 #. Push the commit to your branch:
 
-   .. code-block:: console
+    .. code-block:: console
 
        $ git push
 
@@ -77,22 +78,23 @@ In a new branch based off the latest commit of `main` open a Pull Request (PR):
 
 #. Tag the last commit of `main` and push the tags, creating the new release on TestPyPI:
 
-   .. code-block:: console
+    .. code-block:: console
 
-	   $ git tag -s vX.Y.Z -m "vX.Y.Z (or any other message you want associated with the tag)"
-       $ git push --tags
+        $ git tag -s vX.Y.Z -m "vX.Y.Z (or any other message you want associated with the tag)"
+        $ git push --tags
 
 #. (Optionally) Check the TestPyPI listing page to make sure that the README, metadata URLs, and necessary package contents are all available and accurate.
    If not, try one of these:
 
-	#. Copy and paste the RestructuredText into an RST checker (such as https://rsted.info.ucl.ac.be/) to find out what broke the formatting.
+    * Copy and paste the RestructuredText into an RST checker (such as https://rsted.info.ucl.ac.be/) to find out what broke the formatting.
 
-    #. Check your long_description locally:
+    * Check your `long_description`` locally:
 
-       .. code-block:: console
-           $ pip install build twine
-           $ python -m build --sdist --wheel
-           $ python -m twine check dist/*
+    .. code-block:: console
+
+        $ pip install build twine
+        $ python -m build --sdist --wheel
+        $ python -m twine check dist/*
 
 #. If corrections are required, merge them to `main`, bump to a new version, and create a new tag; published PyPI artifacts cannot be overwritten.
 
