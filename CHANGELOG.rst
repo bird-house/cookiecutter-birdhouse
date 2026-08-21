@@ -1,8 +1,23 @@
 Changelog
 =========
 
+..
+    `Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
+    -----------------------------------------------------------------------------
+    Contributors:
+
+    Changes
+    ^^^^^^^
+    * No change.
+
+    Fixes
+    ^^^^^
+    * No change.
+
+.. _changes_2.1.0:
+
 2.1.0 (2026-08-20)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Template changes:
 
@@ -34,8 +49,10 @@ Top-level changes:
 * Documentation formatting/rendering is nicer. (#168).
 * Added a prompt for `ORCID` number. (#168).
 
+.. _changes_2.0.0:
+
 2.0.0 (2026-06-02)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Template changes:
 
@@ -68,8 +85,10 @@ Top-level changes:
 * Now uses `prek` for a handful of QA checks. (#162).
 * More tests are enabled for PyPy-based template generation. (#162).
 
+.. _changes_1.1.0:
+
 1.1.0 (2025-02-04)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Changes:
 
@@ -82,8 +101,10 @@ Changes:
 * Updated several development dependencies. (#129).
 * Now using a Dependabot configuration for managing Python and GitHub Actions updates. (#129).
 
+.. _changes_1.0.0:
+
 1.0.0 (2024-10-03)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Changes:
 
@@ -99,8 +120,10 @@ Changes:
 * Projects now use a `src`-based directory structure (#120).
 * Both the top-level package and rendered templates are now PEP 517 and PEP 621 compliant (`pyproject.toml`) (#120).
 
+.. _changes_0.5.0:
+
 0.5.0 (2020-10-07)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Changes:
 
@@ -110,8 +133,10 @@ Changes:
 * Backported fixes from birds (#86, #88, #89).
 * Other fixes (#92, #93, #96, #100).
 
+.. _changes_0.4.2:
+
 0.4.2 (2020-01-07)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Changes:
 
@@ -120,8 +145,10 @@ Changes:
 * Updated links to developer guide (#73).
 * Added setuptools to conda environment (#72).
 
+.. _changes_0.4.1:
+
 0.4.1 (2019-09-27)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 This is the Bucharest release.
 
@@ -129,8 +156,10 @@ Changes:
 
 * Skipped conda environment handling in makefile (#70).
 
+.. _changes_0.4.0:
+
 0.4.0 (2019-04-17)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 This is the San Francisco release.
 
@@ -141,9 +170,10 @@ Changes:
 * Added `make spec` (#65).
 * Fixed Emu references (#63).
 
+.. _changes_0.3.1:
 
 0.3.1 (2018-12-05)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Bugfixes for Washington release.
 
@@ -153,8 +183,10 @@ Changes:
 * Get version number without importing package (#56).
 * Keep only a single *hello* process (#53).
 
+.. _changes_0.3.0:
+
 0.3.0 (2018-09-05)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Cookiecutter template prepared for Ansible deployment of PyWPS.
 
@@ -167,15 +199,19 @@ Changes:
 * Using ``bumpversion`` to update version (#9)
 * numerous fixes.
 
+.. _changes_0.2.0:
+
 0.2.0 (2018-05-22)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Initial Cookiecutter Birdhouse release.
 
 A Cookiecutter template for a minimal PyWPS server with example processes.
 
+.. _changes_0.1.1:
+
 0.1.1 (2016-06-04)
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Original Cookiecutter:
 https://github.com/audreyr/cookiecutter-pypackage/tree/v0.1.1

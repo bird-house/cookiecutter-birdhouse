@@ -59,6 +59,7 @@ tox = [
 ]
 dev = [
   "build >=1.4.2",
+  "bump-my-version >=1.5.0",
   "cookiecutter >=2.7.0",
   "cruft >=2.15.0",
   "flit >=3.11.0,<4.0",
@@ -72,6 +73,36 @@ dev = [
   {include-group = "test"},
   {include-group = "tox"}
 ]
+
+[tool.bumpversion]
+current_version = "2.1.0"
+commit = true
+commit_args = "--no-verify"
+tag = false
+allow_dirty = true
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
+serialize = [
+  "{major}.{minor}.{patch}"
+]
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.rst"
+search = """\
+`Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
+-----------------------------------------------------------------------------
+"""
+replace = """\
+..
+    `Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
+    -----------------------------------------------------------------------------
+
+    Changes:
+
+.. _changes_{new_version}:
+
+`{new_version} <https://github.com/bird-house/cookiecutter-birdhouse/tree/v{new_version}>`_ ({now:%Y-%m-%d})
+----------------------------------------------------------------------------------------
+"""
 
 [tool.coverage.run]
 omit = ["tests/*"]
