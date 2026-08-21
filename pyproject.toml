@@ -100,8 +100,8 @@ replace = """\
 
 .. _changes_{new_version}:
 
-`{new_version} <https://github.com/bird-house/cookiecutter-birdhouse/tree/v{new_version}>`_ ({now:%Y-%m-%d})
-----------------------------------------------------------------------------------------
+`v{new_version} <https://github.com/bird-house/cookiecutter-birdhouse/tree/v{new_version}>`_ ({now:%Y-%m-%d})
+------------------------------------------------------------------------------------------
 """
 
 [tool.coverage.run]
