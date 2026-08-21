@@ -16,7 +16,7 @@ Changelog
 
 .. _changes_2.1.0:
 
-`v2.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.0>`_  (2026-08-20)
+`v2.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.0>`_  (2026-08-24)
 ------------------------------------------------------------------------------------------
 
 Template changes:
