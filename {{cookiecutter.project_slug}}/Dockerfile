@@ -1,11 +1,19 @@
+{%- set license_spdx_codes = {
+    'MIT license': 'MIT',
+    'BSD license': 'BSD-3-Clause',
+    'ISC license': 'ISC',
+    'Apache Software License 2.0': 'Apache-2.0',
+    'GNU General Public License v3': 'GPL-3.0-or-later'
+} -%}
 # vim:set ft=dockerfile:
-FROM condaforge/miniforge3:26.3.2-3
+FROM condaforge/miniforge3:26.5.3-0
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PIP_ROOT_USER_ACTION=ignore
 LABEL org.opencontainers.image.authors="Birdhouse"
 LABEL org.opencontainers.image.created="2000-01-02T03:04:05Z"
 LABEL org.opencontainers.image.description="{{ cookiecutter.project_name }} WPS"
-LABEL org.opencontainers.image.source=https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}
+LABEL org.opencontainers.image.licenses="{{ license_spdx_codes[cookiecutter.open_source_license] }}"
+LABEL org.opencontainers.image.source="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}"
 LABEL org.opencontainers.image.title="{{ cookiecutter.project_name }}WPS"
 LABEL org.opencontainers.image.vendor="Birdhouse"
 LABEL org.opencontainers.image.version="{{ cookiecutter.version }}"

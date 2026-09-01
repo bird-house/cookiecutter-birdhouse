@@ -20,18 +20,14 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  IMAGE_AUTHORS: {{ cookiecutter.full_name }}
-  IMAGE_DESCRIPTION: {{ cookiecutter.project_name }} WPS
-  IMAGE_NAME: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
-  IMAGE_TITLE: {{ cookiecutter.project_name }}WPS
-  IMAGE_VENDOR: {{ cookiecutter.github_username }}
 
-{% raw -%}
 jobs:
   build-publish:
     name: Build and publish image
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+    {% raw -%}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
@@ -50,10 +46,6 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
           labels: |
-            org.opencontainers.image.authors=${{ env.IMAGE_AUTHORS }}
-            org.opencontainers.image.description=${{ env.IMAGE_DESCRIPTION }}
-            org.opencontainers.image.title=${{ env.IMAGE_DESCRIPTION }}
-            org.opencontainers.image.vendor=${{ env.IMAGE_VENDOR }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=tag
@@ -71,7 +63,8 @@ jobs:
       - name: Build Docker image and publish to Docker Hub
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
+          file: Dockerfile
           labels: ${{ steps.meta.outputs.labels }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-{%- endraw %}
+    {%- endraw %}
