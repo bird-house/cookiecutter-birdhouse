@@ -12,7 +12,9 @@ ENV PIP_ROOT_USER_ACTION=ignore
 LABEL org.opencontainers.image.authors="Birdhouse"
 LABEL org.opencontainers.image.created="2000-01-02T03:04:05Z"
 LABEL org.opencontainers.image.description="{{ cookiecutter.project_name }} WPS"
+{%- if cookiecutter.open_source_license in license_spdx_codes %}
 LABEL org.opencontainers.image.licenses="{{ license_spdx_codes[cookiecutter.open_source_license] }}"
+{%- endif %}
 LABEL org.opencontainers.image.source="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}"
 LABEL org.opencontainers.image.title="{{ cookiecutter.project_name }}WPS"
 LABEL org.opencontainers.image.vendor="Birdhouse"
