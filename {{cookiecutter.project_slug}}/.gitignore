@@ -106,6 +106,8 @@ docs/_build/
 # docs/make.bat
 docs/doctrees/
 docs/_html/
+docs/source/apidoc/{{ cookiecutter.project_slug }}*.rst
+docs/source/apidoc/modules.rst
 docs/source/output-sanitize.cfg
 
 # PyBuilder

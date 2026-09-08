@@ -4,20 +4,26 @@ Changelog
 ..
     `Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
     -----------------------------------------------------------------------------
-    Contributors:
 
-    Changes
-    ^^^^^^^
-    * No change.
+    Changes:
 
-    Fixes
-    ^^^^^
-    * No change.
+.. _changes_2.1.1:
+
+`v2.1.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.1>`_ (2026-09-08)
+------------------------------------------------------------------------------------------
+
+Changes:
+
+* Updated the Docker image metadata to include licenses. (#171).
+* Updated the Docker workflows to use automated label parsing and tag functionality from `docker/metadata-action`. (#171).
+* Updated base Docker image to `condaforge/miniforge3:26.5.3-0`. (#171).
+* ReadTheDocs now runs `sphinx-apidoc` on documentation builds to ensure library mappings are always up-to-date. (#171).
+* Docker images are tested before being pushed. (#171).
 
 .. _changes_2.1.0:
 
-`v2.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.0>`_  (2026-08-24)
-------------------------------------------------------------------------------------------
+`v2.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.0>`_ (2026-08-24)
+-----------------------------------------------------------------------------------------
 
 Template changes:
 
@@ -51,8 +57,8 @@ Top-level changes:
 
 .. _changes_2.0.0:
 
-`v2.0.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.0.0>`_  (2026-06-02)
-------------------------------------------------------------------------------------------
+`v2.0.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.0.0>`_ (2026-06-02)
+-----------------------------------------------------------------------------------------
 
 Template changes:
 
@@ -87,8 +93,8 @@ Top-level changes:
 
 .. _changes_1.1.0:
 
-`v1.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v1.1.0>`_  (2025-02-04)
-------------------------------------------------------------------------------------------
+`v1.1.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v1.1.0>`_ (2025-02-04)
+-----------------------------------------------------------------------------------------
 
 Changes:
 
@@ -103,8 +109,8 @@ Changes:
 
 .. _changes_1.0.0:
 
-`v1.0.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v1.0.0>`_  (2024-10-03)
-------------------------------------------------------------------------------------------
+`v1.0.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v1.0.0>`_ (2024-10-03)
+-----------------------------------------------------------------------------------------
 
 Changes:
 
@@ -122,8 +128,8 @@ Changes:
 
 .. _changes_0.5.0:
 
-`v0.5.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.5.0>`_  (2020-10-07)
-------------------------------------------------------------------------------------------
+`v0.5.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.5.0>`_ (2020-10-07)
+-----------------------------------------------------------------------------------------
 
 Changes:
 
@@ -135,8 +141,8 @@ Changes:
 
 .. _changes_0.4.2:
 
-`v0.4.2 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.2>`_  (2020-01-07)
-------------------------------------------------------------------------------------------
+`v0.4.2 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.2>`_ (2020-01-07)
+-----------------------------------------------------------------------------------------
 
 Changes:
 
@@ -147,8 +153,8 @@ Changes:
 
 .. _changes_0.4.1:
 
-`v0.4.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.1>`_  (2019-09-27)
-------------------------------------------------------------------------------------------
+`v0.4.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.1>`_ (2019-09-27)
+-----------------------------------------------------------------------------------------
 
 This is the Bucharest release.
 
@@ -158,8 +164,8 @@ Changes:
 
 .. _changes_0.4.0:
 
-`v0.4.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.0>`_  (2019-04-17)
-------------------------------------------------------------------------------------------
+`v0.4.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.4.0>`_ (2019-04-17)
+-----------------------------------------------------------------------------------------
 
 This is the San Francisco release.
 
@@ -172,8 +178,8 @@ Changes:
 
 .. _changes_0.3.1:
 
-`v0.3.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.3.1>`_  (2018-12-05)
-------------------------------------------------------------------------------------------
+`v0.3.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.3.1>`_ (2018-12-05)
+-----------------------------------------------------------------------------------------
 
 Bugfixes for Washington release.
 
@@ -185,8 +191,8 @@ Changes:
 
 .. _changes_0.3.0:
 
-`v0.3.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.3.0>`_  (2018-09-05)
-------------------------------------------------------------------------------------------
+`v0.3.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.3.0>`_ (2018-09-05)
+-----------------------------------------------------------------------------------------
 
 Cookiecutter template prepared for Ansible deployment of PyWPS.
 
@@ -201,8 +207,8 @@ Changes:
 
 .. _changes_0.2.0:
 
-`v0.2.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.2.0>`_  (2018-05-22)
-------------------------------------------------------------------------------------------
+`v0.2.0 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.2.0>`_ (2018-05-22)
+-----------------------------------------------------------------------------------------
 
 Initial Cookiecutter Birdhouse release.
 
@@ -210,8 +216,8 @@ A Cookiecutter template for a minimal PyWPS server with example processes.
 
 .. _changes_0.1.1:
 
-`v0.1.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.1.1>`_  (2016-06-04)
-------------------------------------------------------------------------------------------
+`v0.1.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v0.1.1>`_ (2016-06-04)
+-----------------------------------------------------------------------------------------
 
 Original Cookiecutter:
 https://github.com/audreyr/cookiecutter-pypackage/tree/v0.1.1

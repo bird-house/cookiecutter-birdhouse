@@ -177,10 +177,11 @@ See the bump-my-version_ documentation for details.
 .. _Cruft: https://cruft.github.io/cruft/
 .. _GitHub_Workflows: https://docs.github.com/en/actions/using-workflows
 .. _Mkdocs: https://pypi.org/project/mkdocs/
-.. _PyPI: https://pypi.python.org/pypi
-.. _ReadTheDocs: https://readthedocs.io/
+.. _PyPI: https://pypi.org/
+.. _ReadTheDocs: https://about.readthedocs.com
 .. _Sphinx: http://sphinx-doc.org/
-.. _Tox: http://testrun.org/tox/
+.. _TestPyPI: https://test.pypi.org/
+.. _Tox: https://tox.wiki/en
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 .. _bump-my-version: https://github.com/callowayproject/bump-my-version
 .. _cruft_link: https://github.com/bird-house/finch/pull/128/commits/0b0d7f37966cbb5bf345dfd4b4ac7953f38f4867
