@@ -1,8 +1,16 @@
 Changelog
 =========
 
-`Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
------------------------------------------------------------------------------
+..
+    `Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
+    -----------------------------------------------------------------------------
+
+    Changes:
+
+.. _changes_2.1.1:
+
+`v2.1.1 <https://github.com/bird-house/cookiecutter-birdhouse/tree/v2.1.1>`_ (2026-09-08)
+------------------------------------------------------------------------------------------
 
 Changes:
 
