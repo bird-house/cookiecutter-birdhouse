@@ -1,18 +1,16 @@
 Changelog
 =========
 
-..
-    `Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
-    -----------------------------------------------------------------------------
-    Contributors:
+`Unreleased <https://github.com/bird-house/cookiecutter-birdhouse>`_ (latest)
+-----------------------------------------------------------------------------
 
-    Changes
-    ^^^^^^^
-    * No change.
+Changes:
 
-    Fixes
-    ^^^^^
-    * No change.
+* Updated the Docker image metadata to include licenses. (#171).
+* Updated the Docker workflows to use automated label parsing and tag functionality from `docker/metadata-action`. (#171).
+* Updated base Docker image to `condaforge/miniforge3:26.5.3-0`. (#171).
+* ReadTheDocs now runs `sphinx-apidoc` on documentation builds to ensure library mappings are always up-to-date. (#171).
+* Docker images are tested before being pushed. (#171).
 
 .. _changes_2.1.0:
 
