@@ -6,30 +6,31 @@ on:
       - main
     paths-ignore:
       - .*
-      - .github/**.md
-      - .github/**.yml
+      - .github/*.in
+      - .github/*.txt
+      - .github/*/*.md
+      - .github/*/*.yml
       {%- if cookiecutter.create_author_file == 'y' %}
       - AUTHORS.rst
       {%- endif %}
       - CHANGELOG.rst
-      - CI/**.in
-      - CI/**.txt
       - CODE_OF_CONDUCT.rst
       - CONTRIBUTING.rst
       - Dockerfile
       - Makefile
       - README.rst
       - docker-compose.yml
-      - docs/**.ipynb
-      - docs/**.py
-      - docs/**.rst
+      - docs/source/*/*.ipynb
+      - docs/source/*.py
+      - docs/source/*.rst
       - docs/Makefile
-      - docs/_static/*
+      - docs/source/_build/*
+      - docs/source/_static/*
       - environment-dev.yml
       - environment-docs.yml
       - environment.yml
       - pyproject.toml
-      - test/**.py
+      - test/*/*.py
       - tox.toml
       - src/${{ cookiecutter.project_slug }}/__version__.py
 

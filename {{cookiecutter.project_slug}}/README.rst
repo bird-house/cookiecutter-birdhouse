@@ -81,6 +81,7 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. |pypi| image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
         :alt: Python Package Index Build
+
 {%- endif %}
 
 .. |pre-commit-ci| image:: https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_repo_name }}/main.svg

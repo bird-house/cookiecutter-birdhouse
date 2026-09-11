@@ -44,7 +44,8 @@ dependencies = [
   "click >=8.3.0",
   "jinja2 >=3.1.6",
   "psutil >=7.2.0",
-  "pywps >=4.7.0"
+  "pywps >=4.7.0",
+  "werkzeug >=3.1.0"
 ]
 
 [project.optional-dependencies]
@@ -81,7 +82,7 @@ docs = [
   "nbsphinx >=0.9.8",
   "sphinx >=9.0.2",
   "sphinx-autobuild >=2024.4.16",
-  "sphinx-click",
+  "sphinx-click  >=6.2.0",
   "sphinx-codeautolink >=0.16.2",
   "sphinx-copybutton >=0.5.2"
 ]
@@ -89,7 +90,7 @@ test = [
   "coverage >=7.5.0"
 {%- if cookiecutter.use_pytest == 'y' %},
   "nbval >=0.11.0",
-  "pytest >=9.0.0",
+  "pytest >=9.0.2",
   "pytest-cov >=7.1.0"
 {%- endif %}
 ]
@@ -214,6 +215,8 @@ command_line = "-m unittest discover -s tests/"
 omit = ["tests/*.py"]
 relative_files = true
 source = ["{{ cookiecutter.project_slug }}"]
+
+[tool.deptry]
 
 [tool.flit.sdist]
 include = [

@@ -29,7 +29,7 @@ Install {{ cookiecutter.project_name }} app:
 .. code-block:: console
 
     $ pip install -e .
-    OR
+    # or
     $ make install
 
 For development you can use this command:
@@ -37,7 +37,7 @@ For development you can use this command:
 .. code-block:: console
 
     $ pip install -e .[dev]
-    OR
+    # or
     $ make develop
 
 Start {{ cookiecutter.project_name }} PyWPS service
@@ -50,7 +50,7 @@ After successful installation you can start the service using the ``{{ cookiecut
     $ {{ cookiecutter.project_slug }} --help # show help
     $ {{ cookiecutter.project_slug }} start  # start service with default configuration
 
-    OR
+    # or
 
     $ {{ cookiecutter.project_slug }} start --daemon # start service as daemon
     loading configuration

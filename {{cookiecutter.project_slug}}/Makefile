@@ -58,11 +58,14 @@ status: ## show status of {{ cookiecutter.project_slug }} service
 
 install: ## install {{ cookiecutter.project_slug }} application
 	@echo "Installing application ..."
-	@-bash -c 'pip install -e .'
+	@python -m pip install --editable .
 	@echo "\nStart service with \`make start\` and stop with \`make stop\`."
 
+install-dev: install ## install dependencies needed for development (all)
+	@echo "Installing development requirements for tests and docs ..."
+	@python -m pip install --group dev
+
 develop: install-dev ## install {{ cookiecutter.project_slug }} application with development libraries
-	@python -m pip install .
 	@-bash -c 'prek install'
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
@@ -102,29 +105,25 @@ clean-docs: ## remove documentation artifacts
 	@-rm -f docs/modules.rst
 	$(MAKE) -C docs clean
 
-install-dev: ## install dependencies needed for development (all)
-	@echo "Installing development requirements for tests and docs ..."
-	@python -m pip install --group dev
-
 install-lint: ## install dependencies needed for linting
 	@python -m pip install --quiet --group lint
 
-install-docs: ## install dependencies needed for building the docs
+install-docs: install ## install dependencies needed for building the docs
 	@python -m pip install --quiet --group docs
 
-install-test: ## install dependencies needed for standard testing
+install-test: install ## install dependencies needed for standard testing
 	@python -m pip install --quiet --group test
 
-install-tox: ## install base dependencies needed for running tox
+install-tox: install-tox ## install base dependencies needed for running tox
 	@python -m pip install --quiet --group tox
 
-lint: ## check style
+lint: install-lint ## check style
 	@echo "Running flake8 code style checks ..."
 	@bash -c 'ruff check src/{{ cookiecutter.project_slug }} tests'
 
 ## Testing targets:
 
-test: ## run tests quickly with the default Python
+test: install-test ## run tests quickly with the default Python
 	@echo "Running all tests (including slow and online tests) ..."
 {%- if cookiecutter.use_pytest == 'y' %}
 	@bash -c 'pytest -v'
@@ -132,7 +131,7 @@ test: ## run tests quickly with the default Python
 	@bash -c 'python -m unittest discover -v'
 {%- endif %}
 
-test-tox: ## run tests on every available Python version with tox
+test-tox: install-tox ## run tests on every available Python version with tox
 	@bash -c 'tox'
 
 test-notebooks: notebook-sanitizer ## run notebook-based tests
@@ -143,7 +142,7 @@ test-notebooks-lax: notebook-sanitizer ## run tests on notebooks but don't be so
 	@echo "Running notebook-based tests"
 	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval-lax --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
 
-coverage: ## check code coverage quickly with the default Python
+coverage: install-test ## check code coverage quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
 	@bash -c 'coverage run --source {{ cookiecutter.project_slug }} -m pytest'
 {%- else %}

@@ -11,6 +11,6 @@ dependencies:
   - pywps >=4.7.0
   - sphinx >=9.0.0
   - sphinx-autobuild >=2024.4.16
-  - sphinx-click
+  - sphinx-click >=6.2.0
   - sphinx-codeautolink >=0.16.2
   - sphinx-copybutton >=0.5.2
