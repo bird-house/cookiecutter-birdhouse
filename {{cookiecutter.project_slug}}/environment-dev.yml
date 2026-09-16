@@ -8,6 +8,7 @@ dependencies:
   - jinja2 >=3.1.6
   - psutil >=7.2.0
   - pywps >=4.7.0
+  - werkzeug >=3.1.0
   # development
   - bump-my-version >=1.5.1
   - coverage >=7.13.0
@@ -18,13 +19,13 @@ dependencies:
   - nbval >=0.10.0
   - prek >=0.5.0
 {%- if cookiecutter.use_pytest == 'y' %}
-  - pytest >=9.0.0
+  - pytest >=9.0.2
   - pytest-cov >=7.1.0
 {%- endif %}
   - ruff >=0.15.0
-  - sphinx >=9.0.0
+  - sphinx >=9.0.2
   - sphinx-autobuild >=2024.4.16
-  - sphinx-click
+  - sphinx-click >=6.2.0
   - sphinx-codeautolink >=0.16.2
   - sphinx-copybutton >=0.5.2
   - tox >=4.52.0

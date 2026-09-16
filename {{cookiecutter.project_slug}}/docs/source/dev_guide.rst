@@ -38,7 +38,7 @@ First activate the ``{{ cookiecutter.project_slug }}`` Conda environment and ins
     $ source activate {{ cookiecutter.project_slug }}
     $ python -m pip install --group dev
     $ python -m pip install --editable .
-    OR
+    # or
     $ make develop
 
 Run quick tests (skip slow and online):
