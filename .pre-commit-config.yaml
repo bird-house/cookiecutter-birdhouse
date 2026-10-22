@@ -12,7 +12,7 @@ repos:
       - id: trailing-whitespace
         exclude: '{{cookiecutter.project_slug}}'
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.4
+    rev: v0.25.0
     hooks:
       - id: toml-sort-fix
         exclude: '{{cookiecutter.project_slug}}/(pyproject|tox)?.toml'
@@ -26,12 +26,12 @@ repos:
       - id: text-unicode-replacement-char
         exclude: '{{cookiecutter.project_slug}}'
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.29.0
+    rev: v1.31.1
     hooks:
       - id: zizmor
         exclude: '{{cookiecutter.project_slug}}'
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.38.0
+    rev: 0.38.2
     hooks:
       - id: check-github-workflows
       - id: check-readthedocs
