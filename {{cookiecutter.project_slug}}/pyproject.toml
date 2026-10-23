@@ -12,12 +12,12 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "{{ cookiecutter.project_slug }}"
 authors = [
-  {name = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}", email = "{{ cookiecutter.email }}"}
+  { name = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}", email = "{{ cookiecutter.email }}" }
 ]
 maintainers = [
-  {name = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}", email = "{{ cookiecutter.email }}"}
+  { name = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}", email = "{{ cookiecutter.email }}" }
 ]
-readme = {file = "README.rst", content-type = "text/x-rst"}
+readme = { file = "README.rst", content-type = "text/x-rst" }
 requires-python = ">=3.11.0"
 keywords = ["wps", "pywps", "birdhouse", "{{ cookiecutter.project_slug }}"]
 {%- if cookiecutter.open_source_license in license_spdx_codes %}
@@ -106,12 +106,12 @@ dev = [
   "pip >=26.1",
   "prek >=0.5.0",
   "watchdog >=6.0.0",
-  {include-group = "docs"},
-  {include-group = "lint"},
+  { include-group = "docs" },
+  { include-group = "lint" },
   {%- if cookiecutter.use_pytest == 'y' %}
-  {include-group = "test"},
+  { include-group = "test" },
   {%- endif %}
-  {include-group = "tox"}
+  { include-group = "tox" }
 ]
 
 [tool]
