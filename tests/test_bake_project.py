@@ -96,7 +96,7 @@ def test_bake_with_defaults(cookies):
             in next(result.project_path.joinpath("src").iterdir()).name
         )
 
-@pytest.mark.requires_gdal
+@pytest.mark.gdal
 def test_bake_and_run_tests(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project_path.is_dir()
